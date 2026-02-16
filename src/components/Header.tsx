@@ -9,7 +9,7 @@ export function Header({ onGetStarted }: { onGetStarted?: () => void }) {
   return (
      <header className="sticky top-0 z-50 bg-card/95 backdrop-blur-md border-b border-border">
       {/* Top bar with language selector */}
-      <div className="container flex items-center justify-end h-8 gap-1 border-b border-border/50">
+      <div className="container flex items-center justify-center h-8 gap-1 border-b border-border/50">
         <button className="text-[11px] font-semibold bg-accent/10 text-accent px-2.5 py-0.5 rounded transition-colors hover:bg-accent/20">EN</button>
         <button className="text-[11px] font-medium text-muted-foreground px-2.5 py-0.5 rounded transition-colors hover:bg-muted">ES</button>
         <button className="text-[11px] font-medium text-muted-foreground px-2.5 py-0.5 rounded transition-colors hover:bg-muted">PT</button>
