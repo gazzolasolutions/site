@@ -84,8 +84,7 @@ export function QualificationForm({ open, onClose }: QualificationFormProps) {
       return;
     }
     if (step === 5) {
-      if (!form.email.trim()) { setError("Please enter your email"); return; }
-      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) { setError("Please enter a valid email"); return; }
+      if (form.email.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) { setError("Please enter a valid email"); return; }
     }
 
     setError("");
