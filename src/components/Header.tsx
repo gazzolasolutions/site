@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import logo from "@/assets/logo.png";
 
 const navItems = [
   { label: "Services", href: "#services" },
@@ -17,8 +18,11 @@ export function Header() {
   return (
     <header className="sticky top-0 z-50 bg-card/95 backdrop-blur-md border-b border-border">
       <div className="container flex items-center justify-between h-14 md:h-16">
-        <a href="#" className="text-lg font-bold text-primary tracking-tight">
-          Gazzola<span className="text-accent">Solutions</span>
+        <a href="#" className="flex items-center gap-2">
+          <img src={logo} alt="Gazola Solutions" className="h-8 w-8" />
+          <span className="text-lg font-bold text-primary tracking-tight">
+            Gazola<span className="text-accent"> Solutions</span>
+          </span>
         </a>
 
         {/* Desktop nav */}
