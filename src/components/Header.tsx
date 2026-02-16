@@ -47,10 +47,6 @@ export function Header({ onGetStarted }: { onGetStarted?: () => void }) {
 
         {/* Desktop nav */}
         <nav className="hidden md:flex items-center gap-5">
-          <a href="#services" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">{t.services[lang]}</a>
-          <a href="#itin" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">{t.itin[lang]}</a>
-          <a href="#faq" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">{t.faq[lang]}</a>
-          <a href="#contact" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">{t.contact[lang]}</a>
 
           <a href={`tel:${PHONE_NUMBER}`} className="group">
             <Button size="sm" variant="outline" className="gap-1.5 border-accent/30 hover:border-accent hover:bg-accent/5 transition-all">
