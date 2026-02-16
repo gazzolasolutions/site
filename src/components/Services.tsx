@@ -76,7 +76,7 @@ export function Services({ onGetStarted }: { onGetStarted?: () => void }) {
           From formation to tax preparation — Florida-focused services for non-residents.
         </p>
 
-        <div className="grid md:grid-cols-2 gap-6 max-w-3xl mx-auto">
+        <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
           <ServiceCard
             icon={Building2}
             title="Open Your Florida LLC the Right Way"
@@ -146,20 +146,18 @@ export function Services({ onGetStarted }: { onGetStarted?: () => void }) {
             cta="Reinstate My Company"
             onCTA={onGetStarted}
           />
-          <div className="md:col-span-2">
-            <ServiceCard
-              icon={Landmark}
-              title="Business Bank Account Guidance"
-              bullets={[
-                "Document checklist",
-                "Bank preparation guidance",
-                "Requirements explained clearly",
-                "Built for Florida business owners",
-              ]}
-              cta="Get Bank Account Guidance"
-              onCTA={onGetStarted}
-            />
-          </div>
+          <ServiceCard
+            icon={Landmark}
+            title="Business Bank Account Guidance"
+            bullets={[
+              "Document checklist",
+              "Bank preparation guidance",
+              "Requirements explained clearly",
+              "Built for Florida business owners",
+            ]}
+            cta="Get Bank Account Guidance"
+            onCTA={onGetStarted}
+          />
         </div>
       </div>
     </section>
