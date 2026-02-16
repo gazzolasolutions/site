@@ -1,30 +1,16 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight, ArrowLeft, ShieldCheck, Loader2, Check, Phone, MessageCircle, CalendarCheck } from "lucide-react";
+import { ArrowRight, ArrowLeft, Loader2, Check, Phone, MessageCircle, CalendarCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { supabase } from "@/integrations/supabase/client";
+import { useLanguage } from "@/i18n/LanguageContext";
+import { translations } from "@/i18n/translations";
 
 interface QualificationFormProps {
   open: boolean;
   onClose: () => void;
 }
-
-const SERVICE_OPTIONS = [
-  "Florida LLC Formation",
-  "EIN Application",
-  "ITIN Application",
-  "Annual Report Filing",
-  "Company Dissolution",
-  "Company Reinstatement",
-  "Not sure yet",
-];
-
-const OWNER_OPTIONS = [
-  "Just me (Single Member)",
-  "2 or more owners (Multi Member)",
-  "Not sure yet",
-];
 
 const TOTAL_STEPS = 5;
 
@@ -34,9 +20,10 @@ const slideVariants = {
   exit: (dir: number) => ({ x: dir > 0 ? -80 : 80, opacity: 0 }),
 };
 
-// NEW ORDER: 1=Services, 2=Owners, 3=Name, 4=Phone, 5=Email, 6=Final
-
 export function QualificationForm({ open, onClose }: QualificationFormProps) {
+  const { lang } = useLanguage();
+  const t = translations.form;
+
   const [step, setStep] = useState(0);
   const [dir, setDir] = useState(1);
   const [form, setForm] = useState({
@@ -50,6 +37,9 @@ export function QualificationForm({ open, onClose }: QualificationFormProps) {
   const [submitting, setSubmitting] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
+  const serviceOptions = t.serviceOptions[lang];
+  const ownerOptions = t.ownerOptions[lang];
+
   useEffect(() => {
     if (open) {
       setStep(0);
@@ -59,7 +49,6 @@ export function QualificationForm({ open, onClose }: QualificationFormProps) {
     }
   }, [open]);
 
-  // Auto-focus text inputs on steps 3, 4, 5
   useEffect(() => {
     if (open && step >= 3 && step <= 5) {
       setTimeout(() => inputRef.current?.focus(), 350);
@@ -68,36 +57,38 @@ export function QualificationForm({ open, onClose }: QualificationFormProps) {
 
   const goNext = useCallback(() => {
     if (step === 1 && form.services.length === 0) {
-      setError("Please select at least one option");
+      setError(t.errors.selectOne[lang]);
       return;
     }
     if (step === 2 && !form.owners) {
-      setError("Please select an option");
+      setError(t.errors.selectOption[lang]);
       return;
     }
     if (step === 3 && !form.fullName.trim()) {
-      setError("Please enter your name");
+      setError(t.errors.enterName[lang]);
       return;
     }
     if (step === 4 && !form.phone.trim()) {
-      setError("Please enter your phone number");
+      setError(t.errors.enterPhone[lang]);
       return;
     }
     if (step === 5) {
-      if (form.email.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) { setError("Please enter a valid email"); return; }
+      if (form.email.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) {
+        setError(t.errors.validEmail[lang]);
+        return;
+      }
     }
 
     setError("");
     setDir(1);
 
-    // On step 5 (email - last step), submit lead then go to final
     if (step === 5) {
       handleSubmitLead();
       return;
     }
 
     setStep((s) => s + 1);
-  }, [step, form]);
+  }, [step, form, lang]);
 
   const goBack = () => {
     if (step <= 0) return;
@@ -140,7 +131,6 @@ export function QualificationForm({ open, onClose }: QualificationFormProps) {
     if (error) setError("");
   };
 
-  // Auto-advance on single-choice selection (step 2 - owners)
   const selectOption = (field: string, value: string) => {
     setForm((f) => ({ ...f, [field]: value }));
     setError("");
@@ -170,16 +160,16 @@ export function QualificationForm({ open, onClose }: QualificationFormProps) {
           {step > 0 ? (
             <>
               <ArrowLeft size={16} />
-              <span className="hidden sm:inline">Back</span>
+              <span className="hidden sm:inline">{t.back[lang]}</span>
             </>
           ) : (
-            <span className="text-xs font-medium">✕ Close</span>
+            <span className="text-xs font-medium">{t.close[lang]}</span>
           )}
         </button>
 
         {step > 0 && step <= TOTAL_STEPS && (
           <span className="text-xs font-medium text-muted-foreground">
-            Step {step} of {TOTAL_STEPS}
+            {t.step[lang]} {step} {t.of[lang]} {TOTAL_STEPS}
           </span>
         )}
 
@@ -218,22 +208,22 @@ export function QualificationForm({ open, onClose }: QualificationFormProps) {
                 className="text-center"
               >
                 <h1 className="text-2xl sm:text-3xl font-bold text-foreground mb-3 leading-tight">
-                  Let's Get Your Florida Business Started
+                  {t.introTitle[lang]}
                 </h1>
                 <p className="text-muted-foreground mb-8 text-base">
-                  This takes less than 60 seconds.
+                  {t.introSubtitle[lang]}
                 </p>
                 <Button
                   onClick={goNext}
                   className="h-14 px-10 rounded-2xl text-base font-semibold bg-accent text-accent-foreground hover:bg-accent/90 shadow-lg gap-2"
                 >
-                  Start
+                  {t.start[lang]}
                   <ArrowRight size={18} />
                 </Button>
               </motion.div>
             )}
 
-            {/* STEP 1 — Services (multi-select) */}
+            {/* STEP 1 — Services */}
             {step === 1 && (
               <motion.div
                 key="step1"
@@ -245,11 +235,11 @@ export function QualificationForm({ open, onClose }: QualificationFormProps) {
                 transition={{ duration: 0.3, ease: "easeOut" }}
               >
                 <h2 className="text-xl sm:text-2xl font-bold text-foreground mb-2">
-                  What do you need help with?
+                  {t.step1Title[lang]}
                 </h2>
-                <p className="text-sm text-muted-foreground mb-6">Select all that apply.</p>
+                <p className="text-sm text-muted-foreground mb-6">{t.step1Subtitle[lang]}</p>
                 <div className="space-y-3">
-                  {SERVICE_OPTIONS.map((opt, i) => {
+                  {serviceOptions.map((opt, i) => {
                     const selected = form.services.includes(opt);
                     return (
                       <motion.button
@@ -289,13 +279,13 @@ export function QualificationForm({ open, onClose }: QualificationFormProps) {
                   className="mt-6 w-full rounded-xl text-base font-semibold bg-accent text-accent-foreground hover:bg-accent/90 gap-2"
                   style={{ height: 52 }}
                 >
-                  Continue
+                  {t.continue[lang]}
                   <ArrowRight size={16} />
                 </Button>
               </motion.div>
             )}
 
-            {/* STEP 2 — Owners (auto-advance) */}
+            {/* STEP 2 — Owners */}
             {step === 2 && (
               <motion.div
                 key="step2"
@@ -307,11 +297,11 @@ export function QualificationForm({ open, onClose }: QualificationFormProps) {
                 transition={{ duration: 0.3, ease: "easeOut" }}
               >
                 <h2 className="text-xl sm:text-2xl font-bold text-foreground mb-2">
-                  How many owners will the company have?
+                  {t.step2Title[lang]}
                 </h2>
-                <p className="text-sm text-muted-foreground mb-6">This helps us prepare the right documents.</p>
+                <p className="text-sm text-muted-foreground mb-6">{t.step2Subtitle[lang]}</p>
                 <div className="space-y-3">
-                  {OWNER_OPTIONS.map((opt, i) => (
+                  {ownerOptions.map((opt, i) => (
                     <motion.button
                       key={opt}
                       initial={{ opacity: 0, y: 10 }}
@@ -351,12 +341,12 @@ export function QualificationForm({ open, onClose }: QualificationFormProps) {
                 transition={{ duration: 0.3, ease: "easeOut" }}
               >
                 <h2 className="text-xl sm:text-2xl font-bold text-foreground mb-2">
-                  What is your full name?
+                  {t.step3Title[lang]}
                 </h2>
-                <p className="text-sm text-muted-foreground mb-6">So we know who we're helping.</p>
+                <p className="text-sm text-muted-foreground mb-6">{t.step3Subtitle[lang]}</p>
                 <Input
                   ref={inputRef}
-                  placeholder="e.g. Maria Garcia"
+                  placeholder={t.step3Placeholder[lang]}
                   value={form.fullName}
                   onChange={(e) => update("fullName", e.target.value)}
                   onKeyDown={handleKeyDown}
@@ -369,7 +359,7 @@ export function QualificationForm({ open, onClose }: QualificationFormProps) {
                   className="mt-6 w-full rounded-xl text-base font-semibold bg-accent text-accent-foreground hover:bg-accent/90 gap-2"
                   style={{ height: 52 }}
                 >
-                  Continue
+                  {t.continue[lang]}
                   <ArrowRight size={16} />
                 </Button>
               </motion.div>
@@ -387,9 +377,9 @@ export function QualificationForm({ open, onClose }: QualificationFormProps) {
                 transition={{ duration: 0.3, ease: "easeOut" }}
               >
                 <h2 className="text-xl sm:text-2xl font-bold text-foreground mb-2">
-                  What is your phone number?
+                  {t.step4Title[lang]}
                 </h2>
-                <p className="text-sm text-muted-foreground mb-6">In case we need to reach you quickly.</p>
+                <p className="text-sm text-muted-foreground mb-6">{t.step4Subtitle[lang]}</p>
                 <Input
                   ref={inputRef}
                   type="tel"
@@ -406,13 +396,13 @@ export function QualificationForm({ open, onClose }: QualificationFormProps) {
                   className="mt-6 w-full rounded-xl text-base font-semibold bg-accent text-accent-foreground hover:bg-accent/90 gap-2"
                   style={{ height: 52 }}
                 >
-                  Continue
+                  {t.continue[lang]}
                   <ArrowRight size={16} />
                 </Button>
               </motion.div>
             )}
 
-            {/* STEP 5 — Email (submit on continue) */}
+            {/* STEP 5 — Email */}
             {step === 5 && (
               <motion.div
                 key="step5"
@@ -424,9 +414,9 @@ export function QualificationForm({ open, onClose }: QualificationFormProps) {
                 transition={{ duration: 0.3, ease: "easeOut" }}
               >
                 <h2 className="text-xl sm:text-2xl font-bold text-foreground mb-2">
-                  What is your email address?
+                  {t.step5Title[lang]}
                 </h2>
-                <p className="text-sm text-muted-foreground mb-6">We'll send important updates here.</p>
+                <p className="text-sm text-muted-foreground mb-6">{t.step5Subtitle[lang]}</p>
                 <Input
                   ref={inputRef}
                   type="email"
@@ -445,9 +435,9 @@ export function QualificationForm({ open, onClose }: QualificationFormProps) {
                   style={{ height: 52 }}
                 >
                   {submitting ? (
-                    <><Loader2 className="h-5 w-5 animate-spin" /> Submitting...</>
+                    <><Loader2 className="h-5 w-5 animate-spin" /> {t.submitting[lang]}</>
                   ) : (
-                    <>Submit <ArrowRight size={16} /></>
+                    <>{t.submit[lang]} <ArrowRight size={16} /></>
                   )}
                 </Button>
               </motion.div>
@@ -469,17 +459,17 @@ export function QualificationForm({ open, onClose }: QualificationFormProps) {
                   <Check className="h-8 w-8 text-accent" />
                 </div>
                 <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-3">
-                  You're All Set.
+                  {t.finalTitle[lang]}
                 </h2>
                 <p className="text-muted-foreground mb-8 text-base max-w-sm mx-auto">
-                  Our team will review your information and help you move forward with your Florida business.
+                  {t.finalSubtitle[lang]}
                 </p>
 
                 <Button
                   onClick={handleFinish}
                   className="h-14 w-full max-w-xs mx-auto rounded-2xl text-base font-semibold bg-accent text-accent-foreground hover:bg-accent/90 shadow-lg gap-2"
                 >
-                  <CalendarCheck size={18} /> Schedule Your Call
+                  <CalendarCheck size={18} /> {t.scheduleCall[lang]}
                 </Button>
 
                 <div className="flex gap-3 justify-center mt-4 max-w-xs mx-auto">
@@ -489,7 +479,7 @@ export function QualificationForm({ open, onClose }: QualificationFormProps) {
                       className="w-full h-12 rounded-xl font-semibold gap-1.5 border-accent/30 hover:border-accent"
                     >
                       <Phone size={16} className="text-accent" />
-                      Call Now
+                      {translations.mobile.call[lang]}
                     </Button>
                   </a>
                   <a href="https://wa.me/17869732556" target="_blank" rel="noopener noreferrer" className="flex-1">
@@ -504,7 +494,7 @@ export function QualificationForm({ open, onClose }: QualificationFormProps) {
                 </div>
 
                 <p className="text-xs text-muted-foreground mt-5">
-                  Prefer to talk now? Call or message us anytime.
+                  {t.preferTalk[lang]}
                 </p>
               </motion.div>
             )}
@@ -512,11 +502,11 @@ export function QualificationForm({ open, onClose }: QualificationFormProps) {
         </div>
       </div>
 
-      {/* Keyboard hint on text steps */}
+      {/* Keyboard hint */}
       {step >= 3 && step <= 5 && (
         <div className="hidden sm:flex justify-center pb-6">
           <span className="text-xs text-muted-foreground/60">
-            Press <kbd className="px-1.5 py-0.5 rounded bg-muted text-muted-foreground font-mono text-[11px]">Enter ↵</kbd> to continue
+            {t.enterToContinue[lang]} <kbd className="px-1.5 py-0.5 rounded bg-muted text-muted-foreground font-mono text-[11px]">Enter ↵</kbd> {t.enterLabel[lang]}
           </span>
         </div>
       )}
