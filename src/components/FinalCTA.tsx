@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 
-export function FinalCTA() {
+export function FinalCTA({ onGetStarted }: { onGetStarted?: () => void }) {
   return (
     <section className="py-16 md:py-24" style={{ background: "var(--gradient-hero)" }}>
       <motion.div
@@ -20,6 +20,7 @@ export function FinalCTA() {
           <Button
             size="lg"
             className="bg-accent text-accent-foreground hover:bg-accent/90 h-12 px-8 rounded-xl font-semibold text-base"
+            onClick={onGetStarted}
           >
             Start Now
           </Button>

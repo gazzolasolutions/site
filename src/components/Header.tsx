@@ -5,7 +5,7 @@ import logo from "@/assets/logo.png";
 const PHONE_NUMBER = "+17869732556";
 const WHATSAPP_URL = "https://wa.me/17869732556";
 
-export function Header() {
+export function Header({ onGetStarted }: { onGetStarted?: () => void }) {
   return (
     <header className="sticky top-0 z-50 bg-card/95 backdrop-blur-md border-b border-border">
       <div className="container flex items-center justify-between h-14 md:h-16">
@@ -41,7 +41,7 @@ export function Header() {
             </Button>
           </a>
 
-          <Button size="sm" className="bg-accent text-accent-foreground hover:bg-accent/90">
+          <Button size="sm" className="bg-accent text-accent-foreground hover:bg-accent/90" onClick={onGetStarted}>
             Get Started
           </Button>
         </nav>
