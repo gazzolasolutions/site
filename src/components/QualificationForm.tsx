@@ -1,9 +1,8 @@
-import { useState } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, Loader2, ShieldCheck } from "lucide-react";
+import { ArrowRight, ArrowLeft, ShieldCheck, Loader2, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 
 interface QualificationFormProps {
   open: boolean;
@@ -23,7 +22,17 @@ const OWNER_OPTIONS = [
   "Not sure yet",
 ];
 
+const TOTAL_STEPS = 5;
+
+const slideVariants = {
+  enter: (dir: number) => ({ x: dir > 0 ? 80 : -80, opacity: 0 }),
+  center: { x: 0, opacity: 1 },
+  exit: (dir: number) => ({ x: dir > 0 ? -80 : 80, opacity: 0 }),
+};
+
 export function QualificationForm({ open, onClose }: QualificationFormProps) {
+  const [step, setStep] = useState(0); // 0 = intro, 1-5 = questions, 6 = final
+  const [dir, setDir] = useState(1);
   const [form, setForm] = useState({
     fullName: "",
     email: "",
@@ -31,196 +40,433 @@ export function QualificationForm({ open, onClose }: QualificationFormProps) {
     service: "",
     owners: "",
   });
-  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [error, setError] = useState("");
   const [submitting, setSubmitting] = useState(false);
+  const inputRef = useRef<HTMLInputElement>(null);
 
-  function validate() {
-    const e: Record<string, string> = {};
-    if (!form.fullName.trim()) e.fullName = "Full name is required";
-    if (!form.email.trim()) e.email = "Email is required";
-    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) e.email = "Enter a valid email";
-    if (!form.phone.trim()) e.phone = "Phone number is required";
-    if (!form.service) e.service = "Please select an option";
-    if (!form.owners) e.owners = "Please select an option";
-    return e;
-  }
+  // Reset when opening
+  useEffect(() => {
+    if (open) {
+      setStep(0);
+      setDir(1);
+      setError("");
+      setSubmitting(false);
+    }
+  }, [open]);
 
-  function handleSubmit(ev: React.FormEvent) {
-    ev.preventDefault();
-    const e = validate();
-    setErrors(e);
-    if (Object.keys(e).length > 0) return;
+  // Auto-focus text inputs
+  useEffect(() => {
+    if (open && step >= 1 && step <= 3) {
+      setTimeout(() => inputRef.current?.focus(), 350);
+    }
+  }, [step, open]);
 
+  const goNext = useCallback(() => {
+    // Validate current step
+    if (step === 1 && !form.fullName.trim()) {
+      setError("Please enter your name");
+      return;
+    }
+    if (step === 2) {
+      if (!form.email.trim()) { setError("Please enter your email"); return; }
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) { setError("Please enter a valid email"); return; }
+    }
+    if (step === 3 && !form.phone.trim()) {
+      setError("Please enter your phone number");
+      return;
+    }
+    if (step === 4 && !form.service) {
+      setError("Please select an option");
+      return;
+    }
+    if (step === 5 && !form.owners) {
+      setError("Please select an option");
+      return;
+    }
+
+    setError("");
+    setDir(1);
+    setStep((s) => s + 1);
+  }, [step, form]);
+
+  const goBack = () => {
+    if (step <= 0) return;
+    setError("");
+    setDir(-1);
+    setStep((s) => s - 1);
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      goNext();
+    }
+  };
+
+  const handleFinish = () => {
     setSubmitting(true);
-    // Simulate brief loading, then redirect / show success
+    try {
+      sessionStorage.setItem("gz_qualification", JSON.stringify(form));
+    } catch {}
     setTimeout(() => {
       setSubmitting(false);
-      // Store data for potential future use
-      try {
-        sessionStorage.setItem("gz_qualification", JSON.stringify(form));
-      } catch {}
-      // For now, scroll to services or show success state
       onClose();
       document.getElementById("services")?.scrollIntoView({ behavior: "smooth" });
     }, 800);
-  }
+  };
 
-  function update(field: string, value: string) {
+  const update = (field: string, value: string) => {
     setForm((f) => ({ ...f, [field]: value }));
-    if (errors[field]) setErrors((e) => ({ ...e, [field]: "" }));
-  }
+    if (error) setError("");
+  };
+
+  // Auto-advance on choice selection
+  const selectOption = (field: string, value: string) => {
+    setForm((f) => ({ ...f, [field]: value }));
+    setError("");
+    setTimeout(() => {
+      setDir(1);
+      setStep((s) => s + 1);
+    }, 300);
+  };
+
+  if (!open) return null;
+
+  const progressPercent = step === 0 ? 0 : step > TOTAL_STEPS ? 100 : (step / TOTAL_STEPS) * 100;
 
   return (
-    <AnimatePresence>
-      {open && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-foreground/40 backdrop-blur-sm p-0 sm:p-4"
-          onClick={(e) => e.target === e.currentTarget && onClose()}
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="fixed inset-0 z-50 bg-card flex flex-col"
+    >
+      {/* Top bar */}
+      <div className="flex items-center justify-between px-4 sm:px-6 pt-4 pb-2">
+        <button
+          onClick={step > 0 ? goBack : onClose}
+          className="flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground transition-colors p-1.5 -ml-1.5 rounded-lg"
         >
-          <motion.div
-            initial={{ y: 40, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            exit={{ y: 40, opacity: 0 }}
-            transition={{ type: "spring", damping: 25, stiffness: 300 }}
-            className="relative w-full sm:max-w-md bg-card rounded-t-2xl sm:rounded-2xl shadow-2xl max-h-[95dvh] overflow-y-auto"
-          >
-            {/* Close */}
-            <button
-              onClick={onClose}
-              className="absolute top-4 right-4 p-1.5 rounded-full hover:bg-muted transition-colors text-muted-foreground"
-              aria-label="Close"
-            >
-              <X size={18} />
-            </button>
+          {step > 0 ? (
+            <>
+              <ArrowLeft size={16} />
+              <span className="hidden sm:inline">Back</span>
+            </>
+          ) : (
+            <span className="text-xs font-medium">✕ Close</span>
+          )}
+        </button>
 
-            <div className="p-6 sm:p-8">
-              {/* Header */}
-              <h2 className="text-xl sm:text-2xl font-bold text-foreground mb-1">
-                Start Your Florida Business
-              </h2>
-              <p className="text-sm text-muted-foreground mb-6">
-                Answer a few quick questions to begin.
-              </p>
+        {step > 0 && step <= TOTAL_STEPS && (
+          <span className="text-xs font-medium text-muted-foreground">
+            Step {step} of {TOTAL_STEPS}
+          </span>
+        )}
 
-              <form onSubmit={handleSubmit} className="space-y-4">
-                {/* Full Name */}
-                <div>
-                  <Label htmlFor="qf-name" className="text-sm font-medium text-foreground">Full Name</Label>
-                  <Input
-                    id="qf-name"
-                    placeholder="Your full name"
-                    value={form.fullName}
-                    onChange={(e) => update("fullName", e.target.value)}
-                    className="mt-1.5 h-12 rounded-xl text-base"
-                    autoComplete="name"
-                  />
-                  {errors.fullName && <p className="text-xs text-destructive mt-1">{errors.fullName}</p>}
-                </div>
+        {step === 0 && <div />}
+        {step > TOTAL_STEPS && <div />}
+      </div>
 
-                {/* Email */}
-                <div>
-                  <Label htmlFor="qf-email" className="text-sm font-medium text-foreground">Email Address</Label>
-                  <Input
-                    id="qf-email"
-                    type="email"
-                    placeholder="you@example.com"
-                    value={form.email}
-                    onChange={(e) => update("email", e.target.value)}
-                    className="mt-1.5 h-12 rounded-xl text-base"
-                    autoComplete="email"
-                  />
-                  {errors.email && <p className="text-xs text-destructive mt-1">{errors.email}</p>}
-                </div>
+      {/* Progress bar */}
+      {step > 0 && (
+        <div className="px-4 sm:px-6 pb-2">
+          <div className="h-1 w-full bg-muted rounded-full overflow-hidden">
+            <motion.div
+              className="h-full rounded-full"
+              style={{ background: "var(--gradient-cta)" }}
+              animate={{ width: `${progressPercent}%` }}
+              transition={{ duration: 0.4, ease: "easeOut" }}
+            />
+          </div>
+        </div>
+      )}
 
-                {/* Phone */}
-                <div>
-                  <Label htmlFor="qf-phone" className="text-sm font-medium text-foreground">Phone Number</Label>
-                  <Input
-                    id="qf-phone"
-                    type="tel"
-                    placeholder="+1 (786) 000-0000"
-                    value={form.phone}
-                    onChange={(e) => update("phone", e.target.value)}
-                    className="mt-1.5 h-12 rounded-xl text-base"
-                    autoComplete="tel"
-                  />
-                  {errors.phone && <p className="text-xs text-destructive mt-1">{errors.phone}</p>}
-                </div>
-
-                {/* Service Select */}
-                <div>
-                  <Label className="text-sm font-medium text-foreground">What do you need help with?</Label>
-                  <div className="grid grid-cols-1 gap-2 mt-1.5">
-                    {SERVICE_OPTIONS.map((opt) => (
-                      <button
-                        key={opt}
-                        type="button"
-                        onClick={() => update("service", opt)}
-                        className={`text-left px-4 py-3 rounded-xl border text-sm font-medium transition-all ${
-                          form.service === opt
-                            ? "border-accent bg-accent/10 text-foreground ring-1 ring-accent"
-                            : "border-border bg-background text-muted-foreground hover:border-accent/40"
-                        }`}
-                      >
-                        {opt}
-                      </button>
-                    ))}
-                  </div>
-                  {errors.service && <p className="text-xs text-destructive mt-1">{errors.service}</p>}
-                </div>
-
-                {/* Owners Select */}
-                <div>
-                  <Label className="text-sm font-medium text-foreground">How many owners will the company have?</Label>
-                  <div className="grid grid-cols-1 gap-2 mt-1.5">
-                    {OWNER_OPTIONS.map((opt) => (
-                      <button
-                        key={opt}
-                        type="button"
-                        onClick={() => update("owners", opt)}
-                        className={`text-left px-4 py-3 rounded-xl border text-sm font-medium transition-all ${
-                          form.owners === opt
-                            ? "border-accent bg-accent/10 text-foreground ring-1 ring-accent"
-                            : "border-border bg-background text-muted-foreground hover:border-accent/40"
-                        }`}
-                      >
-                        {opt}
-                      </button>
-                    ))}
-                  </div>
-                  {errors.owners && <p className="text-xs text-destructive mt-1">{errors.owners}</p>}
-                </div>
-
-                {/* Submit */}
+      {/* Content area */}
+      <div className="flex-1 flex items-center justify-center px-6 sm:px-8 overflow-hidden">
+        <div className="w-full max-w-md">
+          <AnimatePresence mode="wait" custom={dir}>
+            {/* INTRO */}
+            {step === 0 && (
+              <motion.div
+                key="intro"
+                custom={dir}
+                variants={slideVariants}
+                initial="enter"
+                animate="center"
+                exit="exit"
+                transition={{ duration: 0.3, ease: "easeOut" }}
+                className="text-center"
+              >
+                <h1 className="text-2xl sm:text-3xl font-bold text-foreground mb-3 leading-tight">
+                  Let's Get Your Florida Business Started
+                </h1>
+                <p className="text-muted-foreground mb-8 text-base">
+                  This takes less than 60 seconds.
+                </p>
                 <Button
-                  type="submit"
+                  onClick={goNext}
+                  className="h-14 px-10 rounded-2xl text-base font-semibold bg-accent text-accent-foreground hover:bg-accent/90 shadow-lg gap-2"
+                >
+                  Start
+                  <ArrowRight size={18} />
+                </Button>
+              </motion.div>
+            )}
+
+            {/* STEP 1 — Name */}
+            {step === 1 && (
+              <motion.div
+                key="step1"
+                custom={dir}
+                variants={slideVariants}
+                initial="enter"
+                animate="center"
+                exit="exit"
+                transition={{ duration: 0.3, ease: "easeOut" }}
+              >
+                <h2 className="text-xl sm:text-2xl font-bold text-foreground mb-2">
+                  What is your full name?
+                </h2>
+                <p className="text-sm text-muted-foreground mb-6">So we know who we're helping.</p>
+                <Input
+                  ref={inputRef}
+                  placeholder="e.g. Maria Garcia"
+                  value={form.fullName}
+                  onChange={(e) => update("fullName", e.target.value)}
+                  onKeyDown={handleKeyDown}
+                  className="h-14 rounded-xl text-lg border-2 border-border focus:border-accent px-4"
+                  autoComplete="name"
+                />
+                {error && <p className="text-sm text-destructive mt-2">{error}</p>}
+                <Button
+                  onClick={goNext}
+                  className="mt-6 h-13 w-full rounded-xl text-base font-semibold bg-accent text-accent-foreground hover:bg-accent/90 gap-2"
+                  style={{ height: 52 }}
+                >
+                  Continue
+                  <ArrowRight size={16} />
+                </Button>
+              </motion.div>
+            )}
+
+            {/* STEP 2 — Email */}
+            {step === 2 && (
+              <motion.div
+                key="step2"
+                custom={dir}
+                variants={slideVariants}
+                initial="enter"
+                animate="center"
+                exit="exit"
+                transition={{ duration: 0.3, ease: "easeOut" }}
+              >
+                <h2 className="text-xl sm:text-2xl font-bold text-foreground mb-2">
+                  What is your email address?
+                </h2>
+                <p className="text-sm text-muted-foreground mb-6">We'll send important updates here.</p>
+                <Input
+                  ref={inputRef}
+                  type="email"
+                  placeholder="you@example.com"
+                  value={form.email}
+                  onChange={(e) => update("email", e.target.value)}
+                  onKeyDown={handleKeyDown}
+                  className="h-14 rounded-xl text-lg border-2 border-border focus:border-accent px-4"
+                  autoComplete="email"
+                />
+                {error && <p className="text-sm text-destructive mt-2">{error}</p>}
+                <Button
+                  onClick={goNext}
+                  className="mt-6 h-13 w-full rounded-xl text-base font-semibold bg-accent text-accent-foreground hover:bg-accent/90 gap-2"
+                  style={{ height: 52 }}
+                >
+                  Continue
+                  <ArrowRight size={16} />
+                </Button>
+              </motion.div>
+            )}
+
+            {/* STEP 3 — Phone */}
+            {step === 3 && (
+              <motion.div
+                key="step3"
+                custom={dir}
+                variants={slideVariants}
+                initial="enter"
+                animate="center"
+                exit="exit"
+                transition={{ duration: 0.3, ease: "easeOut" }}
+              >
+                <h2 className="text-xl sm:text-2xl font-bold text-foreground mb-2">
+                  What is your phone number?
+                </h2>
+                <p className="text-sm text-muted-foreground mb-6">In case we need to reach you quickly.</p>
+                <Input
+                  ref={inputRef}
+                  type="tel"
+                  placeholder="+1 (786) 000-0000"
+                  value={form.phone}
+                  onChange={(e) => update("phone", e.target.value)}
+                  onKeyDown={handleKeyDown}
+                  className="h-14 rounded-xl text-lg border-2 border-border focus:border-accent px-4"
+                  autoComplete="tel"
+                />
+                {error && <p className="text-sm text-destructive mt-2">{error}</p>}
+                <Button
+                  onClick={goNext}
+                  className="mt-6 h-13 w-full rounded-xl text-base font-semibold bg-accent text-accent-foreground hover:bg-accent/90 gap-2"
+                  style={{ height: 52 }}
+                >
+                  Continue
+                  <ArrowRight size={16} />
+                </Button>
+              </motion.div>
+            )}
+
+            {/* STEP 4 — Service */}
+            {step === 4 && (
+              <motion.div
+                key="step4"
+                custom={dir}
+                variants={slideVariants}
+                initial="enter"
+                animate="center"
+                exit="exit"
+                transition={{ duration: 0.3, ease: "easeOut" }}
+              >
+                <h2 className="text-xl sm:text-2xl font-bold text-foreground mb-2">
+                  What do you need help with?
+                </h2>
+                <p className="text-sm text-muted-foreground mb-6">Select the option that best fits your needs.</p>
+                <div className="space-y-3">
+                  {SERVICE_OPTIONS.map((opt, i) => (
+                    <motion.button
+                      key={opt}
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: i * 0.06 }}
+                      onClick={() => selectOption("service", opt)}
+                      className={`w-full text-left px-5 py-4 rounded-xl border-2 text-base font-medium transition-all flex items-center gap-3 ${
+                        form.service === opt
+                          ? "border-accent bg-accent/10 text-foreground"
+                          : "border-border bg-background text-muted-foreground hover:border-accent/40 hover:bg-accent/5"
+                      }`}
+                    >
+                      <span className={`flex items-center justify-center w-6 h-6 rounded-full border-2 shrink-0 transition-all ${
+                        form.service === opt
+                          ? "border-accent bg-accent text-accent-foreground"
+                          : "border-muted-foreground/30"
+                      }`}>
+                        {form.service === opt && <Check size={14} />}
+                      </span>
+                      {opt}
+                    </motion.button>
+                  ))}
+                </div>
+                {error && <p className="text-sm text-destructive mt-2">{error}</p>}
+              </motion.div>
+            )}
+
+            {/* STEP 5 — Owners */}
+            {step === 5 && (
+              <motion.div
+                key="step5"
+                custom={dir}
+                variants={slideVariants}
+                initial="enter"
+                animate="center"
+                exit="exit"
+                transition={{ duration: 0.3, ease: "easeOut" }}
+              >
+                <h2 className="text-xl sm:text-2xl font-bold text-foreground mb-2">
+                  How many owners will the company have?
+                </h2>
+                <p className="text-sm text-muted-foreground mb-6">This helps us prepare the right documents.</p>
+                <div className="space-y-3">
+                  {OWNER_OPTIONS.map((opt, i) => (
+                    <motion.button
+                      key={opt}
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: i * 0.06 }}
+                      onClick={() => selectOption("owners", opt)}
+                      className={`w-full text-left px-5 py-4 rounded-xl border-2 text-base font-medium transition-all flex items-center gap-3 ${
+                        form.owners === opt
+                          ? "border-accent bg-accent/10 text-foreground"
+                          : "border-border bg-background text-muted-foreground hover:border-accent/40 hover:bg-accent/5"
+                      }`}
+                    >
+                      <span className={`flex items-center justify-center w-6 h-6 rounded-full border-2 shrink-0 transition-all ${
+                        form.owners === opt
+                          ? "border-accent bg-accent text-accent-foreground"
+                          : "border-muted-foreground/30"
+                      }`}>
+                        {form.owners === opt && <Check size={14} />}
+                      </span>
+                      {opt}
+                    </motion.button>
+                  ))}
+                </div>
+                {error && <p className="text-sm text-destructive mt-2">{error}</p>}
+              </motion.div>
+            )}
+
+            {/* FINAL SCREEN */}
+            {step === 6 && (
+              <motion.div
+                key="final"
+                custom={dir}
+                variants={slideVariants}
+                initial="enter"
+                animate="center"
+                exit="exit"
+                transition={{ duration: 0.3, ease: "easeOut" }}
+                className="text-center"
+              >
+                <div className="w-16 h-16 rounded-full bg-accent/15 flex items-center justify-center mx-auto mb-6">
+                  <Check className="h-8 w-8 text-accent" />
+                </div>
+                <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-3">
+                  Perfect. Let's Continue.
+                </h2>
+                <p className="text-muted-foreground mb-8 text-base max-w-sm mx-auto">
+                  We'll now collect the detailed information needed to prepare your Florida business documents.
+                </p>
+                <Button
+                  onClick={handleFinish}
                   disabled={submitting}
-                  className="w-full h-13 rounded-xl text-base font-semibold bg-accent text-accent-foreground hover:bg-accent/90 shadow-lg"
-                  style={{ height: "52px" }}
+                  className="h-14 px-10 rounded-2xl text-base font-semibold bg-accent text-accent-foreground hover:bg-accent/90 shadow-lg gap-2"
                 >
                   {submitting ? (
                     <>
-                      <Loader2 className="h-4 w-4 animate-spin mr-2" />
+                      <Loader2 className="h-5 w-5 animate-spin" />
                       Processing...
                     </>
                   ) : (
-                    "Continue"
+                    <>
+                      Continue to Full Application
+                      <ArrowRight size={18} />
+                    </>
                   )}
                 </Button>
-
-                {/* Trust microcopy */}
-                <div className="flex items-center justify-center gap-1.5 text-xs text-muted-foreground pt-1">
+                <div className="flex items-center justify-center gap-1.5 text-xs text-muted-foreground mt-5">
                   <ShieldCheck size={14} className="text-accent" />
-                  Secure and guided process.
+                  Secure and guided process. Your information is protected.
                 </div>
-              </form>
-            </div>
-          </motion.div>
-        </motion.div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
+      </div>
+
+      {/* Keyboard hint on text steps */}
+      {step >= 1 && step <= 3 && (
+        <div className="hidden sm:flex justify-center pb-6">
+          <span className="text-xs text-muted-foreground/60">
+            Press <kbd className="px-1.5 py-0.5 rounded bg-muted text-muted-foreground font-mono text-[11px]">Enter ↵</kbd> to continue
+          </span>
+        </div>
       )}
-    </AnimatePresence>
+    </motion.div>
   );
 }
