@@ -2,10 +2,12 @@ import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { translations } from "@/i18n/translations";
+import { useCalendlyPopup } from "@/hooks/useCalendlyPopup";
 
 export function FinalCTA({ onGetStarted }: { onGetStarted?: () => void }) {
   const { lang } = useLanguage();
   const t = translations.finalCTA;
+  const openCalendly = useCalendlyPopup();
 
   return (
     <section className="py-16 md:py-24" style={{ background: "var(--gradient-hero)" }}>
@@ -33,7 +35,7 @@ export function FinalCTA({ onGetStarted }: { onGetStarted?: () => void }) {
             size="lg"
             variant="outline"
             className="border-2 border-primary-foreground/40 text-primary-foreground hover:bg-primary-foreground/10 h-12 px-8 rounded-xl text-base font-semibold bg-transparent"
-            onClick={() => document.getElementById("calendly")?.scrollIntoView({ behavior: "smooth" })}
+            onClick={openCalendly}
           >
             {t.consultation[lang]}
           </Button>
