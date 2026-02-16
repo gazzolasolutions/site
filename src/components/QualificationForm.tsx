@@ -31,8 +31,10 @@ const slideVariants = {
   exit: (dir: number) => ({ x: dir > 0 ? -80 : 80, opacity: 0 }),
 };
 
+// NEW ORDER: 1=Services, 2=Owners, 3=Name, 4=Phone, 5=Email, 6=Final
+
 export function QualificationForm({ open, onClose }: QualificationFormProps) {
-  const [step, setStep] = useState(0); // 0 = intro, 1-5 = questions, 6 = final
+  const [step, setStep] = useState(0);
   const [dir, setDir] = useState(1);
   const [form, setForm] = useState({
     fullName: "",
@@ -45,7 +47,6 @@ export function QualificationForm({ open, onClose }: QualificationFormProps) {
   const [submitting, setSubmitting] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  // Reset when opening
   useEffect(() => {
     if (open) {
       setStep(0);
@@ -55,38 +56,44 @@ export function QualificationForm({ open, onClose }: QualificationFormProps) {
     }
   }, [open]);
 
-  // Auto-focus text inputs
+  // Auto-focus text inputs on steps 3, 4, 5
   useEffect(() => {
-    if (open && step >= 1 && step <= 3) {
+    if (open && step >= 3 && step <= 5) {
       setTimeout(() => inputRef.current?.focus(), 350);
     }
   }, [step, open]);
 
   const goNext = useCallback(() => {
-    // Validate current step
-    if (step === 1 && !form.fullName.trim()) {
-      setError("Please enter your name");
-      return;
-    }
-    if (step === 2) {
-      if (!form.email.trim()) { setError("Please enter your email"); return; }
-      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) { setError("Please enter a valid email"); return; }
-    }
-    if (step === 3 && !form.phone.trim()) {
-      setError("Please enter your phone number");
-      return;
-    }
-    if (step === 4 && form.services.length === 0) {
+    if (step === 1 && form.services.length === 0) {
       setError("Please select at least one option");
       return;
     }
-    if (step === 5 && !form.owners) {
+    if (step === 2 && !form.owners) {
       setError("Please select an option");
       return;
+    }
+    if (step === 3 && !form.fullName.trim()) {
+      setError("Please enter your name");
+      return;
+    }
+    if (step === 4 && !form.phone.trim()) {
+      setError("Please enter your phone number");
+      return;
+    }
+    if (step === 5) {
+      if (!form.email.trim()) { setError("Please enter your email"); return; }
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) { setError("Please enter a valid email"); return; }
     }
 
     setError("");
     setDir(1);
+
+    // On step 5 (email - last step), submit lead then go to final
+    if (step === 5) {
+      handleSubmitLead();
+      return;
+    }
+
     setStep((s) => s + 1);
   }, [step, form]);
 
@@ -104,7 +111,7 @@ export function QualificationForm({ open, onClose }: QualificationFormProps) {
     }
   };
 
-  const handleFinish = async () => {
+  const handleSubmitLead = async () => {
     setSubmitting(true);
     try {
       await supabase.from("leads").insert({
@@ -116,11 +123,14 @@ export function QualificationForm({ open, onClose }: QualificationFormProps) {
         source: "typeform",
       });
     } catch {}
-    setTimeout(() => {
-      setSubmitting(false);
-      onClose();
-      document.getElementById("services")?.scrollIntoView({ behavior: "smooth" });
-    }, 800);
+    setSubmitting(false);
+    setDir(1);
+    setStep(6);
+  };
+
+  const handleFinish = () => {
+    onClose();
+    document.getElementById("services")?.scrollIntoView({ behavior: "smooth" });
   };
 
   const update = (field: string, value: string) => {
@@ -128,7 +138,7 @@ export function QualificationForm({ open, onClose }: QualificationFormProps) {
     if (error) setError("");
   };
 
-  // Auto-advance on choice selection
+  // Auto-advance on single-choice selection (step 2 - owners)
   const selectOption = (field: string, value: string) => {
     setForm((f) => ({ ...f, [field]: value }));
     setError("");
@@ -221,120 +231,10 @@ export function QualificationForm({ open, onClose }: QualificationFormProps) {
               </motion.div>
             )}
 
-            {/* STEP 1 — Name */}
+            {/* STEP 1 — Services (multi-select) */}
             {step === 1 && (
               <motion.div
                 key="step1"
-                custom={dir}
-                variants={slideVariants}
-                initial="enter"
-                animate="center"
-                exit="exit"
-                transition={{ duration: 0.3, ease: "easeOut" }}
-              >
-                <h2 className="text-xl sm:text-2xl font-bold text-foreground mb-2">
-                  What is your full name?
-                </h2>
-                <p className="text-sm text-muted-foreground mb-6">So we know who we're helping.</p>
-                <Input
-                  ref={inputRef}
-                  placeholder="e.g. Maria Garcia"
-                  value={form.fullName}
-                  onChange={(e) => update("fullName", e.target.value)}
-                  onKeyDown={handleKeyDown}
-                  className="h-14 rounded-xl text-lg border-2 border-border focus:border-accent px-4"
-                  autoComplete="name"
-                />
-                {error && <p className="text-sm text-destructive mt-2">{error}</p>}
-                <Button
-                  onClick={goNext}
-                  className="mt-6 h-13 w-full rounded-xl text-base font-semibold bg-accent text-accent-foreground hover:bg-accent/90 gap-2"
-                  style={{ height: 52 }}
-                >
-                  Continue
-                  <ArrowRight size={16} />
-                </Button>
-              </motion.div>
-            )}
-
-            {/* STEP 2 — Email */}
-            {step === 2 && (
-              <motion.div
-                key="step2"
-                custom={dir}
-                variants={slideVariants}
-                initial="enter"
-                animate="center"
-                exit="exit"
-                transition={{ duration: 0.3, ease: "easeOut" }}
-              >
-                <h2 className="text-xl sm:text-2xl font-bold text-foreground mb-2">
-                  What is your email address?
-                </h2>
-                <p className="text-sm text-muted-foreground mb-6">We'll send important updates here.</p>
-                <Input
-                  ref={inputRef}
-                  type="email"
-                  placeholder="you@example.com"
-                  value={form.email}
-                  onChange={(e) => update("email", e.target.value)}
-                  onKeyDown={handleKeyDown}
-                  className="h-14 rounded-xl text-lg border-2 border-border focus:border-accent px-4"
-                  autoComplete="email"
-                />
-                {error && <p className="text-sm text-destructive mt-2">{error}</p>}
-                <Button
-                  onClick={goNext}
-                  className="mt-6 h-13 w-full rounded-xl text-base font-semibold bg-accent text-accent-foreground hover:bg-accent/90 gap-2"
-                  style={{ height: 52 }}
-                >
-                  Continue
-                  <ArrowRight size={16} />
-                </Button>
-              </motion.div>
-            )}
-
-            {/* STEP 3 — Phone */}
-            {step === 3 && (
-              <motion.div
-                key="step3"
-                custom={dir}
-                variants={slideVariants}
-                initial="enter"
-                animate="center"
-                exit="exit"
-                transition={{ duration: 0.3, ease: "easeOut" }}
-              >
-                <h2 className="text-xl sm:text-2xl font-bold text-foreground mb-2">
-                  What is your phone number?
-                </h2>
-                <p className="text-sm text-muted-foreground mb-6">In case we need to reach you quickly.</p>
-                <Input
-                  ref={inputRef}
-                  type="tel"
-                  placeholder="+1 (786) 000-0000"
-                  value={form.phone}
-                  onChange={(e) => update("phone", e.target.value)}
-                  onKeyDown={handleKeyDown}
-                  className="h-14 rounded-xl text-lg border-2 border-border focus:border-accent px-4"
-                  autoComplete="tel"
-                />
-                {error && <p className="text-sm text-destructive mt-2">{error}</p>}
-                <Button
-                  onClick={goNext}
-                  className="mt-6 h-13 w-full rounded-xl text-base font-semibold bg-accent text-accent-foreground hover:bg-accent/90 gap-2"
-                  style={{ height: 52 }}
-                >
-                  Continue
-                  <ArrowRight size={16} />
-                </Button>
-              </motion.div>
-            )}
-
-            {/* STEP 4 — Service (multi-select) */}
-            {step === 4 && (
-              <motion.div
-                key="step4"
                 custom={dir}
                 variants={slideVariants}
                 initial="enter"
@@ -393,12 +293,10 @@ export function QualificationForm({ open, onClose }: QualificationFormProps) {
               </motion.div>
             )}
 
-
-
-            {/* STEP 5 — Owners */}
-            {step === 5 && (
+            {/* STEP 2 — Owners (auto-advance) */}
+            {step === 2 && (
               <motion.div
-                key="step5"
+                key="step2"
                 custom={dir}
                 variants={slideVariants}
                 initial="enter"
@@ -439,6 +337,120 @@ export function QualificationForm({ open, onClose }: QualificationFormProps) {
               </motion.div>
             )}
 
+            {/* STEP 3 — Name */}
+            {step === 3 && (
+              <motion.div
+                key="step3"
+                custom={dir}
+                variants={slideVariants}
+                initial="enter"
+                animate="center"
+                exit="exit"
+                transition={{ duration: 0.3, ease: "easeOut" }}
+              >
+                <h2 className="text-xl sm:text-2xl font-bold text-foreground mb-2">
+                  What is your full name?
+                </h2>
+                <p className="text-sm text-muted-foreground mb-6">So we know who we're helping.</p>
+                <Input
+                  ref={inputRef}
+                  placeholder="e.g. Maria Garcia"
+                  value={form.fullName}
+                  onChange={(e) => update("fullName", e.target.value)}
+                  onKeyDown={handleKeyDown}
+                  className="h-14 rounded-xl text-lg border-2 border-border focus:border-accent px-4"
+                  autoComplete="name"
+                />
+                {error && <p className="text-sm text-destructive mt-2">{error}</p>}
+                <Button
+                  onClick={goNext}
+                  className="mt-6 w-full rounded-xl text-base font-semibold bg-accent text-accent-foreground hover:bg-accent/90 gap-2"
+                  style={{ height: 52 }}
+                >
+                  Continue
+                  <ArrowRight size={16} />
+                </Button>
+              </motion.div>
+            )}
+
+            {/* STEP 4 — Phone */}
+            {step === 4 && (
+              <motion.div
+                key="step4"
+                custom={dir}
+                variants={slideVariants}
+                initial="enter"
+                animate="center"
+                exit="exit"
+                transition={{ duration: 0.3, ease: "easeOut" }}
+              >
+                <h2 className="text-xl sm:text-2xl font-bold text-foreground mb-2">
+                  What is your phone number?
+                </h2>
+                <p className="text-sm text-muted-foreground mb-6">In case we need to reach you quickly.</p>
+                <Input
+                  ref={inputRef}
+                  type="tel"
+                  placeholder="+1 (786) 000-0000"
+                  value={form.phone}
+                  onChange={(e) => update("phone", e.target.value)}
+                  onKeyDown={handleKeyDown}
+                  className="h-14 rounded-xl text-lg border-2 border-border focus:border-accent px-4"
+                  autoComplete="tel"
+                />
+                {error && <p className="text-sm text-destructive mt-2">{error}</p>}
+                <Button
+                  onClick={goNext}
+                  className="mt-6 w-full rounded-xl text-base font-semibold bg-accent text-accent-foreground hover:bg-accent/90 gap-2"
+                  style={{ height: 52 }}
+                >
+                  Continue
+                  <ArrowRight size={16} />
+                </Button>
+              </motion.div>
+            )}
+
+            {/* STEP 5 — Email (submit on continue) */}
+            {step === 5 && (
+              <motion.div
+                key="step5"
+                custom={dir}
+                variants={slideVariants}
+                initial="enter"
+                animate="center"
+                exit="exit"
+                transition={{ duration: 0.3, ease: "easeOut" }}
+              >
+                <h2 className="text-xl sm:text-2xl font-bold text-foreground mb-2">
+                  What is your email address?
+                </h2>
+                <p className="text-sm text-muted-foreground mb-6">We'll send important updates here.</p>
+                <Input
+                  ref={inputRef}
+                  type="email"
+                  placeholder="you@example.com"
+                  value={form.email}
+                  onChange={(e) => update("email", e.target.value)}
+                  onKeyDown={handleKeyDown}
+                  className="h-14 rounded-xl text-lg border-2 border-border focus:border-accent px-4"
+                  autoComplete="email"
+                />
+                {error && <p className="text-sm text-destructive mt-2">{error}</p>}
+                <Button
+                  onClick={goNext}
+                  disabled={submitting}
+                  className="mt-6 w-full rounded-xl text-base font-semibold bg-accent text-accent-foreground hover:bg-accent/90 gap-2"
+                  style={{ height: 52 }}
+                >
+                  {submitting ? (
+                    <><Loader2 className="h-5 w-5 animate-spin" /> Submitting...</>
+                  ) : (
+                    <>Submit <ArrowRight size={16} /></>
+                  )}
+                </Button>
+              </motion.div>
+            )}
+
             {/* FINAL SCREEN */}
             {step === 6 && (
               <motion.div
@@ -461,20 +473,13 @@ export function QualificationForm({ open, onClose }: QualificationFormProps) {
                   Our team will review your information and help you move forward with your Florida business.
                 </p>
 
-                {/* Primary CTA */}
                 <Button
                   onClick={handleFinish}
-                  disabled={submitting}
                   className="h-14 w-full max-w-xs mx-auto rounded-2xl text-base font-semibold bg-accent text-accent-foreground hover:bg-accent/90 shadow-lg gap-2"
                 >
-                  {submitting ? (
-                    <><Loader2 className="h-5 w-5 animate-spin" /> Processing...</>
-                  ) : (
-                    <><CalendarCheck size={18} /> Schedule Your Call</>
-                  )}
+                  <CalendarCheck size={18} /> Schedule Your Call
                 </Button>
 
-                {/* Secondary contact */}
                 <div className="flex gap-3 justify-center mt-4 max-w-xs mx-auto">
                   <a href="tel:+17869732556" className="flex-1">
                     <Button
@@ -506,7 +511,7 @@ export function QualificationForm({ open, onClose }: QualificationFormProps) {
       </div>
 
       {/* Keyboard hint on text steps */}
-      {step >= 1 && step <= 3 && (
+      {step >= 3 && step <= 5 && (
         <div className="hidden sm:flex justify-center pb-6">
           <span className="text-xs text-muted-foreground/60">
             Press <kbd className="px-1.5 py-0.5 rounded bg-muted text-muted-foreground font-mono text-[11px]">Enter ↵</kbd> to continue
