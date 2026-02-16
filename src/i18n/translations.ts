@@ -20,9 +20,9 @@ export const translations = {
       pt: "Abra Sua Empresa na Flórida de Forma Inteligente e Rápida",
     },
     subtitle: {
-      en: "We help you open your Florida LLC, obtain your EIN, and — if needed — apply for your ITIN without sending your passport to the IRS.",
-      es: "Le ayudamos a abrir su LLC en Florida, obtener su EIN y — si es necesario — solicitar su ITIN sin enviar su pasaporte al IRS.",
-      pt: "Ajudamos você a abrir sua LLC na Flórida, obter seu EIN e — se necessário — solicitar seu ITIN sem enviar seu passaporte ao IRS.",
+      en: "We help you open your Florida LLC, obtain your EIN, and, if needed, apply for your ITIN without sending your passport to the IRS.",
+      es: "Le ayudamos a abrir su LLC en Florida, obtener su EIN y, si es necesario, solicitar su ITIN sin enviar su pasaporte al IRS.",
+      pt: "Ajudamos você a abrir sua LLC na Flórida, obter seu EIN e, se necessário, solicitar seu ITIN sem enviar seu passaporte ao IRS.",
     },
     bullets: {
       en: ["No SSN required", "ITIN without mailing your passport", "Multilingual support", "Step by step guidance"],
@@ -74,9 +74,9 @@ export const translations = {
       pt: "Tudo Que Você Precisa Para Abrir Sua Empresa na Flórida",
     },
     subtitle: {
-      en: "From formation to tax preparation — Florida-focused services for non-residents.",
-      es: "Desde la formación hasta la preparación de impuestos — servicios enfocados en Florida para no residentes.",
-      pt: "Da formação à preparação de impostos — serviços focados na Flórida para não residentes.",
+      en: "From formation to tax preparation. Florida-focused services for non-residents.",
+      es: "Desde la formación hasta la preparación de impuestos. Servicios enfocados en Florida para no residentes.",
+      pt: "Da formação à preparação de impostos. Serviços focados na Flórida para não residentes.",
     },
     cards: {
       en: [
@@ -92,9 +92,9 @@ export const translations = {
           cta: "Apply for EIN",
         },
         {
-          title: "Apply for Your ITIN — If You Qualify",
+          title: "Apply for Your ITIN (If You Qualify)",
           subtitle: "Certified Acceptance Agent Service",
-          bullets: ["Keep your passport — no mailing required", "Avoid long delays", "Secure in-person or remote verification", "Full support in your language"],
+          bullets: ["Keep your passport, no mailing required", "Avoid long delays", "Secure in-person or remote verification", "Full support in your language"],
           note: "Not every business owner needs an ITIN. We help determine if this applies to your situation.",
           cta: "Get My ITIN Safely",
         },
@@ -142,9 +142,9 @@ export const translations = {
           cta: "Solicitar EIN",
         },
         {
-          title: "Solicite Su ITIN — Si Califica",
+          title: "Solicite Su ITIN (Si Califica)",
           subtitle: "Servicio de Agente de Aceptación Certificado",
-          bullets: ["Conserve su pasaporte — sin enviarlo", "Evite largas demoras", "Verificación presencial o remota segura", "Soporte completo en su idioma"],
+          bullets: ["Conserve su pasaporte, sin enviarlo", "Evite largas demoras", "Verificación presencial o remota segura", "Soporte completo en su idioma"],
           note: "No todos los dueños de negocio necesitan un ITIN. Le ayudamos a determinar si aplica en su caso.",
           cta: "Obtener Mi ITIN",
         },
@@ -192,9 +192,9 @@ export const translations = {
           cta: "Solicitar EIN",
         },
         {
-          title: "Solicite Seu ITIN — Se Você Se Qualificar",
+          title: "Solicite Seu ITIN (Se Você Se Qualificar)",
           subtitle: "Serviço de Agente de Aceitação Certificado",
-          bullets: ["Mantenha seu passaporte — sem envio", "Evite longas demoras", "Verificação presencial ou remota segura", "Suporte completo no seu idioma"],
+          bullets: ["Mantenha seu passaporte, sem envio", "Evite longas demoras", "Verificação presencial ou remota segura", "Suporte completo no seu idioma"],
           note: "Nem todo dono de negócio precisa de um ITIN. Ajudamos a determinar se isso se aplica à sua situação.",
           cta: "Obter Meu ITIN",
         },
