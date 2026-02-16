@@ -33,7 +33,7 @@ export function FinalCTA({ onGetStarted }: { onGetStarted?: () => void }) {
             size="lg"
             variant="outline"
             className="border-2 border-primary-foreground/40 text-primary-foreground hover:bg-primary-foreground/10 h-12 px-8 rounded-xl text-base font-semibold bg-transparent"
-            onClick={() => window.open("https://wa.me/17869732556", "_blank")}
+            onClick={() => window.open("https://calendly.com/gazzolasolutions/30min", "_blank")}
           >
             {t.consultation[lang]}
           </Button>

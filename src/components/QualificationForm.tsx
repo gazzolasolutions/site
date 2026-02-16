@@ -473,6 +473,15 @@ export function QualificationForm({ open, onClose }: QualificationFormProps) {
                 </Button>
 
                 <div className="flex gap-3 justify-center mt-4 max-w-xs mx-auto">
+                  <a href="https://calendly.com/gazzolasolutions/30min" target="_blank" rel="noopener noreferrer" className="flex-1">
+                    <Button
+                      variant="outline"
+                      className="w-full h-12 rounded-xl font-semibold gap-1.5 border-accent/30 hover:border-accent"
+                    >
+                      <CalendarCheck size={16} className="text-accent" />
+                      Calendly
+                    </Button>
+                  </a>
                   <a href="tel:+17869732556" className="flex-1">
                     <Button
                       variant="outline"
