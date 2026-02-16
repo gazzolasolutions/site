@@ -7,9 +7,9 @@ export function Footer() {
         <div className="grid md:grid-cols-3 gap-8">
           <div>
             <div className="flex items-center gap-2 mb-2">
-              <img src={logo} alt="Gazola Solutions" className="h-7 w-7 brightness-0 invert" />
+              <img src={logo} alt="Gazzola Solutions" className="h-7 w-7 brightness-0 invert" />
               <span className="text-lg font-bold">
-                Gazola<span className="text-accent"> Solutions</span>
+                Gazzola<span className="text-accent"> Solutions</span>
               </span>
             </div>
             <p className="text-sm text-primary-foreground/70 leading-relaxed">
@@ -27,7 +27,7 @@ export function Footer() {
           </div>
           <div>
             <h4 className="font-semibold text-sm mb-3">Contact</h4>
-            <p className="text-sm text-primary-foreground/70">info@gazolasolutions.com</p>
+            <p className="text-sm text-primary-foreground/70">info@gazzolasolutions.com</p>
             <div className="flex gap-2 mt-3">
               <span className="text-xs bg-primary-foreground/10 px-2 py-1 rounded-md">EN</span>
               <span className="text-xs bg-primary-foreground/10 px-2 py-1 rounded-md">ES</span>
@@ -36,7 +36,7 @@ export function Footer() {
           </div>
         </div>
         <div className="border-t border-primary-foreground/10 mt-8 pt-6 text-xs text-primary-foreground/50 text-center">
-          © {new Date().getFullYear()} Gazola Solutions. All rights reserved. This is not legal or tax advice.
+          © {new Date().getFullYear()} Gazzola Solutions. All rights reserved. This is not legal or tax advice.
         </div>
       </div>
     </footer>
