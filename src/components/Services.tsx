@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Building2, FileText, Shield, BookOpen, Calculator, Star, Landmark } from "lucide-react";
+import { Building2, FileText, Shield, BookOpen, Calculator, Star, Landmark, FileCheck, XCircle, RefreshCw } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 
@@ -76,7 +76,7 @@ export function Services({ onGetStarted }: { onGetStarted?: () => void }) {
           From formation to tax preparation — Florida-focused services for non-residents.
         </p>
 
-        <div className="grid md:grid-cols-2 gap-6 max-w-2xl mx-auto">
+        <div className="grid md:grid-cols-2 gap-6 max-w-3xl mx-auto">
           <ServiceCard
             icon={Building2}
             title="Open Your Florida LLC the Right Way"
@@ -127,6 +127,27 @@ export function Services({ onGetStarted }: { onGetStarted?: () => void }) {
             title="Professional Tax Preparation"
             bullets={["Individual & business returns", "Expert review", "Serving Florida business owners"]}
             cta="Request Tax Help"
+            onCTA={onGetStarted}
+          />
+          <ServiceCard
+            icon={FileCheck}
+            title="Annual Report Filing"
+            bullets={["Required yearly for Florida LLCs", "Timely filing to avoid penalties", "Hassle-free submission"]}
+            cta="File My Annual Report"
+            onCTA={onGetStarted}
+          />
+          <ServiceCard
+            icon={XCircle}
+            title="Company Dissolution"
+            bullets={["Proper legal closure", "State filing handled", "Avoid ongoing obligations"]}
+            cta="Dissolve My Company"
+            onCTA={onGetStarted}
+          />
+          <ServiceCard
+            icon={RefreshCw}
+            title="Company Reinstatement"
+            bullets={["Revive your inactive LLC", "Back in good standing", "Full state compliance restored"]}
+            cta="Reinstate My Company"
             onCTA={onGetStarted}
           />
           <div className="md:col-span-2">
