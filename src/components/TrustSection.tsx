@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 const badges = [
   { icon: ShieldCheck, label: "Certified Acceptance Agent" },
   { icon: Globe, label: "Multilingual Support" },
-  { icon: Lock, label: "Secure & Confidential" },
+  { icon: Lock, label: "Florida Business Focused" },
 ];
 
 const testimonials = [

@@ -11,7 +11,7 @@ const steps = [
   {
     icon: FileCheck,
     title: "We Handle the Paperwork",
-    desc: "Our team takes care of filing, compliance, and approvals.",
+    desc: "Our team takes care of filing, registration, and approvals.",
   },
   {
     icon: Rocket,

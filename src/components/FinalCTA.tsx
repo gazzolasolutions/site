@@ -11,7 +11,7 @@ export function FinalCTA() {
         className="container text-center"
       >
         <h2 className="text-2xl md:text-4xl font-bold text-primary-foreground mb-4">
-          Ready to Start Your US Business the Right Way?
+          Ready to Start Your Florida Business the Right Way?
         </h2>
         <p className="text-primary-foreground/80 mb-8 max-w-md mx-auto">
           Join hundreds of entrepreneurs who trusted us to launch their US businesses.

@@ -22,10 +22,10 @@ export function Hero() {
             className="text-primary-foreground"
           >
             <h1 className="text-3xl md:text-5xl font-extrabold leading-tight tracking-tight mb-4">
-              Start Your US Company the Smart and Fast Way
+              Start Your Florida Company the Smart and Fast Way
             </h1>
             <p className="text-base md:text-lg opacity-85 mb-6 leading-relaxed max-w-lg">
-              Open your LLC, get your EIN, and apply for your ITIN without sending your passport to the IRS.
+              We help you open your Florida LLC, obtain your EIN, and — if needed — apply for your ITIN without sending your passport to the IRS.
             </p>
 
             <ul className="space-y-2.5 mb-8">
