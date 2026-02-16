@@ -37,7 +37,7 @@ export function QualificationForm({ open, onClose }: QualificationFormProps) {
     fullName: "",
     email: "",
     phone: "",
-    service: "",
+    services: [] as string[],
     owners: "",
   });
   const [error, setError] = useState("");
@@ -75,8 +75,8 @@ export function QualificationForm({ open, onClose }: QualificationFormProps) {
       setError("Please enter your phone number");
       return;
     }
-    if (step === 4 && !form.service) {
-      setError("Please select an option");
+    if (step === 4 && form.services.length === 0) {
+      setError("Please select at least one option");
       return;
     }
     if (step === 5 && !form.owners) {
@@ -323,7 +323,7 @@ export function QualificationForm({ open, onClose }: QualificationFormProps) {
               </motion.div>
             )}
 
-            {/* STEP 4 — Service */}
+            {/* STEP 4 — Service (multi-select) */}
             {step === 4 && (
               <motion.div
                 key="step4"
@@ -337,35 +337,55 @@ export function QualificationForm({ open, onClose }: QualificationFormProps) {
                 <h2 className="text-xl sm:text-2xl font-bold text-foreground mb-2">
                   What do you need help with?
                 </h2>
-                <p className="text-sm text-muted-foreground mb-6">Select the option that best fits your needs.</p>
+                <p className="text-sm text-muted-foreground mb-6">Select all that apply.</p>
                 <div className="space-y-3">
-                  {SERVICE_OPTIONS.map((opt, i) => (
-                    <motion.button
-                      key={opt}
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: i * 0.06 }}
-                      onClick={() => selectOption("service", opt)}
-                      className={`w-full text-left px-5 py-4 rounded-xl border-2 text-base font-medium transition-all flex items-center gap-3 ${
-                        form.service === opt
-                          ? "border-accent bg-accent/10 text-foreground"
-                          : "border-border bg-background text-muted-foreground hover:border-accent/40 hover:bg-accent/5"
-                      }`}
-                    >
-                      <span className={`flex items-center justify-center w-6 h-6 rounded-full border-2 shrink-0 transition-all ${
-                        form.service === opt
-                          ? "border-accent bg-accent text-accent-foreground"
-                          : "border-muted-foreground/30"
-                      }`}>
-                        {form.service === opt && <Check size={14} />}
-                      </span>
-                      {opt}
-                    </motion.button>
-                  ))}
+                  {SERVICE_OPTIONS.map((opt, i) => {
+                    const selected = form.services.includes(opt);
+                    return (
+                      <motion.button
+                        key={opt}
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: i * 0.06 }}
+                        onClick={() => {
+                          const next = selected
+                            ? form.services.filter((s) => s !== opt)
+                            : [...form.services, opt];
+                          setForm((f) => ({ ...f, services: next }));
+                          if (error) setError("");
+                        }}
+                        className={`w-full text-left px-5 py-4 rounded-xl border-2 text-base font-medium transition-all flex items-center gap-3 ${
+                          selected
+                            ? "border-accent bg-accent/10 text-foreground"
+                            : "border-border bg-background text-muted-foreground hover:border-accent/40 hover:bg-accent/5"
+                        }`}
+                      >
+                        <span className={`flex items-center justify-center w-6 h-6 rounded-md border-2 shrink-0 transition-all ${
+                          selected
+                            ? "border-accent bg-accent text-accent-foreground"
+                            : "border-muted-foreground/30"
+                        }`}>
+                          {selected && <Check size={14} />}
+                        </span>
+                        {opt}
+                      </motion.button>
+                    );
+                  })}
                 </div>
                 {error && <p className="text-sm text-destructive mt-2">{error}</p>}
+                <Button
+                  onClick={goNext}
+                  disabled={form.services.length === 0}
+                  className="mt-6 w-full rounded-xl text-base font-semibold bg-accent text-accent-foreground hover:bg-accent/90 gap-2"
+                  style={{ height: 52 }}
+                >
+                  Continue
+                  <ArrowRight size={16} />
+                </Button>
               </motion.div>
             )}
+
+
 
             {/* STEP 5 — Owners */}
             {step === 5 && (
