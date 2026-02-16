@@ -21,7 +21,7 @@ function ServiceCard({ icon: Icon, title, bullets, cta, featured, badge, subtitl
       initial={{ opacity: 0, y: 16 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      className={`rounded-xl p-6 transition-shadow ${
+    className={`rounded-xl p-6 transition-shadow flex flex-col ${
         featured
           ? "bg-card shadow-card-hover border-2 border-accent/30 relative"
           : "bg-card shadow-card border border-border"
@@ -38,7 +38,7 @@ function ServiceCard({ icon: Icon, title, bullets, cta, featured, badge, subtitl
       </div>
       <h3 className={`font-bold mb-1 ${featured ? "text-lg" : "text-base"} text-foreground`}>{title}</h3>
       {subtitle && <p className="text-xs text-accent font-medium mb-3">{subtitle}</p>}
-      <ul className="space-y-2 mb-4">
+      <ul className="space-y-2 mb-4 flex-1">
         {bullets.map((b) => (
           <li key={b} className="flex items-start gap-2 text-sm text-muted-foreground">
             <span className="text-accent mt-0.5">✓</span>
