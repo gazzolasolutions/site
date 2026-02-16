@@ -7,7 +7,14 @@ const WHATSAPP_URL = "https://wa.me/17869732556";
 
 export function Header({ onGetStarted }: { onGetStarted?: () => void }) {
   return (
-    <header className="sticky top-0 z-50 bg-card/95 backdrop-blur-md border-b border-border">
+     <header className="sticky top-0 z-50 bg-card/95 backdrop-blur-md border-b border-border">
+      {/* Top bar with language selector */}
+      <div className="container flex items-center justify-end h-8 gap-1 border-b border-border/50">
+        <button className="text-[11px] font-semibold bg-accent/10 text-accent px-2.5 py-0.5 rounded transition-colors hover:bg-accent/20">EN</button>
+        <button className="text-[11px] font-medium text-muted-foreground px-2.5 py-0.5 rounded transition-colors hover:bg-muted">ES</button>
+        <button className="text-[11px] font-medium text-muted-foreground px-2.5 py-0.5 rounded transition-colors hover:bg-muted">PT</button>
+      </div>
+
       <div className="container flex items-center justify-between h-14 md:h-16">
         <a href="#" className="flex items-center gap-2">
           <img src={logo} alt="Gazzola Solutions" className="h-8 w-8" />
@@ -15,13 +22,6 @@ export function Header({ onGetStarted }: { onGetStarted?: () => void }) {
             Gazzola<span className="text-accent"> Solutions</span>
           </span>
         </a>
-
-        {/* Language selector */}
-        <div className="flex items-center gap-1 md:absolute md:left-1/2 md:-translate-x-1/2">
-          <button className="text-xs font-medium bg-muted hover:bg-accent/10 px-2 py-1 rounded-md transition-colors">EN</button>
-          <button className="text-xs font-medium bg-muted hover:bg-accent/10 px-2 py-1 rounded-md transition-colors">ES</button>
-          <button className="text-xs font-medium bg-muted hover:bg-accent/10 px-2 py-1 rounded-md transition-colors">PT</button>
-        </div>
 
         {/* Desktop nav */}
         <nav className="hidden md:flex items-center gap-5">
