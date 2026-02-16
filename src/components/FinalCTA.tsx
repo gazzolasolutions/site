@@ -1,7 +1,12 @@
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
+import { useLanguage } from "@/i18n/LanguageContext";
+import { translations } from "@/i18n/translations";
 
 export function FinalCTA({ onGetStarted }: { onGetStarted?: () => void }) {
+  const { lang } = useLanguage();
+  const t = translations.finalCTA;
+
   return (
     <section className="py-16 md:py-24" style={{ background: "var(--gradient-hero)" }}>
       <motion.div
@@ -11,10 +16,10 @@ export function FinalCTA({ onGetStarted }: { onGetStarted?: () => void }) {
         className="container text-center"
       >
         <h2 className="text-2xl md:text-4xl font-bold text-primary-foreground mb-4">
-          Ready to Start Your Florida Business the Right Way?
+          {t.title[lang]}
         </h2>
         <p className="text-primary-foreground/80 mb-8 max-w-md mx-auto">
-          Join hundreds of entrepreneurs who trusted us to launch their US businesses.
+          {t.subtitle[lang]}
         </p>
         <div className="flex flex-col sm:flex-row gap-3 justify-center">
           <Button
@@ -22,7 +27,7 @@ export function FinalCTA({ onGetStarted }: { onGetStarted?: () => void }) {
             className="bg-accent text-accent-foreground hover:bg-accent/90 h-12 px-8 rounded-xl font-semibold text-base"
             onClick={onGetStarted}
           >
-            Start Now
+            {t.cta[lang]}
           </Button>
           <Button
             size="lg"
@@ -30,7 +35,7 @@ export function FinalCTA({ onGetStarted }: { onGetStarted?: () => void }) {
             className="border-2 border-primary-foreground/40 text-primary-foreground hover:bg-primary-foreground/10 h-12 px-8 rounded-xl text-base font-semibold bg-transparent"
             onClick={() => window.open("https://wa.me/17869732556", "_blank")}
           >
-            Book Consultation
+            {t.consultation[lang]}
           </Button>
         </div>
       </motion.div>

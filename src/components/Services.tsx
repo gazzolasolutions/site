@@ -1,7 +1,12 @@
 import { motion } from "framer-motion";
-import { Building2, FileText, Shield, BookOpen, Calculator, Star, Landmark, FileCheck, XCircle, RefreshCw } from "lucide-react";
+import { Building2, FileText, Shield, BookOpen, Calculator, Landmark, FileCheck, XCircle, RefreshCw } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { Star } from "lucide-react";
+import { useLanguage } from "@/i18n/LanguageContext";
+import { translations } from "@/i18n/translations";
+
+const serviceIcons = [Building2, FileText, Shield, BookOpen, Calculator, FileCheck, XCircle, RefreshCw, Landmark];
 
 interface ServiceCardProps {
   icon: React.ElementType;
@@ -21,7 +26,7 @@ function ServiceCard({ icon: Icon, title, bullets, cta, featured, badge, subtitl
       initial={{ opacity: 0, y: 16 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-    className={`rounded-xl p-6 transition-shadow flex flex-col ${
+      className={`rounded-xl p-6 transition-shadow flex flex-col ${
         featured
           ? "bg-card shadow-card-hover border-2 border-accent/30 relative"
           : "bg-card shadow-card border border-border"
@@ -66,98 +71,33 @@ function ServiceCard({ icon: Icon, title, bullets, cta, featured, badge, subtitl
 }
 
 export function Services({ onGetStarted }: { onGetStarted?: () => void }) {
+  const { lang } = useLanguage();
+  const t = translations.services;
+  const cards = t.cards[lang];
+
   return (
     <section className="py-14 md:py-20 bg-muted/50" id="services">
       <div className="container">
         <h2 className="text-2xl md:text-3xl font-bold text-center text-foreground mb-3">
-          Everything You Need to Start Your Florida Business
+          {t.title[lang]}
         </h2>
         <p className="text-center text-muted-foreground mb-10 max-w-md mx-auto">
-          From formation to tax preparation — Florida-focused services for non-residents.
+          {t.subtitle[lang]}
         </p>
 
         <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-          <ServiceCard
-            icon={Building2}
-            title="Open Your Florida LLC the Right Way"
-            bullets={["Florida LLC formation", "State registration", "Operating Agreement"]}
-            note="Operating Agreements are typically required for multi-member LLCs and optional for single-member LLCs."
-            cta="Open My LLC"
-            onCTA={onGetStarted}
-          />
-          <ServiceCard
-            icon={FileText}
-            title="Get Your EIN Without the Headache"
-            bullets={[
-              "Every business typically needs an EIN",
-              "EIN is separate from ITIN",
-              "No SSN required",
-              "IRS filing handled for you",
-            ]}
-            cta="Apply for EIN"
-            onCTA={onGetStarted}
-          />
-          <ServiceCard
-            icon={Shield}
-            title="Apply for Your ITIN — If You Qualify"
-            subtitle="Certified Acceptance Agent Service"
-            bullets={[
-              "Keep your passport — no mailing required",
-              "Avoid long delays",
-              "Secure in-person or remote verification",
-              "Full support in your language",
-            ]}
-            note="Not every business owner needs an ITIN. We help determine if this applies to your situation."
-            cta="Get My ITIN Safely"
-            onCTA={onGetStarted}
-          />
-          <ServiceCard
-            icon={BookOpen}
-            title="Monthly Bookkeeping That Keeps You Organized"
-            bullets={["Monthly review", "Financial reports", "Clean records"]}
-            cta="View Plans"
-            onCTA={onGetStarted}
-          />
-          <ServiceCard
-            icon={Calculator}
-            title="Professional Tax Preparation"
-            bullets={["Individual & business returns", "Expert review", "Serving Florida business owners"]}
-            cta="Request Tax Help"
-            onCTA={onGetStarted}
-          />
-          <ServiceCard
-            icon={FileCheck}
-            title="Annual Report Filing"
-            bullets={["Required yearly for Florida LLCs", "Timely filing to avoid penalties", "Hassle-free submission"]}
-            cta="File My Annual Report"
-            onCTA={onGetStarted}
-          />
-          <ServiceCard
-            icon={XCircle}
-            title="Company Dissolution"
-            bullets={["Proper legal closure", "State filing handled", "Avoid ongoing obligations"]}
-            cta="Dissolve My Company"
-            onCTA={onGetStarted}
-          />
-          <ServiceCard
-            icon={RefreshCw}
-            title="Company Reinstatement"
-            bullets={["Revive your inactive LLC", "Back in good standing", "Full state compliance restored"]}
-            cta="Reinstate My Company"
-            onCTA={onGetStarted}
-          />
-          <ServiceCard
-            icon={Landmark}
-            title="Business Bank Account Guidance"
-            bullets={[
-              "Document checklist",
-              "Bank preparation guidance",
-              "Requirements explained clearly",
-              "Built for Florida business owners",
-            ]}
-            cta="Get Bank Account Guidance"
-            onCTA={onGetStarted}
-          />
+          {cards.map((card, i) => (
+            <ServiceCard
+              key={i}
+              icon={serviceIcons[i]}
+              title={card.title}
+              bullets={card.bullets}
+              note={"note" in card ? (card as any).note : undefined}
+              subtitle={"subtitle" in card ? (card as any).subtitle : undefined}
+              cta={card.cta}
+              onCTA={onGetStarted}
+            />
+          ))}
         </div>
       </div>
     </section>

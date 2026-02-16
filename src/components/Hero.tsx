@@ -2,15 +2,13 @@ import { motion } from "framer-motion";
 import { CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import heroIllustration from "@/assets/hero-illustration.png";
-
-const bullets = [
-  "No SSN required",
-  "ITIN without mailing your passport",
-  "Multilingual support",
-  "Step by step guidance",
-];
+import { useLanguage } from "@/i18n/LanguageContext";
+import { translations } from "@/i18n/translations";
 
 export function Hero({ onGetStarted }: { onGetStarted?: () => void }) {
+  const { lang } = useLanguage();
+  const t = translations.hero;
+
   return (
     <section className="relative overflow-hidden" style={{ background: "var(--gradient-hero)" }}>
       <div className="container py-12 md:py-20">
@@ -22,14 +20,14 @@ export function Hero({ onGetStarted }: { onGetStarted?: () => void }) {
             className="text-primary-foreground"
           >
             <h1 className="text-3xl md:text-5xl font-extrabold leading-tight tracking-tight mb-4">
-              Start Your Florida Company the Smart and Fast Way
+              {t.title[lang]}
             </h1>
             <p className="text-base md:text-lg opacity-85 mb-6 leading-relaxed max-w-lg">
-              We help you open your Florida LLC, obtain your EIN, and — if needed — apply for your ITIN without sending your passport to the IRS.
+              {t.subtitle[lang]}
             </p>
 
             <ul className="space-y-2.5 mb-8">
-              {bullets.map((b) => (
+              {t.bullets[lang].map((b) => (
                 <li key={b} className="flex items-center gap-2.5 text-sm md:text-base">
                   <CheckCircle2 className="h-5 w-5 shrink-0 text-accent" />
                   <span className="opacity-90">{b}</span>
@@ -43,14 +41,14 @@ export function Hero({ onGetStarted }: { onGetStarted?: () => void }) {
                 className="bg-accent text-accent-foreground hover:bg-accent/90 text-base font-semibold h-12 px-8 rounded-xl shadow-lg"
                 onClick={onGetStarted}
               >
-                Get Started Now
+                {t.cta[lang]}
               </Button>
               <Button
                 size="lg"
                 variant="outline"
                 className="border-2 border-primary-foreground/40 text-primary-foreground bg-primary-foreground/10 hover:bg-primary-foreground/20 text-base h-12 px-8 rounded-xl"
               >
-                Book Free Consultation
+                {t.consultation[lang]}
               </Button>
             </div>
           </motion.div>
@@ -63,7 +61,7 @@ export function Hero({ onGetStarted }: { onGetStarted?: () => void }) {
           >
             <img
               src={heroIllustration}
-              alt="Start your US business easily"
+              alt={t.imgAlt[lang]}
               className="w-full max-w-sm md:max-w-md"
               loading="eager"
             />

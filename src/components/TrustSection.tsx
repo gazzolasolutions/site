@@ -1,46 +1,39 @@
 import { ShieldCheck, Globe, Lock, Star } from "lucide-react";
 import { motion } from "framer-motion";
+import { useLanguage } from "@/i18n/LanguageContext";
+import { translations } from "@/i18n/translations";
 
-const badges = [
-  { icon: ShieldCheck, label: "Certified Acceptance Agent" },
-  { icon: Globe, label: "Multilingual Support" },
-  { icon: Lock, label: "Florida Business Focused" },
-];
-
-const testimonials = [
-  {
-    text: "They made the entire ITIN process painless. I kept my passport and got everything done in weeks!",
-    name: "Maria S.",
-    role: "E-commerce Founder",
-  },
-  {
-    text: "Professional, fast, and they speak my language. Best decision I made for my US business.",
-    name: "Carlos R.",
-    role: "Tech Entrepreneur",
-  },
-];
+const badgeIcons = [ShieldCheck, Globe, Lock];
 
 export function TrustSection() {
+  const { lang } = useLanguage();
+  const t = translations.trust;
+  const badgeLabels = t.badges[lang];
+  const testimonials = t.testimonials[lang];
+
   return (
     <section className="py-14 md:py-20 bg-background">
       <div className="container max-w-3xl">
         <h2 className="text-2xl md:text-3xl font-bold text-center text-foreground mb-10">
-          Trusted by Entrepreneurs Worldwide
+          {t.title[lang]}
         </h2>
 
         <div className="grid grid-cols-3 gap-3 mb-12">
-          {badges.map((b) => (
-            <motion.div
-              key={b.label}
-              initial={{ opacity: 0, y: 10 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="flex flex-col items-center text-center gap-2 p-4 rounded-xl bg-card shadow-card"
-            >
-              <b.icon className="h-6 w-6 text-accent" />
-              <span className="text-xs font-semibold text-foreground leading-tight">{b.label}</span>
-            </motion.div>
-          ))}
+          {badgeLabels.map((label, i) => {
+            const Icon = badgeIcons[i];
+            return (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="flex flex-col items-center text-center gap-2 p-4 rounded-xl bg-card shadow-card"
+              >
+                <Icon className="h-6 w-6 text-accent" />
+                <span className="text-xs font-semibold text-foreground leading-tight">{label}</span>
+              </motion.div>
+            );
+          })}
         </div>
 
         <div className="grid md:grid-cols-2 gap-4">
