@@ -8,10 +8,10 @@ import type { Lang } from "@/i18n/translations";
 const PHONE_NUMBER = "+17869732556";
 const WHATSAPP_URL = "https://wa.me/17869732556";
 
-const LANGS: { code: Lang; label: string }[] = [
-  { code: "en", label: "EN" },
-  { code: "es", label: "ES" },
-  { code: "pt", label: "PT" },
+const LANGS: { code: Lang; label: string; flag: string }[] = [
+  { code: "en", label: "EN", flag: "🇺🇸" },
+  { code: "es", label: "ES", flag: "🇪🇸" },
+  { code: "pt", label: "PT", flag: "🇧🇷" },
 ];
 
 export function Header({ onGetStarted }: { onGetStarted?: () => void }) {
@@ -32,7 +32,7 @@ export function Header({ onGetStarted }: { onGetStarted?: () => void }) {
                 : "text-muted-foreground hover:bg-muted"
             }`}
           >
-            {l.label}
+            <span className="text-sm leading-none">{l.flag}</span> {l.label}
           </button>
         ))}
       </div>
