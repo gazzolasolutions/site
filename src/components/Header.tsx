@@ -1,6 +1,6 @@
 import { Phone, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import logo from "@/assets/logo.png";
+
 import { useLanguage } from "@/i18n/LanguageContext";
 import { translations } from "@/i18n/translations";
 import type { Lang } from "@/i18n/translations";
@@ -38,8 +38,7 @@ export function Header({ onGetStarted }: { onGetStarted?: () => void }) {
       </div>
 
       <div className="container flex items-center justify-between h-14 md:h-16">
-        <a href="#" className="flex items-center gap-2">
-          <img src={logo} alt="Gazzola Solutions" className="h-8 w-8" />
+        <a href="#" className="flex items-center">
           <span className="text-lg font-bold text-primary tracking-tight">
             Gazzola<span className="text-accent"> Solutions</span>
           </span>
