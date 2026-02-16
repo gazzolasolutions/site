@@ -97,23 +97,20 @@ export function Services({ onGetStarted }: { onGetStarted?: () => void }) {
             cta="Apply for EIN"
             onCTA={onGetStarted}
           />
-          <div className="md:col-span-2" id="itin">
-            <ServiceCard
-              icon={Shield}
-              title="Apply for Your ITIN — If You Qualify"
-              subtitle="Certified Acceptance Agent Service"
-              featured
-              bullets={[
-                "Keep your passport — no mailing required",
-                "Avoid long delays",
-                "Secure in-person or remote verification",
-                "Full support in your language",
-              ]}
-              note="Not every business owner needs an ITIN. We help determine if this applies to your situation."
-              cta="Get My ITIN Safely"
-              onCTA={onGetStarted}
-            />
-          </div>
+          <ServiceCard
+            icon={Shield}
+            title="Apply for Your ITIN — If You Qualify"
+            subtitle="Certified Acceptance Agent Service"
+            bullets={[
+              "Keep your passport — no mailing required",
+              "Avoid long delays",
+              "Secure in-person or remote verification",
+              "Full support in your language",
+            ]}
+            note="Not every business owner needs an ITIN. We help determine if this applies to your situation."
+            cta="Get My ITIN Safely"
+            onCTA={onGetStarted}
+          />
           <ServiceCard
             icon={BookOpen}
             title="Monthly Bookkeeping That Keeps You Organized"
