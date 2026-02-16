@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Building2, FileText, Shield, BookOpen, Calculator, Star } from "lucide-react";
+import { Building2, FileText, Shield, BookOpen, Calculator, Star, Landmark } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 
@@ -11,9 +11,10 @@ interface ServiceCardProps {
   featured?: boolean;
   badge?: string;
   subtitle?: string;
+  note?: string;
 }
 
-function ServiceCard({ icon: Icon, title, bullets, cta, featured, badge, subtitle }: ServiceCardProps) {
+function ServiceCard({ icon: Icon, title, bullets, cta, featured, badge, subtitle, note }: ServiceCardProps) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 16 }}
@@ -36,7 +37,7 @@ function ServiceCard({ icon: Icon, title, bullets, cta, featured, badge, subtitl
       </div>
       <h3 className={`font-bold mb-1 ${featured ? "text-lg" : "text-base"} text-foreground`}>{title}</h3>
       {subtitle && <p className="text-xs text-accent font-medium mb-3">{subtitle}</p>}
-      <ul className="space-y-2 mb-5">
+      <ul className="space-y-2 mb-4">
         {bullets.map((b) => (
           <li key={b} className="flex items-start gap-2 text-sm text-muted-foreground">
             <span className="text-accent mt-0.5">✓</span>
@@ -44,6 +45,11 @@ function ServiceCard({ icon: Icon, title, bullets, cta, featured, badge, subtitl
           </li>
         ))}
       </ul>
+      {note && (
+        <p className="text-xs text-muted-foreground bg-muted/60 rounded-lg px-3 py-2 mb-4 leading-relaxed">
+          {note}
+        </p>
+      )}
       <Button
         className={`w-full rounded-xl font-semibold ${
           featured
@@ -62,38 +68,45 @@ export function Services() {
     <section className="py-14 md:py-20 bg-muted/50" id="services">
       <div className="container">
         <h2 className="text-2xl md:text-3xl font-bold text-center text-foreground mb-3">
-          Everything You Need to Start Your US Business
+          Everything You Need to Start Your Florida Business
         </h2>
         <p className="text-center text-muted-foreground mb-10 max-w-md mx-auto">
-          From formation to tax preparation — we cover it all.
+          From formation to tax preparation — Florida-focused services for non-residents.
         </p>
 
         <div className="grid md:grid-cols-2 gap-6 max-w-2xl mx-auto">
           <ServiceCard
             icon={Building2}
-            title="Open Your LLC the Right Way"
-            bullets={["LLC formation", "State registration", "Operating Agreement"]}
+            title="Open Your Florida LLC the Right Way"
+            bullets={["Florida LLC formation", "State registration", "Operating Agreement"]}
+            note="Operating Agreements are typically required for multi-member LLCs and optional for single-member LLCs."
             cta="Open My LLC"
           />
           <ServiceCard
             icon={FileText}
             title="Get Your EIN Without the Headache"
-            bullets={["No SSN required", "IRS filing handled", "Secure process"]}
+            bullets={[
+              "Every business typically needs an EIN",
+              "EIN is separate from ITIN",
+              "No SSN required",
+              "IRS filing handled for you",
+            ]}
             cta="Apply for EIN"
           />
           <div className="md:col-span-2" id="itin">
             <ServiceCard
               icon={Shield}
-              title="Apply for Your ITIN Without Sending Your Passport"
+              title="Apply for Your ITIN — If You Qualify"
               subtitle="Certified Acceptance Agent Service"
               badge="Most Popular"
               featured
               bullets={[
-                "Keep your passport",
+                "Keep your passport — no mailing required",
                 "Avoid long delays",
-                "Secure verification",
+                "Secure in-person or remote verification",
                 "Full support in your language",
               ]}
+              note="Not every business owner needs an ITIN. We help determine if this applies to your situation."
               cta="Get My ITIN Safely"
             />
           </div>
@@ -106,9 +119,22 @@ export function Services() {
           <ServiceCard
             icon={Calculator}
             title="Professional Tax Preparation"
-            bullets={["Individual & business returns", "Compliance guaranteed", "Expert review"]}
+            bullets={["Individual & business returns", "Expert review", "Serving Florida business owners"]}
             cta="Request Tax Help"
           />
+          <div className="md:col-span-2">
+            <ServiceCard
+              icon={Landmark}
+              title="Business Bank Account Guidance"
+              bullets={[
+                "Document checklist",
+                "Bank preparation guidance",
+                "Requirements explained clearly",
+                "Built for Florida business owners",
+              ]}
+              cta="Get Bank Account Guidance"
+            />
+          </div>
         </div>
       </div>
     </section>

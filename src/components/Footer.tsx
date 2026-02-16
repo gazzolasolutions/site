@@ -8,7 +8,7 @@ export function Footer() {
               US<span className="text-accent">Biz</span>Start
             </div>
             <p className="text-sm text-primary-foreground/70 leading-relaxed">
-              Helping non-residents and immigrants start their US businesses with confidence.
+              Helping non-residents and immigrants start their Florida businesses with confidence.
             </p>
           </div>
           <div>
