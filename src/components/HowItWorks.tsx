@@ -20,7 +20,7 @@ const steps = [
   },
 ];
 
-export function HowItWorks() {
+export function HowItWorks({ onGetStarted }: { onGetStarted?: () => void }) {
   return (
     <section className="py-14 md:py-20 bg-background" id="how-it-works">
       <div className="container">
@@ -47,7 +47,7 @@ export function HowItWorks() {
           ))}
         </div>
         <div className="text-center mt-8">
-          <Button className="bg-accent text-accent-foreground hover:bg-accent/90 h-11 px-8 rounded-xl font-semibold">
+          <Button className="bg-accent text-accent-foreground hover:bg-accent/90 h-11 px-8 rounded-xl font-semibold" onClick={onGetStarted}>
             Start Your Application
           </Button>
         </div>

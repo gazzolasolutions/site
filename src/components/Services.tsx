@@ -12,9 +12,10 @@ interface ServiceCardProps {
   badge?: string;
   subtitle?: string;
   note?: string;
+  onCTA?: () => void;
 }
 
-function ServiceCard({ icon: Icon, title, bullets, cta, featured, badge, subtitle, note }: ServiceCardProps) {
+function ServiceCard({ icon: Icon, title, bullets, cta, featured, badge, subtitle, note, onCTA }: ServiceCardProps) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 16 }}
@@ -51,6 +52,7 @@ function ServiceCard({ icon: Icon, title, bullets, cta, featured, badge, subtitl
         </p>
       )}
       <Button
+        onClick={onCTA}
         className={`w-full rounded-xl font-semibold ${
           featured
             ? "bg-accent text-accent-foreground hover:bg-accent/90"
@@ -63,7 +65,7 @@ function ServiceCard({ icon: Icon, title, bullets, cta, featured, badge, subtitl
   );
 }
 
-export function Services() {
+export function Services({ onGetStarted }: { onGetStarted?: () => void }) {
   return (
     <section className="py-14 md:py-20 bg-muted/50" id="services">
       <div className="container">
@@ -81,6 +83,7 @@ export function Services() {
             bullets={["Florida LLC formation", "State registration", "Operating Agreement"]}
             note="Operating Agreements are typically required for multi-member LLCs and optional for single-member LLCs."
             cta="Open My LLC"
+            onCTA={onGetStarted}
           />
           <ServiceCard
             icon={FileText}
@@ -92,6 +95,7 @@ export function Services() {
               "IRS filing handled for you",
             ]}
             cta="Apply for EIN"
+            onCTA={onGetStarted}
           />
           <div className="md:col-span-2" id="itin">
             <ServiceCard
@@ -108,6 +112,7 @@ export function Services() {
               ]}
               note="Not every business owner needs an ITIN. We help determine if this applies to your situation."
               cta="Get My ITIN Safely"
+              onCTA={onGetStarted}
             />
           </div>
           <ServiceCard
@@ -115,12 +120,14 @@ export function Services() {
             title="Monthly Bookkeeping That Keeps You Organized"
             bullets={["Monthly review", "Financial reports", "Clean records"]}
             cta="View Plans"
+            onCTA={onGetStarted}
           />
           <ServiceCard
             icon={Calculator}
             title="Professional Tax Preparation"
             bullets={["Individual & business returns", "Expert review", "Serving Florida business owners"]}
             cta="Request Tax Help"
+            onCTA={onGetStarted}
           />
           <div className="md:col-span-2">
             <ServiceCard
@@ -133,6 +140,7 @@ export function Services() {
                 "Built for Florida business owners",
               ]}
               cta="Get Bank Account Guidance"
+              onCTA={onGetStarted}
             />
           </div>
         </div>

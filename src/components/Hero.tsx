@@ -10,7 +10,7 @@ const bullets = [
   "Step by step guidance",
 ];
 
-export function Hero() {
+export function Hero({ onGetStarted }: { onGetStarted?: () => void }) {
   return (
     <section className="relative overflow-hidden" style={{ background: "var(--gradient-hero)" }}>
       <div className="container py-12 md:py-20">
@@ -41,6 +41,7 @@ export function Hero() {
               <Button
                 size="lg"
                 className="bg-accent text-accent-foreground hover:bg-accent/90 text-base font-semibold h-12 px-8 rounded-xl shadow-lg"
+                onClick={onGetStarted}
               >
                 Get Started Now
               </Button>
