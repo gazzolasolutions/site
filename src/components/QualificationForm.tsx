@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight, ArrowLeft, ShieldCheck, Loader2, Check } from "lucide-react";
+import { ArrowRight, ArrowLeft, ShieldCheck, Loader2, Check, Phone, MessageCircle, CalendarCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
@@ -447,32 +447,50 @@ export function QualificationForm({ open, onClose }: QualificationFormProps) {
                   <Check className="h-8 w-8 text-accent" />
                 </div>
                 <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-3">
-                  Perfect. Let's Continue.
+                  You're All Set.
                 </h2>
                 <p className="text-muted-foreground mb-8 text-base max-w-sm mx-auto">
-                  We'll now collect the detailed information needed to prepare your Florida business documents.
+                  Our team will review your information and help you move forward with your Florida business.
                 </p>
+
+                {/* Primary CTA */}
                 <Button
                   onClick={handleFinish}
                   disabled={submitting}
-                  className="h-14 px-10 rounded-2xl text-base font-semibold bg-accent text-accent-foreground hover:bg-accent/90 shadow-lg gap-2"
+                  className="h-14 w-full max-w-xs mx-auto rounded-2xl text-base font-semibold bg-accent text-accent-foreground hover:bg-accent/90 shadow-lg gap-2"
                 >
                   {submitting ? (
-                    <>
-                      <Loader2 className="h-5 w-5 animate-spin" />
-                      Processing...
-                    </>
+                    <><Loader2 className="h-5 w-5 animate-spin" /> Processing...</>
                   ) : (
-                    <>
-                      Continue to Full Application
-                      <ArrowRight size={18} />
-                    </>
+                    <><CalendarCheck size={18} /> Schedule Your Call</>
                   )}
                 </Button>
-                <div className="flex items-center justify-center gap-1.5 text-xs text-muted-foreground mt-5">
-                  <ShieldCheck size={14} className="text-accent" />
-                  Secure and guided process. Your information is protected.
+
+                {/* Secondary contact */}
+                <div className="flex gap-3 justify-center mt-4 max-w-xs mx-auto">
+                  <a href="tel:+17869732556" className="flex-1">
+                    <Button
+                      variant="outline"
+                      className="w-full h-12 rounded-xl font-semibold gap-1.5 border-accent/30 hover:border-accent"
+                    >
+                      <Phone size={16} className="text-accent" />
+                      Call Now
+                    </Button>
+                  </a>
+                  <a href="https://wa.me/17869732556" target="_blank" rel="noopener noreferrer" className="flex-1">
+                    <Button
+                      variant="outline"
+                      className="w-full h-12 rounded-xl font-semibold gap-1.5 border-green-500/30 hover:border-green-500"
+                    >
+                      <MessageCircle size={16} className="text-green-600" />
+                      WhatsApp
+                    </Button>
+                  </a>
                 </div>
+
+                <p className="text-xs text-muted-foreground mt-5">
+                  Prefer to talk now? Call or message us anytime.
+                </p>
               </motion.div>
             )}
           </AnimatePresence>
