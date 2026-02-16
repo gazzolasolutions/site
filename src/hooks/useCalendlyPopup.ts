@@ -33,7 +33,7 @@ export function useCalendlyPopup() {
   const openCalendly = useCallback(() => {
     if (window.Calendly) {
       window.Calendly.initPopupWidget({
-        url: "https://calendly.com/gazzolasolutions/30min",
+        url: "https://calendly.com/gazzolasolutions/30min?hide_event_type_details=1&hide_gdpr_banner=1",
       });
     } else {
       window.open("https://calendly.com/gazzolasolutions/30min", "_blank");
