@@ -23,11 +23,6 @@ export function Footer() {
           <div>
             <h4 className="font-semibold text-sm mb-3">Contact</h4>
             <p className="text-sm text-primary-foreground/70">gazzolasolutions@gmail.com</p>
-            <div className="flex gap-2 mt-3">
-              <span className="text-xs bg-primary-foreground/10 px-2 py-1 rounded-md">EN</span>
-              <span className="text-xs bg-primary-foreground/10 px-2 py-1 rounded-md">ES</span>
-              <span className="text-xs bg-primary-foreground/10 px-2 py-1 rounded-md">PT</span>
-            </div>
           </div>
         </div>
         <div className="border-t border-primary-foreground/10 mt-8 pt-6 text-xs text-primary-foreground/50 text-center">
