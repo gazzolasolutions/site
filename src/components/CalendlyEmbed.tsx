@@ -9,9 +9,9 @@ const titles = {
 };
 
 const subtitles = {
-  en: "Pick a time that works for you — we'll walk you through everything.",
-  es: "Elija un horario que le convenga — le guiaremos en todo.",
-  pt: "Escolha um horário que funcione para você — vamos te guiar em tudo.",
+  en: "Pick a time that works for you. We'll walk you through everything.",
+  es: "Elija un horario que le convenga. Le guiaremos en todo.",
+  pt: "Escolha um horário que funcione para você. Vamos te guiar em tudo.",
 };
 
 export function CalendlyEmbed() {

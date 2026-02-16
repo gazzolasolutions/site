@@ -223,7 +223,7 @@ export function QualificationForm({ open, onClose }: QualificationFormProps) {
               </motion.div>
             )}
 
-            {/* STEP 1 — Services */}
+            {/* STEP 1 - Services */}
             {step === 1 && (
               <motion.div
                 key="step1"
@@ -285,7 +285,7 @@ export function QualificationForm({ open, onClose }: QualificationFormProps) {
               </motion.div>
             )}
 
-            {/* STEP 2 — Owners */}
+            {/* STEP 2 - Owners */}
             {step === 2 && (
               <motion.div
                 key="step2"
@@ -329,7 +329,7 @@ export function QualificationForm({ open, onClose }: QualificationFormProps) {
               </motion.div>
             )}
 
-            {/* STEP 3 — Name */}
+            {/* STEP 3 - Name */}
             {step === 3 && (
               <motion.div
                 key="step3"
@@ -365,7 +365,7 @@ export function QualificationForm({ open, onClose }: QualificationFormProps) {
               </motion.div>
             )}
 
-            {/* STEP 4 — Phone */}
+            {/* STEP 4 - Phone */}
             {step === 4 && (
               <motion.div
                 key="step4"
@@ -402,7 +402,7 @@ export function QualificationForm({ open, onClose }: QualificationFormProps) {
               </motion.div>
             )}
 
-            {/* STEP 5 — Email */}
+            {/* STEP 5 - Email */}
             {step === 5 && (
               <motion.div
                 key="step5"
