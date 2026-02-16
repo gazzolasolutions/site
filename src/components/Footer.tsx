@@ -5,7 +5,7 @@ export function Footer() {
         <div className="grid md:grid-cols-3 gap-8">
           <div>
             <div className="text-lg font-bold mb-2">
-              US<span className="text-accent">Biz</span>Start
+              Gazzola<span className="text-accent">Solutions</span>
             </div>
             <p className="text-sm text-primary-foreground/70 leading-relaxed">
               Helping non-residents and immigrants start their Florida businesses with confidence.
@@ -22,7 +22,7 @@ export function Footer() {
           </div>
           <div>
             <h4 className="font-semibold text-sm mb-3">Contact</h4>
-            <p className="text-sm text-primary-foreground/70">info@usbizstart.com</p>
+            <p className="text-sm text-primary-foreground/70">info@gazzolasolutions.com</p>
             <div className="flex gap-2 mt-3">
               <span className="text-xs bg-primary-foreground/10 px-2 py-1 rounded-md">EN</span>
               <span className="text-xs bg-primary-foreground/10 px-2 py-1 rounded-md">ES</span>
@@ -31,7 +31,7 @@ export function Footer() {
           </div>
         </div>
         <div className="border-t border-primary-foreground/10 mt-8 pt-6 text-xs text-primary-foreground/50 text-center">
-          © {new Date().getFullYear()} USBizStart. All rights reserved. This is not legal or tax advice.
+          © {new Date().getFullYear()} GazzolaSolutions. All rights reserved. This is not legal or tax advice.
         </div>
       </div>
     </footer>
