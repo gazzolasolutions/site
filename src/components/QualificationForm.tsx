@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, ArrowLeft, ShieldCheck, Loader2, Check, Phone, MessageCircle, CalendarCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { supabase } from "@/integrations/supabase/client";
 
 interface QualificationFormProps {
   open: boolean;
@@ -103,10 +104,17 @@ export function QualificationForm({ open, onClose }: QualificationFormProps) {
     }
   };
 
-  const handleFinish = () => {
+  const handleFinish = async () => {
     setSubmitting(true);
     try {
-      sessionStorage.setItem("gz_qualification", JSON.stringify(form));
+      await supabase.from("leads").insert({
+        full_name: form.fullName,
+        email: form.email,
+        phone: form.phone,
+        services: form.services,
+        owners: form.owners,
+        source: "typeform",
+      });
     } catch {}
     setTimeout(() => {
       setSubmitting(false);
