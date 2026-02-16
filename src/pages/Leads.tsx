@@ -14,7 +14,7 @@ import { useNavigate } from "react-router-dom";
 type Lead = Tables<"leads">;
 
 function whatsAppUrl(lead: Lead) {
-  const msg = `Hi ${lead.full_name}, this is Gazola Solutions. We received your request about ${lead.services.join(", ")} and we're ready to help you start your Florida business.`;
+  const msg = `Hi ${lead.full_name}, this is Gazola Solutions. We received your request about ${lead.services.join(", ")} and we're ready to help you with your Florida business.`;
   return `https://wa.me/${lead.phone.replace(/\D/g, "")}?text=${encodeURIComponent(msg)}`;
 }
 

@@ -14,6 +14,9 @@ const SERVICE_OPTIONS = [
   "Florida LLC Formation",
   "EIN Application",
   "ITIN Application",
+  "Annual Report Filing",
+  "Company Dissolution",
+  "Company Reinstatement",
   "Not sure yet",
 ];
 
