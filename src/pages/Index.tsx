@@ -9,6 +9,7 @@ import { FinalCTA } from "@/components/FinalCTA";
 import { Footer } from "@/components/Footer";
 import { StickyMobileCTA } from "@/components/StickyMobileCTA";
 import { QualificationForm } from "@/components/QualificationForm";
+import { CalendlyEmbed } from "@/components/CalendlyEmbed";
 import { LanguageProvider } from "@/i18n/LanguageContext";
 
 const Index = () => {
@@ -24,6 +25,7 @@ const Index = () => {
         <Services onGetStarted={openForm} />
         <TrustSection />
         <FAQ />
+        <CalendlyEmbed />
         <FinalCTA onGetStarted={openForm} />
         <Footer />
         <StickyMobileCTA />
