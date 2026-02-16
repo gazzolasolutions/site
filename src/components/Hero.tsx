@@ -4,10 +4,12 @@ import { Button } from "@/components/ui/button";
 import heroIllustration from "@/assets/hero-illustration.png";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { translations } from "@/i18n/translations";
+import { useCalendlyPopup } from "@/hooks/useCalendlyPopup";
 
 export function Hero({ onGetStarted }: { onGetStarted?: () => void }) {
   const { lang } = useLanguage();
   const t = translations.hero;
+  const openCalendly = useCalendlyPopup();
 
   return (
     <section className="relative overflow-hidden" style={{ background: "var(--gradient-hero)" }}>
@@ -47,7 +49,7 @@ export function Hero({ onGetStarted }: { onGetStarted?: () => void }) {
                 size="lg"
                 variant="outline"
                 className="border-2 border-primary-foreground/40 text-primary-foreground bg-primary-foreground/10 hover:bg-primary-foreground/20 text-base h-12 px-8 rounded-xl"
-                onClick={() => document.getElementById("calendly")?.scrollIntoView({ behavior: "smooth" })}
+                onClick={openCalendly}
               >
                 {t.consultation[lang]}
               </Button>
