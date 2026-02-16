@@ -102,7 +102,6 @@ export function Services({ onGetStarted }: { onGetStarted?: () => void }) {
               icon={Shield}
               title="Apply for Your ITIN — If You Qualify"
               subtitle="Certified Acceptance Agent Service"
-              badge="Most Popular"
               featured
               bullets={[
                 "Keep your passport — no mailing required",
