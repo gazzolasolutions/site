@@ -16,6 +16,13 @@ export function Header({ onGetStarted }: { onGetStarted?: () => void }) {
           </span>
         </a>
 
+        {/* Language selector */}
+        <div className="flex items-center gap-1 md:absolute md:left-1/2 md:-translate-x-1/2">
+          <button className="text-xs font-medium bg-muted hover:bg-accent/10 px-2 py-1 rounded-md transition-colors">EN</button>
+          <button className="text-xs font-medium bg-muted hover:bg-accent/10 px-2 py-1 rounded-md transition-colors">ES</button>
+          <button className="text-xs font-medium bg-muted hover:bg-accent/10 px-2 py-1 rounded-md transition-colors">PT</button>
+        </div>
+
         {/* Desktop nav */}
         <nav className="hidden md:flex items-center gap-5">
           <a href="#services" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">Services</a>
