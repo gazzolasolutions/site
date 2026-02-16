@@ -47,7 +47,7 @@ export function Hero({ onGetStarted }: { onGetStarted?: () => void }) {
                 size="lg"
                 variant="outline"
                 className="border-2 border-primary-foreground/40 text-primary-foreground bg-primary-foreground/10 hover:bg-primary-foreground/20 text-base h-12 px-8 rounded-xl"
-                onClick={() => window.open("https://calendly.com/gazzolasolutions/30min", "_blank")}
+                onClick={() => document.getElementById("calendly")?.scrollIntoView({ behavior: "smooth" })}
               >
                 {t.consultation[lang]}
               </Button>
