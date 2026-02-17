@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { supabase } from "@/integrations/supabase/client";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { translations } from "@/i18n/translations";
+import { useCalendlyPopup } from "@/hooks/useCalendlyPopup";
 
 interface QualificationFormProps {
   open: boolean;
@@ -23,6 +24,7 @@ const slideVariants = {
 export function QualificationForm({ open, onClose }: QualificationFormProps) {
   const { lang } = useLanguage();
   const t = translations.form;
+  const openCalendly = useCalendlyPopup();
 
   const [step, setStep] = useState(0);
   const [dir, setDir] = useState(1);
@@ -478,41 +480,34 @@ export function QualificationForm({ open, onClose }: QualificationFormProps) {
                   {t.finalSubtitle[lang]}
                 </p>
 
-                <Button
-                  onClick={handleFinish}
-                  className="h-14 w-full max-w-xs mx-auto rounded-2xl text-base font-semibold bg-accent text-accent-foreground hover:bg-accent/90 shadow-lg gap-2"
-                >
-                  <CalendarCheck size={18} /> {t.scheduleCall[lang]}
-                </Button>
+                <div className="flex flex-col gap-3 w-full max-w-xs mx-auto">
+                  <Button
+                    onClick={openCalendly}
+                    className="h-14 w-full rounded-2xl text-base font-semibold bg-accent text-accent-foreground hover:bg-accent/90 shadow-lg gap-2"
+                  >
+                    <CalendarCheck size={18} /> {t.scheduleCall[lang]}
+                  </Button>
 
-                <div className="flex gap-3 justify-center mt-4 max-w-xs mx-auto">
-                  <a href="https://calendly.com/gazzolasolutions/30min" target="_blank" rel="noopener noreferrer" className="flex-1">
-                    <Button
-                      variant="outline"
-                      className="w-full h-12 rounded-xl font-semibold gap-1.5 border-accent/30 hover:border-accent"
-                    >
-                      <CalendarCheck size={16} className="text-accent" />
-                      Calendly
-                    </Button>
-                  </a>
-                  <a href="tel:+17869732556" className="flex-1">
-                    <Button
-                      variant="outline"
-                      className="w-full h-12 rounded-xl font-semibold gap-1.5 border-accent/30 hover:border-accent"
-                    >
-                      <Phone size={16} className="text-accent" />
-                      {translations.mobile.call[lang]}
-                    </Button>
-                  </a>
-                  <a href="https://wa.me/17869732556" target="_blank" rel="noopener noreferrer" className="flex-1">
-                    <Button
-                      variant="outline"
-                      className="w-full h-12 rounded-xl font-semibold gap-1.5 border-green-500/30 hover:border-green-500"
-                    >
-                      <MessageCircle size={16} className="text-green-600" />
-                      WhatsApp
-                    </Button>
-                  </a>
+                  <div className="flex gap-3">
+                    <a href="tel:+17869732556" className="flex-1">
+                      <Button
+                        variant="outline"
+                        className="w-full h-12 rounded-xl font-semibold gap-1.5 border-border hover:border-accent"
+                      >
+                        <Phone size={16} className="text-accent" />
+                        {translations.mobile.call[lang]}
+                      </Button>
+                    </a>
+                    <a href="https://wa.me/17869732556" target="_blank" rel="noopener noreferrer" className="flex-1">
+                      <Button
+                        variant="outline"
+                        className="w-full h-12 rounded-xl font-semibold gap-1.5 border-border hover:border-accent"
+                      >
+                        <MessageCircle size={16} className="text-accent" />
+                        WhatsApp
+                      </Button>
+                    </a>
+                  </div>
                 </div>
 
                 <p className="text-xs text-muted-foreground mt-5">
