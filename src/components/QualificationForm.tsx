@@ -534,6 +534,13 @@ export function QualificationForm({ open, onClose }: QualificationFormProps) {
                 <p className="text-xs text-muted-foreground mt-5">
                   {t.preferTalk[lang]}
                 </p>
+
+                <button
+                  onClick={onClose}
+                  className="mt-4 text-sm text-muted-foreground/60 hover:text-muted-foreground underline underline-offset-2 transition-colors"
+                >
+                  {lang === "pt" ? "← Voltar ao site" : "← Back to website"}
+                </button>
               </motion.div>
             )}
           </AnimatePresence>
