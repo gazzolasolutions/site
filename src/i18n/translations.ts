@@ -270,7 +270,7 @@ export const translations = {
     items: {
       en: [
         { q: "Do I need an ITIN to open an LLC?", a: "Not necessarily. Many business owners only need an EIN to get started. We help you determine whether an ITIN applies to your situation." },
-        { q: "Do I need to send my passport to the IRS?", a: "No. As a Certified Acceptance Agent, we verify your documents in person or remotely, so your passport never leaves your hands." },
+        { q: "Do I need to send my passport to the IRS?", a: "No. As a Certified Acceptance Agent, we verify your documents, so your passport never leaves your hands." },
         { q: "Do you only work with Florida companies?", a: "Yes, we are currently focused on Florida business formations to provide the best possible service and expertise." },
         { q: "Do I need to live in Florida?", a: "No. Non-residents can open a Florida LLC from anywhere in the world." },
         { q: "How long does it take?", a: "Florida LLC formation takes 1–2 weeks. ITIN processing is typically 8–12 weeks after submission to the IRS." },
@@ -279,7 +279,7 @@ export const translations = {
       ],
       es: [
         { q: "¿Necesito un ITIN para abrir una LLC?", a: "No necesariamente. Muchos empresarios solo necesitan un EIN para comenzar. Le ayudamos a determinar si un ITIN aplica en su caso." },
-        { q: "¿Necesito enviar mi pasaporte al IRS?", a: "No. Como Agente de Aceptación Certificado, verificamos sus documentos en persona o de forma remota, para que su pasaporte nunca salga de sus manos." },
+        { q: "¿Necesito enviar mi pasaporte al IRS?", a: "No. Como Agente de Aceptación Certificado, verificamos sus documentos, para que su pasaporte nunca salga de sus manos." },
         { q: "¿Solo trabajan con empresas de Florida?", a: "Sí, actualmente estamos enfocados en formaciones de empresas en Florida para brindar el mejor servicio y experiencia posible." },
         { q: "¿Necesito vivir en Florida?", a: "No. Los no residentes pueden abrir una LLC en Florida desde cualquier parte del mundo." },
         { q: "¿Cuánto tiempo tarda?", a: "La formación de una LLC en Florida toma 1–2 semanas. El procesamiento del ITIN generalmente toma 8–12 semanas después de la presentación al IRS." },
@@ -288,7 +288,7 @@ export const translations = {
       ],
       pt: [
         { q: "Preciso de um ITIN para abrir uma LLC?", a: "Não necessariamente. Muitos empresários só precisam de um EIN para começar. Ajudamos você a determinar se um ITIN se aplica à sua situação." },
-        { q: "Preciso enviar meu passaporte para o IRS?", a: "Não. Como Agente de Aceitação Certificado, verificamos seus documentos presencialmente ou remotamente, para que seu passaporte nunca saia das suas mãos." },
+        { q: "Preciso enviar meu passaporte para o IRS?", a: "Não. Como Agente de Aceitação Certificado, verificamos seus documentos, para que seu passaporte nunca saia das suas mãos." },
         { q: "Vocês só trabalham com empresas da Flórida?", a: "Sim, atualmente estamos focados em formações de empresas na Flórida para oferecer o melhor serviço e expertise possível." },
         { q: "Preciso morar na Flórida?", a: "Não. Não residentes podem abrir uma LLC na Flórida de qualquer lugar do mundo." },
         { q: "Quanto tempo demora?", a: "A formação de uma LLC na Flórida leva 1–2 semanas. O processamento do ITIN geralmente leva 8–12 semanas após a submissão ao IRS." },
