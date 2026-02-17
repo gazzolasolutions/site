@@ -128,10 +128,10 @@ export function QualificationForm({ open, onClose }: QualificationFormProps) {
             "Content-Type": "text/plain;charset=utf-8",
           },
           body: JSON.stringify({
-            full_name: form.fullName,
+            name: form.fullName,
             email: form.email,
             phone: form.phone,
-            services: form.services || "",
+            services: Array.isArray(form.services) ? form.services.join(", ") : (form.services || ""),
             owners: form.owners || "",
             source: "lovable_form",
           }),
