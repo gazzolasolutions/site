@@ -126,8 +126,21 @@ export function QualificationForm({ open, onClose }: QualificationFormProps) {
     document.getElementById("services")?.scrollIntoView({ behavior: "smooth" });
   };
 
+  const formatPhone = (raw: string) => {
+    // Strip everything except digits and leading +
+    const digits = raw.replace(/\D/g, "");
+    if (digits.length === 0) return "";
+    // Format as +X (XXX) XXX-XXXX
+    if (digits.length <= 1) return `+${digits}`;
+    if (digits.length <= 4) return `+${digits.slice(0, 1)} (${digits.slice(1)}`;
+    if (digits.length <= 7) return `+${digits.slice(0, 1)} (${digits.slice(1, 4)}) ${digits.slice(4)}`;
+    if (digits.length <= 11) return `+${digits.slice(0, 1)} (${digits.slice(1, 4)}) ${digits.slice(4, 7)}-${digits.slice(7, 11)}`;
+    return `+${digits.slice(0, 1)} (${digits.slice(1, 4)}) ${digits.slice(4, 7)}-${digits.slice(7, 11)}`;
+  };
+
   const update = (field: string, value: string) => {
-    setForm((f) => ({ ...f, [field]: value }));
+    const formatted = field === "phone" ? formatPhone(value) : value;
+    setForm((f) => ({ ...f, [field]: formatted }));
     if (error) setError("");
   };
 
