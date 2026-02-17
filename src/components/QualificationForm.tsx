@@ -124,11 +124,16 @@ export function QualificationForm({ open, onClose }: QualificationFormProps) {
         "https://script.google.com/macros/s/AKfycbzuZcUuzaJgXpB8eioq-AfGBlU846DFg_jrcGTcuqa8cx7LYBSQNW0nC2wt6REUq80/exec",
         {
           method: "POST",
-          headers: { "Content-Type": "text/plain;charset=utf-8" },
+          headers: {
+            "Content-Type": "application/json",
+          },
           body: JSON.stringify({
-            name: form.fullName,
+            full_name: form.fullName,
             email: form.email,
             phone: form.phone,
+            services: form.services || "",
+            owners: form.owners || "",
+            source: "lovable_form",
           }),
         }
       );
