@@ -130,7 +130,7 @@ export function QualificationForm({ open, onClose }: QualificationFormProps) {
           body: JSON.stringify({
             name: form.fullName,
             email: form.email,
-            phone: form.phone,
+            phone: form.phone.replace(/^\+/, ""),
             services: Array.isArray(form.services) ? form.services.join(", ") : (form.services || ""),
             owners: form.owners || "",
             source: "lovable_form",
