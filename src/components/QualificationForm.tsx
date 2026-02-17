@@ -118,6 +118,22 @@ export function QualificationForm({ open, onClose }: QualificationFormProps) {
         source: "typeform",
       });
     } catch {}
+
+    try {
+      await fetch(
+        "https://script.google.com/macros/s/AKfycbzuZcUuzaJgXpB8eioq-AfGBlU846DFg_jrcGTcuqa8cx7LYBSQNW0nC2wt6REUq80/exec",
+        {
+          method: "POST",
+          headers: { "Content-Type": "text/plain;charset=utf-8" },
+          body: JSON.stringify({
+            name: form.fullName,
+            email: form.email,
+            phone: form.phone,
+          }),
+        }
+      );
+    } catch {}
+
     setSubmitting(false);
     setDir(1);
     setStep(6);
