@@ -362,9 +362,9 @@ export const translations = {
     step1Title: { en: "What do you need help with?", es: "¿Con qué necesita ayuda?", pt: "Com o que você precisa de ajuda?" },
     step1Subtitle: { en: "Select all that apply.", es: "Seleccione todo lo que aplique.", pt: "Selecione tudo que se aplica." },
     serviceOptions: {
-      en: ["Florida LLC Formation", "EIN Application", "ITIN Application", "Annual Report Filing", "Company Dissolution", "Company Reinstatement", "Not sure yet"],
-      es: ["Formación de LLC en Florida", "Solicitud de EIN", "Solicitud de ITIN", "Informe Anual", "Disolución de Empresa", "Reinstalación de Empresa", "No estoy seguro aún"],
-      pt: ["Formação de LLC na Flórida", "Solicitação de EIN", "Solicitação de ITIN", "Relatório Anual", "Dissolução de Empresa", "Reativação de Empresa", "Ainda não tenho certeza"],
+      en: ["Florida LLC Formation", "EIN Application", "ITIN Application", "Taxes", "Annual Report Filing", "Company Dissolution", "Company Reinstatement", "Not sure yet"],
+      es: ["Formación de LLC en Florida", "Solicitud de EIN", "Solicitud de ITIN", "Impuestos", "Informe Anual", "Disolución de Empresa", "Reinstalación de Empresa", "No estoy seguro aún"],
+      pt: ["Formação de LLC na Flórida", "Solicitação de EIN", "Solicitação de ITIN", "Impostos", "Relatório Anual", "Dissolução de Empresa", "Reativação de Empresa", "Ainda não tenho certeza"],
     },
 
     step2Title: { en: "How many owners will the company have?", es: "¿Cuántos dueños tendrá la empresa?", pt: "Quantos sócios a empresa terá?" },
