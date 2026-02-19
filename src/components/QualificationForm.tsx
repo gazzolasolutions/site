@@ -1,12 +1,34 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight, ArrowLeft, Loader2, Check, Phone, MessageCircle, CalendarCheck } from "lucide-react";
+import { ArrowRight, ArrowLeft, Loader2, Check, Phone, MessageCircle, CalendarCheck, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { supabase } from "@/integrations/supabase/client";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { translations } from "@/i18n/translations";
 import { useCalendlyPopup } from "@/hooks/useCalendlyPopup";
+
+const COUNTRY_CODES = [
+  { code: "+1", flag: "🇺🇸", label: "US" },
+  { code: "+1", flag: "🇨🇦", label: "CA" },
+  { code: "+55", flag: "🇧🇷", label: "BR" },
+  { code: "+52", flag: "🇲🇽", label: "MX" },
+  { code: "+54", flag: "🇦🇷", label: "AR" },
+  { code: "+57", flag: "🇨🇴", label: "CO" },
+  { code: "+56", flag: "🇨🇱", label: "CL" },
+  { code: "+51", flag: "🇵🇪", label: "PE" },
+  { code: "+58", flag: "🇻🇪", label: "VE" },
+  { code: "+44", flag: "🇬🇧", label: "UK" },
+  { code: "+351", flag: "🇵🇹", label: "PT" },
+  { code: "+34", flag: "🇪🇸", label: "ES" },
+  { code: "+49", flag: "🇩🇪", label: "DE" },
+  { code: "+33", flag: "🇫🇷", label: "FR" },
+  { code: "+39", flag: "🇮🇹", label: "IT" },
+  { code: "+81", flag: "🇯🇵", label: "JP" },
+  { code: "+86", flag: "🇨🇳", label: "CN" },
+  { code: "+91", flag: "🇮🇳", label: "IN" },
+  { code: "+61", flag: "🇦🇺", label: "AU" },
+];
 
 interface QualificationFormProps {
   open: boolean;
@@ -32,9 +54,11 @@ export function QualificationForm({ open, onClose }: QualificationFormProps) {
     fullName: "",
     email: "",
     phone: "",
+    countryCode: COUNTRY_CODES[0],
     services: [] as string[],
     owners: "",
   });
+  const [countryOpen, setCountryOpen] = useState(false);
   const [error, setError] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -106,13 +130,15 @@ export function QualificationForm({ open, onClose }: QualificationFormProps) {
     }
   };
 
+  const fullPhone = `${form.countryCode.code} ${form.phone}`;
+
   const handleSubmitLead = async () => {
     setSubmitting(true);
     try {
       await supabase.from("leads").insert({
         full_name: form.fullName,
         email: form.email,
-        phone: form.phone,
+        phone: fullPhone,
         services: form.services,
         owners: form.owners,
         source: "typeform",
@@ -130,7 +156,7 @@ export function QualificationForm({ open, onClose }: QualificationFormProps) {
           body: JSON.stringify({
             name: form.fullName,
             email: form.email,
-            phone: form.phone.replace(/^\+/, ""),
+            phone: fullPhone.replace(/^\+/, ""),
             services: Array.isArray(form.services) ? form.services.join(", ") : (form.services || ""),
             owners: form.owners || "",
             source: "lovable_form",
@@ -150,15 +176,11 @@ export function QualificationForm({ open, onClose }: QualificationFormProps) {
   };
 
   const formatPhone = (raw: string) => {
-    // Strip everything except digits and leading +
     const digits = raw.replace(/\D/g, "");
     if (digits.length === 0) return "";
-    // Format as +X (XXX) XXX-XXXX
-    if (digits.length <= 1) return `+${digits}`;
-    if (digits.length <= 4) return `+${digits.slice(0, 1)} (${digits.slice(1)}`;
-    if (digits.length <= 7) return `+${digits.slice(0, 1)} (${digits.slice(1, 4)}) ${digits.slice(4)}`;
-    if (digits.length <= 11) return `+${digits.slice(0, 1)} (${digits.slice(1, 4)}) ${digits.slice(4, 7)}-${digits.slice(7, 11)}`;
-    return `+${digits.slice(0, 1)} (${digits.slice(1, 4)}) ${digits.slice(4, 7)}-${digits.slice(7, 11)}`;
+    if (digits.length <= 3) return `(${digits}`;
+    if (digits.length <= 6) return `(${digits.slice(0, 3)}) ${digits.slice(3)}`;
+    return `(${digits.slice(0, 3)}) ${digits.slice(3, 6)}-${digits.slice(6, 10)}`;
   };
 
   const update = (field: string, value: string) => {
@@ -416,16 +438,48 @@ export function QualificationForm({ open, onClose }: QualificationFormProps) {
                   {t.step4Title[lang]}
                 </h2>
                 <p className="text-sm text-muted-foreground mb-6">{t.step4Subtitle[lang]}</p>
-                <Input
-                  ref={inputRef}
-                  type="tel"
-                  placeholder="+1 (786) 000-0000"
-                  value={form.phone}
-                  onChange={(e) => update("phone", e.target.value)}
-                  onKeyDown={handleKeyDown}
-                  className="h-14 rounded-xl text-lg border-2 border-border focus:border-accent px-4"
-                  autoComplete="tel"
-                />
+                <div className="flex gap-2">
+                  <div className="relative">
+                    <button
+                      type="button"
+                      onClick={() => setCountryOpen(!countryOpen)}
+                      className="h-14 px-3 rounded-xl border-2 border-border bg-background flex items-center gap-1.5 text-base hover:border-accent/40 transition-colors min-w-[90px]"
+                    >
+                      <span className="text-xl leading-none">{form.countryCode.flag}</span>
+                      <span className="text-sm font-medium text-foreground">{form.countryCode.code}</span>
+                      <ChevronDown size={14} className="text-muted-foreground" />
+                    </button>
+                    {countryOpen && (
+                      <div className="absolute top-full left-0 mt-1 bg-card border border-border rounded-xl shadow-lg z-50 max-h-48 overflow-y-auto w-48">
+                        {COUNTRY_CODES.map((cc, i) => (
+                          <button
+                            key={`${cc.label}-${i}`}
+                            type="button"
+                            onClick={() => {
+                              setForm((f) => ({ ...f, countryCode: cc }));
+                              setCountryOpen(false);
+                            }}
+                            className="w-full flex items-center gap-2.5 px-3 py-2.5 text-sm hover:bg-muted/50 transition-colors text-left"
+                          >
+                            <span className="text-lg leading-none">{cc.flag}</span>
+                            <span className="text-muted-foreground">{cc.label}</span>
+                            <span className="font-medium text-foreground ml-auto">{cc.code}</span>
+                          </button>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                  <Input
+                    ref={inputRef}
+                    type="tel"
+                    placeholder="(786) 000-0000"
+                    value={form.phone}
+                    onChange={(e) => update("phone", e.target.value)}
+                    onKeyDown={handleKeyDown}
+                    className="h-14 rounded-xl text-lg border-2 border-border focus:border-accent px-4 flex-1"
+                    autoComplete="tel"
+                  />
+                </div>
                 {error && <p className="text-sm text-destructive mt-2">{error}</p>}
                 <Button
                   onClick={goNext}
