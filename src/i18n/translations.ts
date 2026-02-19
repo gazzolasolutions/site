@@ -15,14 +15,14 @@ export const translations = {
   // Hero
   hero: {
     title: {
-      en: "Start Your Florida Company the Smart and Fast Way",
-      es: "Abra Su Empresa en Florida de Forma Inteligente y Rápida",
-      pt: "Abra Sua Empresa na Flórida de Forma Inteligente e Rápida",
+      en: "Start and Manage Your Florida Company in 3 Simple Steps",
+      es: "Inicie y Administre Su Empresa en Florida en 3 Simples Pasos",
+      pt: "Abra e Gerencie Sua Empresa na Flórida em 3 Passos Simples",
     },
     subtitle: {
-      en: "We help you open your Florida LLC, obtain your EIN, and, if needed, apply for your ITIN without sending your passport to the IRS.",
-      es: "Le ayudamos a abrir su LLC en Florida, obtener su EIN y, si es necesario, solicitar su ITIN sin enviar su pasaporte al IRS.",
-      pt: "Ajudamos você a abrir sua LLC na Flórida, obter seu EIN e, se necessário, solicitar seu ITIN sem enviar seu passaporte ao IRS.",
+      en: "Whether you're just starting or already operating, we have a solution for you.",
+      es: "Ya sea que esté comenzando o ya operando, tenemos una solución para usted.",
+      pt: "Seja você iniciante ou já em operação, temos uma solução para você.",
     },
     bullets: {
       en: ["No SSN required", "ITIN without mailing your passport", "Multilingual support", "Step by step guidance"],
@@ -92,7 +92,7 @@ export const translations = {
           cta: "Apply for EIN",
         },
         {
-          title: "Apply for Your ITIN (If You Qualify)",
+          title: "Apply for Your ITIN",
           subtitle: "Certified Acceptance Agent Service",
           bullets: ["Keep your passport, no mailing required", "Avoid long delays", "Secure in-person or remote verification", "Full support in your language"],
           note: "Not every business owner needs an ITIN. We help determine if this applies to your situation.",
@@ -142,7 +142,7 @@ export const translations = {
           cta: "Solicitar EIN",
         },
         {
-          title: "Solicite Su ITIN (Si Califica)",
+          title: "Solicite Su ITIN",
           subtitle: "Servicio de Agente de Aceptación Certificado",
           bullets: ["Conserve su pasaporte, sin enviarlo", "Evite largas demoras", "Verificación presencial o remota segura", "Soporte completo en su idioma"],
           note: "No todos los dueños de negocio necesitan un ITIN. Le ayudamos a determinar si aplica en su caso.",
@@ -192,7 +192,7 @@ export const translations = {
           cta: "Solicitar EIN",
         },
         {
-          title: "Solicite Seu ITIN (Se Você Se Qualificar)",
+          title: "Solicite Seu ITIN",
           subtitle: "Serviço de Agente de Aceitação Certificado",
           bullets: ["Mantenha seu passaporte, sem envio", "Evite longas demoras", "Verificação presencial ou remota segura", "Suporte completo no seu idioma"],
           note: "Nem todo dono de negócio precisa de um ITIN. Ajudamos a determinar se isso se aplica à sua situação.",
@@ -362,9 +362,9 @@ export const translations = {
     step1Title: { en: "What do you need help with?", es: "¿Con qué necesita ayuda?", pt: "Com o que você precisa de ajuda?" },
     step1Subtitle: { en: "Select all that apply.", es: "Seleccione todo lo que aplique.", pt: "Selecione tudo que se aplica." },
     serviceOptions: {
-      en: ["Florida LLC Formation", "EIN Application", "ITIN Application", "Taxes", "Annual Report Filing", "Company Dissolution", "Company Reinstatement", "Not sure yet"],
-      es: ["Formación de LLC en Florida", "Solicitud de EIN", "Solicitud de ITIN", "Impuestos", "Informe Anual", "Disolución de Empresa", "Reinstalación de Empresa", "No estoy seguro aún"],
-      pt: ["Formação de LLC na Flórida", "Solicitação de EIN", "Solicitação de ITIN", "Impostos", "Relatório Anual", "Dissolução de Empresa", "Reativação de Empresa", "Ainda não tenho certeza"],
+      en: ["Florida LLC Formation", "EIN Application", "ITIN Application", "Bookkeeping", "Taxes", "Annual Report Filing", "Company Dissolution", "Company Reinstatement", "Not sure yet"],
+      es: ["Formación de LLC en Florida", "Solicitud de EIN", "Solicitud de ITIN", "Contabilidad", "Impuestos", "Informe Anual", "Disolución de Empresa", "Reinstalación de Empresa", "No estoy seguro aún"],
+      pt: ["Formação de LLC na Flórida", "Solicitação de EIN", "Solicitação de ITIN", "Contabilidade", "Impostos", "Relatório Anual", "Dissolução de Empresa", "Reativação de Empresa", "Ainda não tenho certeza"],
     },
 
     step2Title: { en: "How many owners will the company have?", es: "¿Cuántos dueños tendrá la empresa?", pt: "Quantos sócios a empresa terá?" },
