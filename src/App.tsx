@@ -19,7 +19,8 @@ const App = () => (
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
-          <Route path="/leads" element={<Leads />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/leads" element={<ProtectedRoute><Leads /></ProtectedRoute>} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
