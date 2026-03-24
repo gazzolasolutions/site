@@ -311,7 +311,7 @@ export const translations = {
       pt: "Junte-se a centenas de empreendedores que confiaram em nós para abrir suas empresas nos EUA.",
     },
     cta: { en: "Start Now", es: "Comenzar Ahora", pt: "Começar Agora" },
-    consultation: { en: "Book Consultation", es: "Agendar Consulta", pt: "Agendar Consulta" },
+    consultation: { en: "Book a Free Consultation", es: "Agendar una Consulta Gratuita", pt: "Agendar uma Consulta Gratuita" },
   },
 
   // Footer
