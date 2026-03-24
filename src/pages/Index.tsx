@@ -31,8 +31,14 @@ const IndexContent = () => {
         <StickyMobileCTA />
         <QualificationForm open={formOpen} onClose={() => setFormOpen(false)} />
       </div>
-    </LanguageProvider>
+    </>
   );
 };
+
+const Index = () => (
+  <LanguageProvider>
+    <IndexContent />
+  </LanguageProvider>
+);
 
 export default Index;

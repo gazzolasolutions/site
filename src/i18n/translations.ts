@@ -391,7 +391,7 @@ export const translations = {
       es: "Nuestro equipo revisará su información y le ayudará a avanzar con su empresa en Florida.",
       pt: "Nossa equipe analisará suas informações e ajudará você a avançar com sua empresa na Flórida.",
     },
-    scheduleCall: { en: "Schedule Your Call", es: "Agendar Su Llamada", pt: "Agendar Sua Ligação" },
+    scheduleCall: { en: "Schedule Your Free Call", es: "Agendar Su Llamada Gratuita", pt: "Agendar Sua Ligação Gratuita" },
     preferTalk: { en: "Prefer to talk now? Call or message us anytime.", es: "¿Prefiere hablar ahora? Llame o escríbanos en cualquier momento.", pt: "Prefere falar agora? Ligue ou mande mensagem a qualquer momento." },
 
     errors: {
