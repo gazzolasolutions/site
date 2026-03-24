@@ -30,7 +30,7 @@ export const translations = {
       pt: ["Sem necessidade de SSN", "ITIN sem enviar seu passaporte", "Suporte multilíngue", "Orientação passo a passo"],
     },
     cta: { en: "Get Started Now", es: "Comenzar Ahora", pt: "Começar Agora" },
-    consultation: { en: "Book Free Consultation", es: "Consulta Gratuita", pt: "Consulta Gratuita" },
+    consultation: { en: "Book a Free Consultation", es: "Agendar una Consulta Gratuita", pt: "Agendar uma Consulta Gratuita" },
     imgAlt: {
       en: "Start your US business easily",
       es: "Inicie su negocio en EE.UU. fácilmente",
