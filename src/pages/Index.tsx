@@ -12,12 +12,12 @@ import { QualificationForm } from "@/components/QualificationForm";
 
 import { LanguageProvider } from "@/i18n/LanguageContext";
 
-const Index = () => {
+const IndexContent = () => {
   const [formOpen, setFormOpen] = useState(false);
   const openForm = () => setFormOpen(true);
 
   return (
-    <LanguageProvider>
+    <>
       <div className="min-h-screen bg-background pb-16 md:pb-0">
         <Header onGetStarted={openForm} />
         <Hero onGetStarted={openForm} />
@@ -31,8 +31,14 @@ const Index = () => {
         <StickyMobileCTA />
         <QualificationForm open={formOpen} onClose={() => setFormOpen(false)} />
       </div>
-    </LanguageProvider>
+    </>
   );
 };
+
+const Index = () => (
+  <LanguageProvider>
+    <IndexContent />
+  </LanguageProvider>
+);
 
 export default Index;

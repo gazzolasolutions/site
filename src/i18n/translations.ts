@@ -30,7 +30,7 @@ export const translations = {
       pt: ["Sem necessidade de SSN", "ITIN sem enviar seu passaporte", "Suporte multilíngue", "Orientação passo a passo"],
     },
     cta: { en: "Get Started Now", es: "Comenzar Ahora", pt: "Começar Agora" },
-    consultation: { en: "Book Free Consultation", es: "Consulta Gratuita", pt: "Consulta Gratuita" },
+    consultation: { en: "Book a Free Consultation", es: "Agendar una Consulta Gratuita", pt: "Agendar uma Consulta Gratuita" },
     imgAlt: {
       en: "Start your US business easily",
       es: "Inicie su negocio en EE.UU. fácilmente",
@@ -311,7 +311,7 @@ export const translations = {
       pt: "Junte-se a centenas de empreendedores que confiaram em nós para abrir suas empresas nos EUA.",
     },
     cta: { en: "Start Now", es: "Comenzar Ahora", pt: "Começar Agora" },
-    consultation: { en: "Book Consultation", es: "Agendar Consulta", pt: "Agendar Consulta" },
+    consultation: { en: "Book a Free Consultation", es: "Agendar una Consulta Gratuita", pt: "Agendar uma Consulta Gratuita" },
   },
 
   // Footer
@@ -391,7 +391,7 @@ export const translations = {
       es: "Nuestro equipo revisará su información y le ayudará a avanzar con su empresa en Florida.",
       pt: "Nossa equipe analisará suas informações e ajudará você a avançar com sua empresa na Flórida.",
     },
-    scheduleCall: { en: "Schedule Your Call", es: "Agendar Su Llamada", pt: "Agendar Sua Ligação" },
+    scheduleCall: { en: "Schedule Your Free Call", es: "Agendar Su Llamada Gratuita", pt: "Agendar Sua Ligação Gratuita" },
     preferTalk: { en: "Prefer to talk now? Call or message us anytime.", es: "¿Prefiere hablar ahora? Llame o escríbanos en cualquier momento.", pt: "Prefere falar agora? Ligue ou mande mensagem a qualquer momento." },
 
     errors: {
