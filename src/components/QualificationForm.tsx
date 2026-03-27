@@ -342,8 +342,8 @@ export function QualificationForm({ open, onClose }: QualificationFormProps) {
 
 
 
-            {/* STEP 3 - Name */}
-            {step === 3 && (
+            {/* STEP 2 - Name */}
+            {step === 2 && (
               <motion.div
                 key="step3"
                 custom={dir}
