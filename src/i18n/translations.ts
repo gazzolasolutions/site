@@ -101,7 +101,7 @@ export const translations = {
         {
           title: "Monthly Bookkeeping That Keeps You Organized",
           bullets: ["Monthly review", "Financial reports", "Clean records"],
-          cta: "View Plans",
+          cta: "Let's Talk Numbers",
         },
         {
           title: "Professional Tax Preparation",
