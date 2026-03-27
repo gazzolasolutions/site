@@ -210,7 +210,7 @@ export const translations = {
         },
         {
           title: "Declaração de Relatório Anual",
-          bullets: ["Obrigatório anualmente para LLCs na Flórida", "Entrega pontual para evitar multas", "Processo sem complicações"],
+          bullets: ["Obrigatório anualmente para empresas na Flórida", "Entrega pontual para evitar multas", "Processo sem complicações"],
           cta: "Entregar Meu Relatório Anual",
         },
         {
