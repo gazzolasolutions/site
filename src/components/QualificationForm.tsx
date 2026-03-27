@@ -163,7 +163,7 @@ export function QualificationForm({ open, onClose }: QualificationFormProps) {
 
     setSubmitting(false);
     setDir(1);
-    setStep(6);
+    setStep(5);
   };
 
   const handleFinish = () => {
