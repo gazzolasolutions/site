@@ -287,7 +287,7 @@ export const translations = {
         { q: "¿Qué idiomas soportan?", a: "Ofrecemos soporte completo en inglés, portugués y español para asegurar una comunicación clara durante todo el proceso." },
       ],
       pt: [
-        { q: "Preciso de um ITIN para abrir uma LLC?", a: "Não necessariamente. Muitos empresários só precisam de um EIN para começar. Ajudamos você a determinar se um ITIN se aplica à sua situação." },
+        { q: "Preciso de um ITIN para abrir uma empresa?", a: "Não necessariamente. Muitos empresários só precisam de um EIN para começar. Ajudamos você a determinar se um ITIN se aplica à sua situação." },
         { q: "Preciso enviar meu passaporte para o IRS?", a: "Não. Como Agente de Aceitação Certificado, verificamos seus documentos, para que seu passaporte nunca saia das suas mãos." },
         { q: "Vocês só trabalham com empresas da Flórida?", a: "Sim, atualmente estamos focados em formações de empresas na Flórida para oferecer o melhor serviço e expertise possível." },
         { q: "Preciso morar na Flórida?", a: "Não. Não residentes podem abrir uma LLC na Flórida de qualquer lugar do mundo." },
