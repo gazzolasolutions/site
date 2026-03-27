@@ -81,10 +81,10 @@ export const translations = {
     cards: {
       en: [
         {
-          title: "Open Your Florida LLC the Right Way",
-          bullets: ["Florida LLC formation", "State registration", "Operating Agreement"],
+          title: "Open Your Florida Company the Right Way",
+          bullets: ["Florida company formation", "State registration", "Operating Agreement"],
           note: "Operating Agreements are typically required for multi-member LLCs and optional for single-member LLCs.",
-          cta: "Open My LLC",
+          cta: "Start My Company",
         },
         {
           title: "Get Your EIN Without the Headache",
