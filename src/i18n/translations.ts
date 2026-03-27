@@ -81,10 +81,10 @@ export const translations = {
     cards: {
       en: [
         {
-          title: "Open Your Florida LLC the Right Way",
-          bullets: ["Florida LLC formation", "State registration", "Operating Agreement"],
+          title: "Open Your Florida Company the Right Way",
+          bullets: ["Florida company formation", "State registration", "Operating Agreement"],
           note: "Operating Agreements are typically required for multi-member LLCs and optional for single-member LLCs.",
-          cta: "Open My LLC",
+          cta: "Start My Company",
         },
         {
           title: "Get Your EIN Without the Headache",
@@ -110,7 +110,7 @@ export const translations = {
         },
         {
           title: "Annual Report Filing",
-          bullets: ["Required yearly for Florida LLCs", "Timely filing to avoid penalties", "Hassle-free submission"],
+          bullets: ["Required yearly for Florida companies", "Timely filing to avoid penalties", "Hassle-free submission"],
           cta: "File My Annual Report",
         },
         {
@@ -120,7 +120,7 @@ export const translations = {
         },
         {
           title: "Company Reinstatement",
-          bullets: ["Revive your inactive LLC", "Back in good standing", "Full state restoration"],
+          bullets: ["Revive your inactive company", "Back in good standing", "Full state restoration"],
           cta: "Reinstate My Company",
         },
         {
@@ -131,10 +131,10 @@ export const translations = {
       ],
       es: [
         {
-          title: "Abra Su LLC en Florida Correctamente",
-          bullets: ["Formación de LLC en Florida", "Registro estatal", "Acuerdo Operativo"],
+          title: "Abra Su Compañía de Florida Correctamente",
+          bullets: ["Formación de compañía en Florida", "Registro estatal", "Acuerdo Operativo"],
           note: "Los Acuerdos Operativos generalmente son requeridos para LLCs con múltiples miembros y opcionales para un solo miembro.",
-          cta: "Abrir Mi LLC",
+          cta: "Iniciar Mi Compañía",
         },
         {
           title: "Obtenga Su EIN Sin Complicaciones",
@@ -160,7 +160,7 @@ export const translations = {
         },
         {
           title: "Presentación de Informe Anual",
-          bullets: ["Requerido anualmente para LLCs en Florida", "Presentación puntual para evitar multas", "Trámite sin complicaciones"],
+          bullets: ["Requerido anualmente para compañías en Florida", "Presentación puntual para evitar multas", "Trámite sin complicaciones"],
           cta: "Presentar Mi Informe Anual",
         },
         {
@@ -170,7 +170,7 @@ export const translations = {
         },
         {
           title: "Reinstalación de Empresa",
-          bullets: ["Reactive su LLC inactiva", "Regrese a buen estado", "Restauración estatal completa"],
+          bullets: ["Reactive su compañía inactiva", "Regrese a buen estado", "Restauración estatal completa"],
           cta: "Reinstalar Mi Empresa",
         },
         {
@@ -181,10 +181,10 @@ export const translations = {
       ],
       pt: [
         {
-          title: "Abra Sua LLC na Flórida da Forma Certa",
-          bullets: ["Formação de LLC na Flórida", "Registro estadual", "Acordo Operacional"],
+          title: "Abra Sua Empresa da Flórida da Forma Certa",
+          bullets: ["Formação de empresa na Flórida", "Registro estadual", "Acordo Operacional"],
           note: "Acordos Operacionais geralmente são exigidos para LLCs com múltiplos membros e opcionais para membro único.",
-          cta: "Abrir Minha LLC",
+          cta: "Iniciar Minha Empresa",
         },
         {
           title: "Obtenha Seu EIN Sem Dor de Cabeça",
@@ -210,7 +210,7 @@ export const translations = {
         },
         {
           title: "Declaração de Relatório Anual",
-          bullets: ["Obrigatório anualmente para LLCs na Flórida", "Entrega pontual para evitar multas", "Processo sem complicações"],
+          bullets: ["Obrigatório anualmente para empresas na Flórida", "Entrega pontual para evitar multas", "Processo sem complicações"],
           cta: "Entregar Meu Relatório Anual",
         },
         {
@@ -220,7 +220,7 @@ export const translations = {
         },
         {
           title: "Reativação de Empresa",
-          bullets: ["Reative sua LLC inativa", "Volte a ficar em dia", "Restauração estadual completa"],
+          bullets: ["Reative sua empresa inativa", "Volte a ficar em dia", "Restauração estadual completa"],
           cta: "Reativar Minha Empresa",
         },
         {
@@ -269,29 +269,29 @@ export const translations = {
     },
     items: {
       en: [
-        { q: "Do I need an ITIN to open an LLC?", a: "Not necessarily. Many business owners only need an EIN to get started. We help you determine whether an ITIN applies to your situation." },
+        { q: "Do I need an ITIN to open a company?", a: "Not necessarily. Many business owners only need an EIN to get started. We help you determine whether an ITIN applies to your situation." },
         { q: "Do I need to send my passport to the IRS?", a: "No. As a Certified Acceptance Agent, we verify your documents, so your passport never leaves your hands." },
         { q: "Do you only work with Florida companies?", a: "Yes, we are currently focused on Florida business formations to provide the best possible service and expertise." },
-        { q: "Do I need to live in Florida?", a: "No. Non-residents can open a Florida LLC from anywhere in the world." },
-        { q: "How long does it take?", a: "Florida LLC formation takes 1–2 weeks. ITIN processing is typically 8–12 weeks after submission to the IRS." },
+        { q: "Do I need to live in Florida?", a: "No. Non-residents can open a Florida company from anywhere in the world." },
+        { q: "How long does it take?", a: "Florida company formation takes 1–2 weeks. ITIN processing is typically 8–12 weeks after submission to the IRS." },
         { q: "Do I need an SSN?", a: "No. We help non-residents who don't have an SSN get their EIN and, if needed, their ITIN." },
         { q: "What languages do you support?", a: "We offer full support in English, Portuguese, and Spanish to ensure clear communication throughout the process." },
       ],
       es: [
-        { q: "¿Necesito un ITIN para abrir una LLC?", a: "No necesariamente. Muchos empresarios solo necesitan un EIN para comenzar. Le ayudamos a determinar si un ITIN aplica en su caso." },
+        { q: "¿Necesito un ITIN para abrir una compañía?", a: "No necesariamente. Muchos empresarios solo necesitan un EIN para comenzar. Le ayudamos a determinar si un ITIN aplica en su caso." },
         { q: "¿Necesito enviar mi pasaporte al IRS?", a: "No. Como Agente de Aceptación Certificado, verificamos sus documentos, para que su pasaporte nunca salga de sus manos." },
         { q: "¿Solo trabajan con empresas de Florida?", a: "Sí, actualmente estamos enfocados en formaciones de empresas en Florida para brindar el mejor servicio y experiencia posible." },
-        { q: "¿Necesito vivir en Florida?", a: "No. Los no residentes pueden abrir una LLC en Florida desde cualquier parte del mundo." },
-        { q: "¿Cuánto tiempo tarda?", a: "La formación de una LLC en Florida toma 1–2 semanas. El procesamiento del ITIN generalmente toma 8–12 semanas después de la presentación al IRS." },
+        { q: "¿Necesito vivir en Florida?", a: "No. Los no residentes pueden abrir una compañía en Florida desde cualquier parte del mundo." },
+        { q: "¿Cuánto tiempo tarda?", a: "La formación de una compañía en Florida toma 1–2 semanas. El procesamiento del ITIN generalmente toma 8–12 semanas después de la presentación al IRS." },
         { q: "¿Necesito un SSN?", a: "No. Ayudamos a no residentes que no tienen SSN a obtener su EIN y, si es necesario, su ITIN." },
         { q: "¿Qué idiomas soportan?", a: "Ofrecemos soporte completo en inglés, portugués y español para asegurar una comunicación clara durante todo el proceso." },
       ],
       pt: [
-        { q: "Preciso de um ITIN para abrir uma LLC?", a: "Não necessariamente. Muitos empresários só precisam de um EIN para começar. Ajudamos você a determinar se um ITIN se aplica à sua situação." },
+        { q: "Preciso de um ITIN para abrir uma empresa?", a: "Não necessariamente. Muitos empresários só precisam de um EIN para começar. Ajudamos você a determinar se um ITIN se aplica à sua situação." },
         { q: "Preciso enviar meu passaporte para o IRS?", a: "Não. Como Agente de Aceitação Certificado, verificamos seus documentos, para que seu passaporte nunca saia das suas mãos." },
         { q: "Vocês só trabalham com empresas da Flórida?", a: "Sim, atualmente estamos focados em formações de empresas na Flórida para oferecer o melhor serviço e expertise possível." },
-        { q: "Preciso morar na Flórida?", a: "Não. Não residentes podem abrir uma LLC na Flórida de qualquer lugar do mundo." },
-        { q: "Quanto tempo demora?", a: "A formação de uma LLC na Flórida leva 1–2 semanas. O processamento do ITIN geralmente leva 8–12 semanas após a submissão ao IRS." },
+        { q: "Preciso morar na Flórida?", a: "Não. Não residentes podem abrir uma empresa na Flórida de qualquer lugar do mundo." },
+        { q: "Quanto tempo demora?", a: "A formação de uma empresa na Flórida leva 1–2 semanas. O processamento do ITIN geralmente leva 8–12 semanas após a submissão ao IRS." },
         { q: "Preciso de um SSN?", a: "Não. Ajudamos não residentes que não têm SSN a obter seu EIN e, se necessário, seu ITIN." },
         { q: "Quais idiomas vocês oferecem suporte?", a: "Oferecemos suporte completo em inglês, português e espanhol para garantir uma comunicação clara durante todo o processo." },
       ],
@@ -362,9 +362,9 @@ export const translations = {
     step1Title: { en: "What do you need help with?", es: "¿Con qué necesita ayuda?", pt: "Com o que você precisa de ajuda?" },
     step1Subtitle: { en: "Select all that apply.", es: "Seleccione todo lo que aplique.", pt: "Selecione tudo que se aplica." },
     serviceOptions: {
-      en: ["Florida LLC Formation", "EIN Application", "ITIN Application", "Bookkeeping", "Taxes", "Annual Report Filing", "Company Dissolution", "Company Reinstatement", "Not sure yet"],
-      es: ["Formación de LLC en Florida", "Solicitud de EIN", "Solicitud de ITIN", "Contabilidad", "Impuestos", "Informe Anual", "Disolución de Empresa", "Reinstalación de Empresa", "No estoy seguro aún"],
-      pt: ["Formação de LLC na Flórida", "Solicitação de EIN", "Solicitação de ITIN", "Contabilidade", "Impostos", "Relatório Anual", "Dissolução de Empresa", "Reativação de Empresa", "Ainda não tenho certeza"],
+      en: ["Florida Company Formation", "EIN Application", "ITIN Application", "Bookkeeping", "Taxes", "Annual Report Filing", "Company Dissolution", "Company Reinstatement", "Not sure yet"],
+      es: ["Formación de Compañía en Florida", "Solicitud de EIN", "Solicitud de ITIN", "Contabilidad", "Impuestos", "Informe Anual", "Disolución de Empresa", "Reinstalación de Empresa", "No estoy seguro aún"],
+      pt: ["Formação de Empresa na Flórida", "Solicitação de EIN", "Solicitação de ITIN", "Contabilidade", "Impostos", "Relatório Anual", "Dissolução de Empresa", "Reativação de Empresa", "Ainda não tenho certeza"],
     },
 
     step2Title: { en: "How many owners will the company have?", es: "¿Cuántos dueños tendrá la empresa?", pt: "Quantos sócios a empresa terá?" },
