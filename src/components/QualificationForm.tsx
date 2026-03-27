@@ -76,7 +76,7 @@ export function QualificationForm({ open, onClose }: QualificationFormProps) {
   }, [open]);
 
   useEffect(() => {
-    if (open && step >= 3 && step <= 5) {
+    if (open && step >= 2 && step <= 4) {
       setTimeout(() => inputRef.current?.focus(), 350);
     }
   }, [step, open]);
