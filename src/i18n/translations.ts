@@ -160,7 +160,7 @@ export const translations = {
         },
         {
           title: "Presentación de Informe Anual",
-          bullets: ["Requerido anualmente para LLCs en Florida", "Presentación puntual para evitar multas", "Trámite sin complicaciones"],
+          bullets: ["Requerido anualmente para compañías en Florida", "Presentación puntual para evitar multas", "Trámite sin complicaciones"],
           cta: "Presentar Mi Informe Anual",
         },
         {
