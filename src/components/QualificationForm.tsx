@@ -64,7 +64,7 @@ export function QualificationForm({ open, onClose }: QualificationFormProps) {
   const inputRef = useRef<HTMLInputElement>(null);
 
   const serviceOptions = t.serviceOptions[lang];
-  const ownerOptions = t.ownerOptions[lang];
+  
 
   useEffect(() => {
     if (open) {
