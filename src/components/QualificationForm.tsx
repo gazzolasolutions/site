@@ -378,8 +378,8 @@ export function QualificationForm({ open, onClose }: QualificationFormProps) {
               </motion.div>
             )}
 
-            {/* STEP 4 - Phone */}
-            {step === 4 && (
+            {/* STEP 3 - Phone */}
+            {step === 3 && (
               <motion.div
                 key="step4"
                 custom={dir}
