@@ -181,10 +181,10 @@ export const translations = {
       ],
       pt: [
         {
-          title: "Abra Sua LLC na Flórida da Forma Certa",
-          bullets: ["Formação de LLC na Flórida", "Registro estadual", "Acordo Operacional"],
+          title: "Abra Sua Empresa da Flórida da Forma Certa",
+          bullets: ["Formação de empresa na Flórida", "Registro estadual", "Acordo Operacional"],
           note: "Acordos Operacionais geralmente são exigidos para LLCs com múltiplos membros e opcionais para membro único.",
-          cta: "Abrir Minha LLC",
+          cta: "Iniciar Minha Empresa",
         },
         {
           title: "Obtenha Seu EIN Sem Dor de Cabeça",
