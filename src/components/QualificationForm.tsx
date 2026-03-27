@@ -86,11 +86,7 @@ export function QualificationForm({ open, onClose }: QualificationFormProps) {
       setError(t.errors.selectOne[lang]);
       return;
     }
-    if (step === 2 && !form.owners) {
-      setError(t.errors.selectOption[lang]);
-      return;
-    }
-    if (step === 3 && !form.fullName.trim()) {
+    if (step === 2 && !form.fullName.trim()) {
       setError(t.errors.enterName[lang]);
       return;
     }
