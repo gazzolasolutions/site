@@ -220,7 +220,7 @@ export const translations = {
         },
         {
           title: "Reativação de Empresa",
-          bullets: ["Reative sua LLC inativa", "Volte a ficar em dia", "Restauração estadual completa"],
+          bullets: ["Reative sua empresa inativa", "Volte a ficar em dia", "Restauração estadual completa"],
           cta: "Reativar Minha Empresa",
         },
         {
