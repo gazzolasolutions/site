@@ -489,7 +489,7 @@ export function QualificationForm({ open, onClose }: QualificationFormProps) {
             )}
 
             {/* FINAL SCREEN */}
-            {step === 6 && (
+            {step === 5 && (
               <motion.div
                 key="final"
                 custom={dir}
