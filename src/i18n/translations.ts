@@ -101,7 +101,7 @@ export const translations = {
         {
           title: "Monthly Bookkeeping That Keeps You Organized",
           bullets: ["Monthly review", "Financial reports", "Clean records"],
-          cta: "View Plans",
+          cta: "Let's Talk Numbers",
         },
         {
           title: "Professional Tax Preparation",
@@ -151,7 +151,7 @@ export const translations = {
         {
           title: "Contabilidad Mensual Para Mantenerse Organizado",
           bullets: ["Revisión mensual", "Informes financieros", "Registros limpios"],
-          cta: "Ver Planes",
+          cta: "Hablemos de Números",
         },
         {
           title: "Preparación Profesional de Impuestos",
@@ -201,7 +201,7 @@ export const translations = {
         {
           title: "Contabilidade Mensal Para Manter Tudo Organizado",
           bullets: ["Revisão mensal", "Relatórios financeiros", "Registros organizados"],
-          cta: "Ver Planos",
+          cta: "Vamos Falar de Números",
         },
         {
           title: "Preparação Profissional de Impostos",
@@ -339,9 +339,9 @@ export const translations = {
   // Qualification Form
   form: {
     introTitle: {
-      en: "Let's Get Your Florida Business Started",
-      es: "Comencemos Con Su Empresa en Florida",
-      pt: "Vamos Começar Sua Empresa na Flórida",
+      en: "Tell Us About Your Business Goals",
+      es: "Cuéntanos Sobre los Objetivos de tu Negocio",
+      pt: "Conte-nos Sobre os Objetivos do seu Negócio",
     },
     introSubtitle: {
       en: "This takes less than 60 seconds.",
