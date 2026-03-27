@@ -110,7 +110,7 @@ export const translations = {
         },
         {
           title: "Annual Report Filing",
-          bullets: ["Required yearly for Florida LLCs", "Timely filing to avoid penalties", "Hassle-free submission"],
+          bullets: ["Required yearly for Florida companies", "Timely filing to avoid penalties", "Hassle-free submission"],
           cta: "File My Annual Report",
         },
         {
