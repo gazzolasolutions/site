@@ -131,10 +131,10 @@ export const translations = {
       ],
       es: [
         {
-          title: "Abra Su LLC en Florida Correctamente",
-          bullets: ["Formación de LLC en Florida", "Registro estatal", "Acuerdo Operativo"],
+          title: "Abra Su Compañía de Florida Correctamente",
+          bullets: ["Formación de compañía en Florida", "Registro estatal", "Acuerdo Operativo"],
           note: "Los Acuerdos Operativos generalmente son requeridos para LLCs con múltiples miembros y opcionales para un solo miembro.",
-          cta: "Abrir Mi LLC",
+          cta: "Iniciar Mi Compañía",
         },
         {
           title: "Obtenga Su EIN Sin Complicaciones",
