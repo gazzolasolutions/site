@@ -339,49 +339,8 @@ export function QualificationForm({ open, onClose }: QualificationFormProps) {
               </motion.div>
             )}
 
-            {/* STEP 2 - Owners */}
-            {step === 2 && (
-              <motion.div
-                key="step2"
-                custom={dir}
-                variants={slideVariants}
-                initial="enter"
-                animate="center"
-                exit="exit"
-                transition={{ duration: 0.3, ease: "easeOut" }}
-              >
-                <h2 className="text-xl sm:text-2xl font-bold text-foreground mb-2">
-                  {t.step2Title[lang]}
-                </h2>
-                <p className="text-sm text-muted-foreground mb-6">{t.step2Subtitle[lang]}</p>
-                <div className="space-y-3">
-                  {ownerOptions.map((opt, i) => (
-                    <motion.button
-                      key={opt}
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: i * 0.06 }}
-                      onClick={() => selectOption("owners", opt)}
-                      className={`w-full text-left px-5 py-4 rounded-xl border-2 text-base font-medium transition-all flex items-center gap-3 ${
-                        form.owners === opt
-                          ? "border-accent bg-accent/10 text-foreground"
-                          : "border-border bg-background text-muted-foreground hover:border-accent/40 hover:bg-accent/5"
-                      }`}
-                    >
-                      <span className={`flex items-center justify-center w-6 h-6 rounded-full border-2 shrink-0 transition-all ${
-                        form.owners === opt
-                          ? "border-accent bg-accent text-accent-foreground"
-                          : "border-muted-foreground/30"
-                      }`}>
-                        {form.owners === opt && <Check size={14} />}
-                      </span>
-                      {opt}
-                    </motion.button>
-                  ))}
-                </div>
-                {error && <p className="text-sm text-destructive mt-2">{error}</p>}
-              </motion.div>
-            )}
+
+
 
             {/* STEP 3 - Name */}
             {step === 3 && (
