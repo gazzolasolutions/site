@@ -120,7 +120,7 @@ export const translations = {
         },
         {
           title: "Company Reinstatement",
-          bullets: ["Revive your inactive LLC", "Back in good standing", "Full state restoration"],
+          bullets: ["Revive your inactive company", "Back in good standing", "Full state restoration"],
           cta: "Reinstate My Company",
         },
         {
