@@ -170,7 +170,7 @@ export const translations = {
         },
         {
           title: "Reinstalación de Empresa",
-          bullets: ["Reactive su LLC inactiva", "Regrese a buen estado", "Restauración estatal completa"],
+          bullets: ["Reactive su compañía inactiva", "Regrese a buen estado", "Restauración estatal completa"],
           cta: "Reinstalar Mi Empresa",
         },
         {
