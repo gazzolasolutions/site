@@ -339,9 +339,9 @@ export const translations = {
   // Qualification Form
   form: {
     introTitle: {
-      en: "Let's Get Your Florida Business Started",
-      es: "Comencemos Con Su Empresa en Florida",
-      pt: "Vamos Começar Sua Empresa na Flórida",
+      en: "Tell Us About Your Business Goals",
+      es: "Cuéntanos Sobre los Objetivos de tu Negocio",
+      pt: "Conte-nos Sobre os Objetivos do seu Negócio",
     },
     introSubtitle: {
       en: "This takes less than 60 seconds.",

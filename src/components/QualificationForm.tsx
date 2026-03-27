@@ -90,11 +90,11 @@ export function QualificationForm({ open, onClose }: QualificationFormProps) {
       setError(t.errors.enterName[lang]);
       return;
     }
-    if (step === 4 && !form.phone.trim()) {
+    if (step === 3 && !form.phone.trim()) {
       setError(t.errors.enterPhone[lang]);
       return;
     }
-    if (step === 5) {
+    if (step === 4) {
       if (form.email.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) {
         setError(t.errors.validEmail[lang]);
         return;
@@ -104,7 +104,7 @@ export function QualificationForm({ open, onClose }: QualificationFormProps) {
     setError("");
     setDir(1);
 
-    if (step === 5) {
+    if (step === 4) {
       handleSubmitLead();
       return;
     }
