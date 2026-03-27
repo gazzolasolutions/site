@@ -269,7 +269,7 @@ export const translations = {
     },
     items: {
       en: [
-        { q: "Do I need an ITIN to open an LLC?", a: "Not necessarily. Many business owners only need an EIN to get started. We help you determine whether an ITIN applies to your situation." },
+        { q: "Do I need an ITIN to open a company?", a: "Not necessarily. Many business owners only need an EIN to get started. We help you determine whether an ITIN applies to your situation." },
         { q: "Do I need to send my passport to the IRS?", a: "No. As a Certified Acceptance Agent, we verify your documents, so your passport never leaves your hands." },
         { q: "Do you only work with Florida companies?", a: "Yes, we are currently focused on Florida business formations to provide the best possible service and expertise." },
         { q: "Do I need to live in Florida?", a: "No. Non-residents can open a Florida LLC from anywhere in the world." },
