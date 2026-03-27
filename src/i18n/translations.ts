@@ -201,7 +201,7 @@ export const translations = {
         {
           title: "Contabilidade Mensal Para Manter Tudo Organizado",
           bullets: ["Revisão mensal", "Relatórios financeiros", "Registros organizados"],
-          cta: "Ver Planos",
+          cta: "Vamos Falar de Números",
         },
         {
           title: "Preparação Profissional de Impostos",
