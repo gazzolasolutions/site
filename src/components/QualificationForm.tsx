@@ -247,7 +247,7 @@ export function QualificationForm({ open, onClose }: QualificationFormProps) {
 
       {/* Content area */}
       <div className="flex-1 flex items-center justify-center px-6 sm:px-8 overflow-hidden">
-        <div className="w-full max-w-md">
+        <div className="w-full max-w-md max-h-full flex flex-col">
           <AnimatePresence mode="wait" custom={dir}>
             {/* INTRO */}
             {step === 0 && (
@@ -287,12 +287,15 @@ export function QualificationForm({ open, onClose }: QualificationFormProps) {
                 animate="center"
                 exit="exit"
                 transition={{ duration: 0.3, ease: "easeOut" }}
+                className="flex flex-col max-h-[calc(100vh-140px)]"
               >
-                <h2 className="text-xl sm:text-2xl font-bold text-foreground mb-2">
-                  {t.step1Title[lang]}
-                </h2>
-                <p className="text-sm text-muted-foreground mb-6">{t.step1Subtitle[lang]}</p>
-                <div className="space-y-3">
+                <div className="shrink-0">
+                  <h2 className="text-xl sm:text-2xl font-bold text-foreground mb-2">
+                    {t.step1Title[lang]}
+                  </h2>
+                  <p className="text-sm text-muted-foreground mb-4">{t.step1Subtitle[lang]}</p>
+                </div>
+                <div className="space-y-3 overflow-y-auto flex-1 min-h-0 pb-2 pr-1">
                   {serviceOptions.map((opt, i) => {
                     const selected = form.services.includes(opt);
                     return (
@@ -326,16 +329,18 @@ export function QualificationForm({ open, onClose }: QualificationFormProps) {
                     );
                   })}
                 </div>
-                {error && <p className="text-sm text-destructive mt-2">{error}</p>}
-                <Button
-                  onClick={goNext}
-                  disabled={form.services.length === 0}
-                  className="mt-6 w-full rounded-xl text-base font-semibold bg-accent text-accent-foreground hover:bg-accent/90 gap-2"
-                  style={{ height: 52 }}
-                >
-                  {t.continue[lang]}
-                  <ArrowRight size={16} />
-                </Button>
+                <div className="shrink-0 pt-3">
+                  {error && <p className="text-sm text-destructive mb-2">{error}</p>}
+                  <Button
+                    onClick={goNext}
+                    disabled={form.services.length === 0}
+                    className="w-full rounded-xl text-base font-semibold bg-accent text-accent-foreground hover:bg-accent/90 gap-2"
+                    style={{ height: 52 }}
+                  >
+                    {t.continue[lang]}
+                    <ArrowRight size={16} />
+                  </Button>
+                </div>
               </motion.div>
             )}
 
