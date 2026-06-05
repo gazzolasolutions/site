@@ -10,6 +10,7 @@ export const translations = {
     callNow: { en: "Call Now", es: "Llamar", pt: "Ligar" },
     whatsapp: { en: "WhatsApp", es: "WhatsApp", pt: "WhatsApp" },
     getStarted: { en: "Get Started", es: "Comenzar", pt: "Começar" },
+    taxQuestionnaire: { en: "Tax Questionnaire", es: "Cuestionario Fiscal", pt: "Questionário Fiscal" },
   },
 
   // Hero

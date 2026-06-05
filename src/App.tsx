@@ -7,6 +7,7 @@ import Index from "./pages/Index";
 import Leads from "./pages/Leads";
 import Login from "./pages/Login";
 import NotFound from "./pages/NotFound";
+import TaxQuestionnaire from "./pages/TaxQuestionnaire";
 import ProtectedRoute from "./components/ProtectedRoute";
 
 const queryClient = new QueryClient();
@@ -21,6 +22,9 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/es/*" element={<Index />} />
           <Route path="/pt/*" element={<Index />} />
+          <Route path="/tax-questionnaire" element={<TaxQuestionnaire />} />
+          <Route path="/es/tax-questionnaire" element={<TaxQuestionnaire />} />
+          <Route path="/pt/tax-questionnaire" element={<TaxQuestionnaire />} />
           <Route path="/login" element={<Login />} />
           <Route path="/leads" element={<ProtectedRoute><Leads /></ProtectedRoute>} />
           <Route path="*" element={<NotFound />} />
