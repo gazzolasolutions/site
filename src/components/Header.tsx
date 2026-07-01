@@ -48,14 +48,6 @@ export function Header({ onGetStarted }: { onGetStarted?: () => void }) {
         {/* Desktop nav */}
         <nav className="hidden md:flex items-center gap-5">
 
-          <a
-            href={`${lang === "en" ? "" : "/" + lang}/tax-questionnaire`}
-            className="text-sm font-semibold text-primary hover:text-accent transition-colors"
-          >
-            {t.taxQuestionnaire[lang]}
-          </a>
-
-
           <a href={`tel:${PHONE_NUMBER}`} className="group">
             <Button size="sm" variant="outline" className="gap-1.5 border-accent/30 hover:border-accent hover:bg-accent/5 transition-all">
               <Phone size={14} className="text-accent" />

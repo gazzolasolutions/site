@@ -39,7 +39,6 @@ export function Footer() {
               <a href="#services" className="hover:text-primary-foreground transition-colors">{nav.services[lang]}</a>
               <a href="#itin" className="hover:text-primary-foreground transition-colors">{nav.itin[lang]}</a>
               <a href="#faq" className="hover:text-primary-foreground transition-colors">{nav.faq[lang]}</a>
-              <a href={`${lang === "en" ? "" : "/" + lang}/tax-questionnaire`} className="hover:text-primary-foreground transition-colors">{nav.taxQuestionnaire[lang]}</a>
             </nav>
           </div>
           <div>
