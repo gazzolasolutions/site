@@ -3,6 +3,7 @@ import { motion, useMotionValue, useSpring } from "framer-motion";
 import { Building2, FileText, Shield, BookOpen, Calculator, Landmark, FileCheck, XCircle, RefreshCw, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { AnimatedTitle } from "@/components/motion/AnimatedTitle";
+import { DrawUnderline } from "@/components/motion/DrawUnderline";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { translations } from "@/i18n/translations";
 
@@ -112,11 +113,12 @@ export function Services({ onGetStarted }: { onGetStarted?: () => void }) {
     <section className="relative py-16 md:py-24 overflow-hidden" id="services" style={{ background: "linear-gradient(180deg, hsl(180 55% 5%) 0%, hsl(180 60% 7%) 50%, hsl(180 55% 5%) 100%)" }}>
       <div className="aurora-blob animate-aurora w-[500px] h-[500px] top-20 -right-56 opacity-10" style={{ background: "#5DCAA5" }} />
       <div className="container relative">
-        <div className="text-center mb-14">
+        <div className="flex flex-col items-center text-center mb-14">
           <AnimatedTitle
             text={t.title[lang]}
-            className="font-display text-3xl md:text-4xl font-bold text-foreground mb-4 max-w-2xl mx-auto leading-tight"
+            className="font-display text-3xl md:text-4xl font-bold text-foreground max-w-2xl leading-tight"
           />
+          <DrawUnderline className="h-3 w-40 mt-2 mb-4" />
           <motion.p
             initial={{ opacity: 0, y: 12 }}
             whileInView={{ opacity: 1, y: 0 }}

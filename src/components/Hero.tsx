@@ -1,7 +1,10 @@
 import { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, useMotionValue, useSpring } from "framer-motion";
 import { CheckCircle2, ShieldCheck, Star, ArrowRight, Check, Rocket } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Marquee } from "@/components/motion/Marquee";
+import { DrawUnderline } from "@/components/motion/DrawUnderline";
+import { InteractiveAurora } from "@/components/motion/InteractiveAurora";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { translations } from "@/i18n/translations";
 import { useCalendlyPopup } from "@/hooks/useCalendlyPopup";
@@ -16,6 +19,16 @@ const container = {
 const item = {
   hidden: { opacity: 0, y: 24 },
   show: { opacity: 1, y: 0, transition: { duration: 0.55, ease: EASE } },
+};
+
+// Headline: each word rises from behind a mask, staggered
+const headline = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.07, delayChildren: 0.05 } },
+};
+const maskWord = {
+  hidden: { y: "115%" },
+  show: { y: 0, transition: { duration: 0.7, ease: EASE } },
 };
 
 export function Hero({ onGetStarted }: { onGetStarted?: () => void }) {
@@ -37,11 +50,26 @@ export function Hero({ onGetStarted }: { onGetStarted?: () => void }) {
   const cardY = useTransform(scrollYProgress, [0, 1], [0, 40]);
   const heroOpacity = useTransform(scrollYProgress, [0, 0.85], [1, 0.15]);
 
+  // Cursor-driven 3D parallax on the visual (desktop)
+  const tiltX = useSpring(useMotionValue(0), { stiffness: 150, damping: 18 });
+  const tiltY = useSpring(useMotionValue(0), { stiffness: 150, damping: 18 });
+  const onCardMouse = (e: React.MouseEvent) => {
+    const r = e.currentTarget.getBoundingClientRect();
+    tiltY.set(((e.clientX - r.left) / r.width - 0.5) * 10);
+    tiltX.set(-((e.clientY - r.top) / r.height - 0.5) * 10);
+  };
+  const resetCard = () => {
+    tiltX.set(0);
+    tiltY.set(0);
+  };
+
   return (
     <section ref={sectionRef} className="relative overflow-hidden noise" style={{ background: "var(--gradient-hero)" }}>
-      {/* Aurora blobs */}
+      {/* Aurora blobs (mobile / fallback) */}
       <motion.div className="aurora-blob animate-aurora w-[500px] h-[500px] -top-40 -right-32 opacity-30" style={{ background: "#1d9e75", y: blob1Y }} />
       <motion.div className="aurora-blob animate-aurora-slow w-[400px] h-[400px] top-1/2 -left-40 opacity-20" style={{ background: "#5DCAA5", y: blob2Y }} />
+      {/* Interactive WebGL aurora (desktop) — draws over the fallback when supported */}
+      <InteractiveAurora />
       <div className="absolute inset-0 bg-grid" />
 
       <div className="container relative py-14 md:py-24">
@@ -58,11 +86,38 @@ export function Hero({ onGetStarted }: { onGetStarted?: () => void }) {
             </motion.div>
 
             <motion.h1
-              variants={item}
-              className="font-display font-bold text-white leading-[1.08] mb-5"
+              variants={headline}
+              className="font-display font-bold text-white leading-[1.08] mb-6"
               style={{ fontSize: "clamp(2.2rem, 3.4vw + 1rem, 3.5rem)" }}
+              aria-label={t.title[lang]}
             >
-              {t.title[lang]}
+              {(() => {
+                const words = t.title[lang].split(" ");
+                const head = words.slice(0, -2);
+                const tail = words.slice(-2).join(" ");
+                return (
+                  <>
+                    {head.map((word, i) => (
+                      <span key={i} className="inline-block overflow-hidden align-bottom pr-[0.22em]" aria-hidden>
+                        <motion.span variants={maskWord} className="inline-block">
+                          {word}
+                        </motion.span>
+                      </span>
+                    ))}
+                    {/* Last two words stay together with the underline tracking them */}
+                    <span className="relative inline-block align-bottom whitespace-nowrap" aria-hidden>
+                      <span className="inline-block overflow-hidden align-bottom">
+                        <motion.span variants={maskWord} className="inline-block">
+                          {tail}
+                        </motion.span>
+                      </span>
+                      <span className="absolute left-0 right-0 top-full mt-0.5">
+                        <DrawUnderline className="h-2.5 w-full" />
+                      </span>
+                    </span>
+                  </>
+                );
+              })()}
             </motion.h1>
 
             <motion.p variants={item} className="text-base md:text-lg text-white/75 mb-7 leading-relaxed max-w-lg">
@@ -112,12 +167,18 @@ export function Hero({ onGetStarted }: { onGetStarted?: () => void }) {
           </motion.div>
 
           {/* Visual: formation progress card */}
-          <motion.div className="relative flex justify-center md:justify-end px-6 md:px-4" style={{ y: cardY }}>
+          <motion.div
+            className="relative flex justify-center md:justify-end px-6 md:px-4"
+            style={{ y: cardY, perspective: 1000 }}
+            onMouseMove={onCardMouse}
+            onMouseLeave={resetCard}
+          >
             <motion.div
               initial={{ opacity: 0, y: 28, scale: 0.96 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               transition={{ duration: 0.7, delay: 0.3, ease: EASE }}
               className="relative w-full max-w-[400px]"
+              style={{ rotateX: tiltX, rotateY: tiltY, transformStyle: "preserve-3d" }}
             >
               {/* Glow */}
               <div className="absolute -inset-10 rounded-full opacity-20 blur-3xl pointer-events-none" style={{ background: "var(--gradient-cta)" }} />
@@ -172,16 +233,9 @@ export function Hero({ onGetStarted }: { onGetStarted?: () => void }) {
         </div>
       </div>
 
-      {/* Marquee trust strip */}
-      <div className="relative border-t border-white/10 py-3.5 overflow-hidden">
-        <div className="marquee-track">
-          {[...marqueeItems, ...marqueeItems].map((label, i) => (
-            <span key={i} className="flex items-center gap-2 px-6 text-xs font-semibold uppercase tracking-widest text-white/50 whitespace-nowrap">
-              <span className="w-1.5 h-1.5 rounded-full bg-accent shrink-0" />
-              {label}
-            </span>
-          ))}
-        </div>
+      {/* Marquee trust strip — speeds up with scroll */}
+      <div className="relative border-t border-white/10 py-3.5">
+        <Marquee items={marqueeItems} />
       </div>
     </section>
   );

@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowRight, Clock } from "lucide-react";
 import { AnimatedTitle } from "@/components/motion/AnimatedTitle";
+import { DrawUnderline } from "@/components/motion/DrawUnderline";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { translations } from "@/i18n/translations";
 import { ARTICLES } from "@/data/articles";
@@ -15,11 +16,12 @@ export function ResourcesSection() {
     <section className="relative py-16 md:py-24 bg-background overflow-hidden" id="resources">
       <div className="aurora-blob animate-aurora-slow w-[400px] h-[400px] -top-40 -left-48 opacity-10" style={{ background: "#1a7a6e" }} />
       <div className="container relative">
-        <div className="text-center mb-12">
+        <div className="flex flex-col items-center text-center mb-12">
           <AnimatedTitle
             text={t.title[lang]}
-            className="font-display text-3xl md:text-4xl font-bold text-foreground mb-4"
+            className="font-display text-3xl md:text-4xl font-bold text-foreground"
           />
+          <DrawUnderline className="h-3 w-28 mt-2 mb-4" />
           <motion.p
             initial={{ opacity: 0, y: 12 }}
             whileInView={{ opacity: 1, y: 0 }}

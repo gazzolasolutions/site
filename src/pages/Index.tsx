@@ -11,6 +11,7 @@ import { StickyMobileCTA } from "@/components/StickyMobileCTA";
 import { QualificationForm } from "@/components/QualificationForm";
 import { SmoothScroll } from "@/components/motion/SmoothScroll";
 import { ScrollProgress } from "@/components/motion/ScrollProgress";
+import { Preloader } from "@/components/motion/Preloader";
 import { Seo } from "@/components/Seo";
 import { track } from "@/lib/analytics";
 
@@ -26,6 +27,7 @@ const IndexContent = () => {
   return (
     <>
       <div className="min-h-screen bg-background pb-16 md:pb-0">
+        <Preloader />
         <Seo withFaqSchema />
         <SmoothScroll />
         <ScrollProgress />
