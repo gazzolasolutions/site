@@ -11,14 +11,35 @@ export const translations = {
     whatsapp: { en: "WhatsApp", es: "WhatsApp", pt: "WhatsApp" },
     getStarted: { en: "Get Started", es: "Comenzar", pt: "Começar" },
     taxQuestionnaire: { en: "Tax Questionnaire", es: "Cuestionario Fiscal", pt: "Questionário Fiscal" },
+    resources: { en: "Resources", es: "Recursos", pt: "Recursos" },
+    privacy: { en: "Privacy Policy", es: "Política de Privacidad", pt: "Política de Privacidade" },
+    terms: { en: "Terms of Service", es: "Términos de Servicio", pt: "Termos de Serviço" },
+  },
+
+  // Resources
+  resources: {
+    title: { en: "Resources", es: "Recursos", pt: "Recursos" },
+    subtitle: {
+      en: "Practical guides for non-residents starting a US business.",
+      es: "Guías prácticas para no residentes que abren un negocio en EE.UU.",
+      pt: "Guias práticos para não residentes que abrem um negócio nos EUA.",
+    },
+    minRead: { en: "min read", es: "min de lectura", pt: "min de leitura" },
+    backToResources: { en: "All resources", es: "Todos los recursos", pt: "Todos os recursos" },
+    readArticle: { en: "Read article", es: "Leer artículo", pt: "Ler artigo" },
+    ctaTitle: {
+      en: "Ready to put this into practice?",
+      es: "¿Listo para ponerlo en práctica?",
+      pt: "Pronto para colocar em prática?",
+    },
   },
 
   // Hero
   hero: {
     title: {
-      en: "Start and Manage Your Florida Company in 3 Simple Steps",
-      es: "Inicie y Administre Su Empresa en Florida en 3 Simples Pasos",
-      pt: "Abra e Gerencie Sua Empresa na Flórida em 3 Passos Simples",
+      en: "Start Your Florida Company in 3 Easy Steps",
+      es: "Abra Su Empresa en Florida en 3 Pasos Fáciles",
+      pt: "Abra Sua Empresa na Flórida em 3 Passos Fáceis",
     },
     subtitle: {
       en: "Whether you're just starting or already operating, we have a solution for you.",
@@ -26,9 +47,9 @@ export const translations = {
       pt: "Seja você iniciante ou já em operação, temos uma solução para você.",
     },
     bullets: {
-      en: ["No SSN required", "ITIN without mailing your passport", "Multilingual support", "Step by step guidance"],
-      es: ["Sin necesidad de SSN", "ITIN sin enviar su pasaporte", "Soporte multilingüe", "Orientación paso a paso"],
-      pt: ["Sem necessidade de SSN", "ITIN sem enviar seu passaporte", "Suporte multilíngue", "Orientação passo a passo"],
+      en: ["No Social Security Number required", "ITIN without mailing your passport", "Multilingual support", "Step by step guidance"],
+      es: ["Sin necesidad de Número de Seguro Social", "ITIN sin enviar su pasaporte", "Soporte multilingüe", "Orientación paso a paso"],
+      pt: ["Sem necessidade de Número de Seguro Social", "ITIN sem enviar seu passaporte", "Suporte multilíngue", "Orientação passo a passo"],
     },
     cta: { en: "Get Started Now", es: "Comenzar Ahora", pt: "Começar Agora" },
     consultation: { en: "Book a Free Consultation", es: "Agendar una Consulta Gratuita", pt: "Agendar uma Consulta Gratuita" },
@@ -89,7 +110,7 @@ export const translations = {
         },
         {
           title: "Get Your EIN Without the Headache",
-          bullets: ["Every business typically needs an EIN", "EIN is separate from ITIN", "No SSN required", "IRS filing handled for you"],
+          bullets: ["Every business typically needs an EIN", "EIN is separate from ITIN", "No Social Security Number required", "IRS filing handled for you"],
           cta: "Apply for EIN",
         },
         {
@@ -139,7 +160,7 @@ export const translations = {
         },
         {
           title: "Obtenga Su EIN Sin Complicaciones",
-          bullets: ["Todo negocio generalmente necesita un EIN", "El EIN es diferente del ITIN", "Sin necesidad de SSN", "Trámite ante el IRS incluido"],
+          bullets: ["Todo negocio generalmente necesita un EIN", "El EIN es diferente del ITIN", "Sin necesidad de Número de Seguro Social", "Trámite ante el IRS incluido"],
           cta: "Solicitar EIN",
         },
         {
@@ -189,7 +210,7 @@ export const translations = {
         },
         {
           title: "Obtenha Seu EIN Sem Dor de Cabeça",
-          bullets: ["Todo negócio geralmente precisa de um EIN", "O EIN é diferente do ITIN", "Sem necessidade de SSN", "Processo junto ao IRS incluído"],
+          bullets: ["Todo negócio geralmente precisa de um EIN", "O EIN é diferente do ITIN", "Sem necessidade de Número de Seguro Social", "Processo junto ao IRS incluído"],
           cta: "Solicitar EIN",
         },
         {
@@ -249,14 +270,26 @@ export const translations = {
       en: [
         { text: "They made the entire ITIN process painless. I kept my passport and got everything done in weeks!", name: "Maria S.", role: "E-commerce Founder" },
         { text: "Professional, fast, and they speak my language. Best decision I made for my US business.", name: "Carlos R.", role: "Tech Entrepreneur" },
+        { text: "I opened my Florida LLC from Brazil without leaving home. Every step was explained in my language.", name: "Ana P.", role: "Business Consultant" },
+        { text: "No Social Security Number and I thought it was impossible. They got my EIN and my company running in no time.", name: "Luis M.", role: "Restaurant Owner" },
+        { text: "They handle my bookkeeping and taxes so I can focus on clients. Clear answers every single time.", name: "Fernanda T.", role: "Freelance Designer" },
+        { text: "Annual report filed on time, compliance handled, zero stress. Trustworthy and always responsive.", name: "Diego V.", role: "E-commerce Seller" },
       ],
       es: [
         { text: "¡Hicieron todo el proceso del ITIN sin complicaciones! Mantuve mi pasaporte y todo se resolvió en semanas.", name: "Maria S.", role: "Fundadora de E-commerce" },
         { text: "Profesionales, rápidos y hablan mi idioma. La mejor decisión que tomé para mi negocio en EE.UU.", name: "Carlos R.", role: "Emprendedor Tech" },
+        { text: "Abrí mi LLC de Florida desde Brasil sin salir de casa. Cada paso fue explicado en mi idioma.", name: "Ana P.", role: "Consultora de Negocios" },
+        { text: "Sin Número de Seguro Social pensé que era imposible. Consiguieron mi EIN y mi empresa funcionando en poco tiempo.", name: "Luis M.", role: "Dueño de Restaurante" },
+        { text: "Manejan mi contabilidad e impuestos para que yo me enfoque en mis clientes. Respuestas claras siempre.", name: "Fernanda T.", role: "Diseñadora Freelance" },
+        { text: "Informe anual presentado a tiempo, cumplimiento resuelto, cero estrés. Confiables y siempre atentos.", name: "Diego V.", role: "Vendedor de E-commerce" },
       ],
       pt: [
         { text: "Fizeram todo o processo do ITIN sem complicação! Mantive meu passaporte e tudo foi resolvido em semanas.", name: "Maria S.", role: "Fundadora de E-commerce" },
         { text: "Profissionais, rápidos e falam meu idioma. Melhor decisão que tomei para meu negócio nos EUA.", name: "Carlos R.", role: "Empreendedor Tech" },
+        { text: "Abri minha LLC da Flórida direto do Brasil sem sair de casa. Cada etapa foi explicada no meu idioma.", name: "Ana P.", role: "Consultora de Negócios" },
+        { text: "Sem Número de Seguro Social eu achava impossível. Conseguiram meu EIN e minha empresa operando em pouco tempo.", name: "Luis M.", role: "Dono de Restaurante" },
+        { text: "Cuidam da minha contabilidade e impostos para eu focar nos clientes. Respostas claras todas as vezes.", name: "Fernanda T.", role: "Designer Freelancer" },
+        { text: "Relatório anual entregue no prazo, conformidade em dia, zero estresse. Confiáveis e sempre disponíveis.", name: "Diego V.", role: "Vendedor de E-commerce" },
       ],
     },
   },
@@ -275,7 +308,7 @@ export const translations = {
         { q: "Do you only work with Florida companies?", a: "Yes, we are currently focused on Florida business formations to provide the best possible service and expertise." },
         { q: "Do I need to live in Florida?", a: "No. Non-residents can open a Florida company from anywhere in the world." },
         { q: "How long does it take?", a: "Florida company formation takes 1–2 weeks. ITIN processing is typically 8–12 weeks after submission to the IRS." },
-        { q: "Do I need an SSN?", a: "No. We help non-residents who don't have an SSN get their EIN and, if needed, their ITIN." },
+        { q: "Do I need a Social Security Number (SSN)?", a: "No. We help non-residents who don't have a Social Security Number get their EIN and, if needed, their ITIN." },
         { q: "What languages do you support?", a: "We offer full support in English, Portuguese, and Spanish to ensure clear communication throughout the process." },
       ],
       es: [
@@ -284,7 +317,7 @@ export const translations = {
         { q: "¿Solo trabajan con empresas de Florida?", a: "Sí, actualmente estamos enfocados en formaciones de empresas en Florida para brindar el mejor servicio y experiencia posible." },
         { q: "¿Necesito vivir en Florida?", a: "No. Los no residentes pueden abrir una compañía en Florida desde cualquier parte del mundo." },
         { q: "¿Cuánto tiempo tarda?", a: "La formación de una compañía en Florida toma 1–2 semanas. El procesamiento del ITIN generalmente toma 8–12 semanas después de la presentación al IRS." },
-        { q: "¿Necesito un SSN?", a: "No. Ayudamos a no residentes que no tienen SSN a obtener su EIN y, si es necesario, su ITIN." },
+        { q: "¿Necesito un Número de Seguro Social (SSN)?", a: "No. Ayudamos a no residentes que no tienen Número de Seguro Social a obtener su EIN y, si es necesario, su ITIN." },
         { q: "¿Qué idiomas soportan?", a: "Ofrecemos soporte completo en inglés, portugués y español para asegurar una comunicación clara durante todo el proceso." },
       ],
       pt: [
@@ -293,7 +326,7 @@ export const translations = {
         { q: "Vocês só trabalham com empresas da Flórida?", a: "Sim, atualmente estamos focados em formações de empresas na Flórida para oferecer o melhor serviço e expertise possível." },
         { q: "Preciso morar na Flórida?", a: "Não. Não residentes podem abrir uma empresa na Flórida de qualquer lugar do mundo." },
         { q: "Quanto tempo demora?", a: "A formação de uma empresa na Flórida leva 1–2 semanas. O processamento do ITIN geralmente leva 8–12 semanas após a submissão ao IRS." },
-        { q: "Preciso de um SSN?", a: "Não. Ajudamos não residentes que não têm SSN a obter seu EIN e, se necessário, seu ITIN." },
+        { q: "Preciso de um Número de Seguro Social (SSN)?", a: "Não. Ajudamos não residentes que não têm Número de Seguro Social a obter seu EIN e, se necessário, seu ITIN." },
         { q: "Quais idiomas vocês oferecem suporte?", a: "Oferecemos suporte completo em inglês, português e espanhol para garantir uma comunicação clara durante todo o processo." },
       ],
     },

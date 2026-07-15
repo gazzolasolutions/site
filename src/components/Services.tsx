@@ -1,8 +1,8 @@
-import { motion } from "framer-motion";
-import { Building2, FileText, Shield, BookOpen, Calculator, Landmark, FileCheck, XCircle, RefreshCw } from "lucide-react";
+import { useRef } from "react";
+import { motion, useMotionValue, useSpring } from "framer-motion";
+import { Building2, FileText, Shield, BookOpen, Calculator, Landmark, FileCheck, XCircle, RefreshCw, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { Star } from "lucide-react";
+import { AnimatedTitle } from "@/components/motion/AnimatedTitle";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { translations } from "@/i18n/translations";
 
@@ -14,55 +14,88 @@ interface ServiceCardProps {
   bullets: string[];
   cta: string;
   featured?: boolean;
-  badge?: string;
   subtitle?: string;
   note?: string;
+  index: number;
   onCTA?: () => void;
 }
 
-function ServiceCard({ icon: Icon, title, bullets, cta, featured, badge, subtitle, note, onCTA }: ServiceCardProps) {
+function ServiceCard({ icon: Icon, title, bullets, cta, featured, subtitle, note, index, onCTA }: ServiceCardProps) {
+  const ref = useRef<HTMLDivElement>(null);
+
+  // 3D tilt following the cursor
+  const rotateX = useMotionValue(0);
+  const rotateY = useMotionValue(0);
+  const springX = useSpring(rotateX, { stiffness: 180, damping: 20 });
+  const springY = useSpring(rotateY, { stiffness: 180, damping: 20 });
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    const rect = ref.current?.getBoundingClientRect();
+    if (!rect) return;
+    const px = (e.clientX - rect.left) / rect.width - 0.5;
+    const py = (e.clientY - rect.top) / rect.height - 0.5;
+    rotateY.set(px * 7);
+    rotateX.set(-py * 7);
+  };
+
+  const handleMouseLeave = () => {
+    rotateX.set(0);
+    rotateY.set(0);
+  };
+
   return (
     <motion.div
-      initial={{ opacity: 0, y: 16 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      className={`rounded-xl p-6 transition-shadow flex flex-col ${
+      ref={ref}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      initial={{ opacity: 0, y: 48, scale: 0.95 }}
+      whileInView={{ opacity: 1, y: 0, scale: 1 }}
+      viewport={{ once: true, margin: "-40px" }}
+      transition={{ delay: (index % 3) * 0.09, type: "spring", stiffness: 90, damping: 16 }}
+      whileHover={{ y: -8 }}
+      style={{ rotateX: springX, rotateY: springY, transformPerspective: 900 }}
+      className={`group relative rounded-3xl p-6 flex flex-col will-change-transform ${
         featured
-          ? "bg-card shadow-card-hover border-2 border-accent/30 relative"
-          : "bg-card shadow-card border border-border"
+          ? "border border-accent/40 shadow-[0_0_50px_hsl(160_51%_58%/0.12)]"
+          : "glass border-white/5 hover:border-accent/25 transition-colors duration-300"
       }`}
-      style={featured ? { background: "var(--gradient-featured)" } : undefined}
     >
-      {badge && (
-        <Badge className="absolute -top-3 left-6 bg-accent text-accent-foreground font-semibold px-3">
-          <Star className="h-3 w-3 mr-1" /> {badge}
-        </Badge>
+      {featured && <div className="absolute inset-0 rounded-3xl -z-10" style={{ background: "var(--gradient-featured)" }} />}
+      {featured && (
+        <span className="absolute -top-3 left-6 max-w-[calc(100%-3rem)] truncate inline-flex items-center gap-1 rounded-full px-3 py-1 text-[11px] font-bold text-accent-foreground" style={{ background: "var(--gradient-cta)" }}>
+          <Star className="h-3 w-3" /> {subtitle}
+        </span>
       )}
-      <div className={`w-10 h-10 rounded-lg flex items-center justify-center mb-4 ${featured ? "bg-accent/15" : "bg-muted"}`}>
-        <Icon className={`h-5 w-5 ${featured ? "text-accent" : "text-foreground"}`} />
+      <div
+        className={`w-11 h-11 rounded-xl flex items-center justify-center mb-4 transition-transform duration-300 group-hover:scale-110 ${
+          featured ? "" : "bg-white/5 ring-1 ring-white/10"
+        }`}
+        style={featured ? { background: "var(--gradient-cta)" } : undefined}
+      >
+        <Icon className={`h-5 w-5 ${featured ? "text-accent-foreground" : "text-accent"}`} />
       </div>
-      <h3 className={`font-bold mb-1 ${featured ? "text-lg" : "text-base"} text-foreground`}>{title}</h3>
-      {subtitle && <p className="text-xs text-accent font-medium mb-3">{subtitle}</p>}
-      <ul className="space-y-2 mb-4 flex-1">
+      <h3 className="font-display font-bold text-base md:text-lg text-foreground mb-3 leading-snug">{title}</h3>
+      <ul className="space-y-2 mb-5 flex-1">
         {bullets.map((b) => (
-          <li key={b} className="flex items-start gap-2 text-sm text-muted-foreground">
-            <span className="text-accent mt-0.5">✓</span>
+          <li key={b} className="flex items-start gap-2 text-sm text-muted-foreground leading-relaxed">
+            <span className="text-accent mt-0.5 shrink-0">✓</span>
             {b}
           </li>
         ))}
       </ul>
       {note && (
-        <p className="text-xs text-muted-foreground bg-muted/60 rounded-lg px-3 py-2 mb-4 leading-relaxed">
+        <p className="text-xs text-muted-foreground/80 bg-white/[0.03] ring-1 ring-white/5 rounded-xl px-3.5 py-2.5 mb-5 leading-relaxed">
           {note}
         </p>
       )}
       <Button
         onClick={onCTA}
-        className={`w-full rounded-xl font-semibold ${
+        className={`w-full rounded-full font-bold h-11 transition-all ${
           featured
-            ? "bg-accent text-accent-foreground hover:bg-accent/90"
-            : "bg-primary text-primary-foreground hover:bg-primary/90"
+            ? "text-accent-foreground border-0 hover:scale-[1.02] hover:shadow-[var(--shadow-glow)]"
+            : "bg-white/5 text-foreground ring-1 ring-white/10 hover:bg-accent hover:text-accent-foreground hover:ring-accent"
         }`}
+        style={featured ? { background: "var(--gradient-cta)" } : undefined}
       >
         {cta}
       </Button>
@@ -76,24 +109,36 @@ export function Services({ onGetStarted }: { onGetStarted?: () => void }) {
   const cards = t.cards[lang];
 
   return (
-    <section className="py-14 md:py-20 bg-muted/50" id="services">
-      <div className="container">
-        <h2 className="text-2xl md:text-3xl font-bold text-center text-foreground mb-3">
-          {t.title[lang]}
-        </h2>
-        <p className="text-center text-muted-foreground mb-10 max-w-md mx-auto">
-          {t.subtitle[lang]}
-        </p>
+    <section className="relative py-16 md:py-24 overflow-hidden" id="services" style={{ background: "linear-gradient(180deg, hsl(180 55% 5%) 0%, hsl(180 60% 7%) 50%, hsl(180 55% 5%) 100%)" }}>
+      <div className="aurora-blob animate-aurora w-[500px] h-[500px] top-20 -right-56 opacity-10" style={{ background: "#5DCAA5" }} />
+      <div className="container relative">
+        <div className="text-center mb-14">
+          <AnimatedTitle
+            text={t.title[lang]}
+            className="font-display text-3xl md:text-4xl font-bold text-foreground mb-4 max-w-2xl mx-auto leading-tight"
+          />
+          <motion.p
+            initial={{ opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.3, duration: 0.5 }}
+            className="text-muted-foreground max-w-md mx-auto"
+          >
+            {t.subtitle[lang]}
+          </motion.p>
+        </div>
 
-        <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6 max-w-5xl mx-auto">
           {cards.map((card, i) => (
             <ServiceCard
               key={i}
+              index={i}
               icon={serviceIcons[i]}
               title={card.title}
               bullets={card.bullets}
               note={"note" in card ? (card as any).note : undefined}
               subtitle={"subtitle" in card ? (card as any).subtitle : undefined}
+              featured={"subtitle" in card}
               cta={card.cta}
               onCTA={onGetStarted}
             />

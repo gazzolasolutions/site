@@ -1,4 +1,5 @@
 import { Linkedin, Instagram } from "lucide-react";
+import logo from "@/assets/logo.png";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { translations } from "@/i18n/translations";
 
@@ -22,31 +23,39 @@ export function Footer() {
   const nav = translations.nav;
 
   return (
-    <footer className="bg-primary text-primary-foreground py-10" id="contact">
+    <footer className="relative py-12 md:py-14" id="contact" style={{ background: "hsl(180 60% 4%)" }}>
+      {/* Gradient hairline */}
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-accent/40 to-transparent" />
+
       <div className="container">
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-3 gap-10 md:gap-8">
           <div>
-            <div className="text-lg font-bold mb-2">
-              Gazzola<span className="text-accent"> Solutions</span>
+            <div className="flex items-center gap-2.5 mb-3">
+              <img src={logo} alt="Gazzola Solutions" className="h-8 w-8" />
+              <span className="font-display text-lg font-bold text-foreground">
+                Gazzola<span className="text-gradient"> Solutions</span>
+              </span>
             </div>
-            <p className="text-sm text-primary-foreground/70 leading-relaxed">
+            <p className="text-sm text-muted-foreground leading-relaxed max-w-xs">
               {t.tagline[lang]}
             </p>
           </div>
           <div>
-            <h4 className="font-semibold text-sm mb-3">{t.quickLinks[lang]}</h4>
-            <nav className="flex flex-col gap-2 text-sm text-primary-foreground/70">
-              <a href="#services" className="hover:text-primary-foreground transition-colors">{nav.services[lang]}</a>
-              <a href="#itin" className="hover:text-primary-foreground transition-colors">{nav.itin[lang]}</a>
-              <a href="#faq" className="hover:text-primary-foreground transition-colors">{nav.faq[lang]}</a>
+            <h4 className="font-display font-bold text-sm mb-4 text-foreground">{t.quickLinks[lang]}</h4>
+            <nav className="flex flex-col gap-2.5 text-sm text-muted-foreground">
+              <a href={`${lang === "en" ? "" : "/" + lang}/#services`} className="hover:text-accent transition-colors w-fit">{nav.services[lang]}</a>
+              <a href={`${lang === "en" ? "" : "/" + lang}/#faq`} className="hover:text-accent transition-colors w-fit">{nav.faq[lang]}</a>
+              <a href={`${lang === "en" ? "" : "/" + lang}/resources`} className="hover:text-accent transition-colors w-fit">{nav.resources[lang]}</a>
+              <a href="/privacy" className="hover:text-accent transition-colors w-fit">{nav.privacy[lang]}</a>
+              <a href="/terms" className="hover:text-accent transition-colors w-fit">{nav.terms[lang]}</a>
             </nav>
           </div>
           <div>
-            <h4 className="font-semibold text-sm mb-3">{t.contactTitle[lang]}</h4>
-            <a href="mailto:gazzolasolutions@gmail.com" className="text-sm text-primary-foreground/70 hover:text-primary-foreground transition-colors">
+            <h4 className="font-display font-bold text-sm mb-4 text-foreground">{t.contactTitle[lang]}</h4>
+            <a href="mailto:gazzolasolutions@gmail.com" className="text-sm text-muted-foreground hover:text-accent transition-colors">
               gazzolasolutions@gmail.com
             </a>
-            <div className="flex gap-3 mt-4">
+            <div className="flex gap-3 mt-5">
               {SOCIAL_LINKS.map(({ icon: Icon, href, label }) => (
                 <a
                   key={label}
@@ -54,15 +63,15 @@ export function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={label}
-                  className="w-9 h-9 rounded-full bg-primary-foreground/10 hover:bg-primary-foreground/20 flex items-center justify-center transition-colors"
+                  className="w-10 h-10 rounded-full glass flex items-center justify-center transition-all hover:border-accent/40 hover:scale-110"
                 >
-                  <Icon size={18} className="text-primary-foreground/80" />
+                  <Icon size={17} className="text-accent" />
                 </a>
               ))}
             </div>
           </div>
         </div>
-        <div className="border-t border-primary-foreground/10 mt-8 pt-6 text-xs text-primary-foreground/50 text-center">
+        <div className="border-t border-white/5 mt-10 pt-6 text-xs text-muted-foreground/60 text-center">
           © {new Date().getFullYear()} {t.copyright[lang]}
         </div>
       </div>

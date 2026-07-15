@@ -1,4 +1,5 @@
 import { useEffect, useCallback } from "react";
+import { track } from "@/lib/analytics";
 
 declare global {
   interface Window {
@@ -31,6 +32,7 @@ export function useCalendlyPopup() {
   }, []);
 
   const openCalendly = useCallback(() => {
+    track("calendly_open");
     if (window.Calendly) {
       window.Calendly.initPopupWidget({
         url: "https://calendly.com/gazzolasolutions/30min?hide_event_type_details=1&hide_gdpr_banner=1",

@@ -7,28 +7,9 @@ import { supabase } from "@/integrations/supabase/client";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { translations } from "@/i18n/translations";
 import { useCalendlyPopup } from "@/hooks/useCalendlyPopup";
-
-const COUNTRY_CODES = [
-  { code: "+1", flag: "🇺🇸", label: "US" },
-  { code: "+54", flag: "🇦🇷", label: "AR" },
-  { code: "+61", flag: "🇦🇺", label: "AU" },
-  { code: "+55", flag: "🇧🇷", label: "BR" },
-  { code: "+1", flag: "🇨🇦", label: "CA" },
-  { code: "+56", flag: "🇨🇱", label: "CL" },
-  { code: "+86", flag: "🇨🇳", label: "CN" },
-  { code: "+57", flag: "🇨🇴", label: "CO" },
-  { code: "+49", flag: "🇩🇪", label: "DE" },
-  { code: "+34", flag: "🇪🇸", label: "ES" },
-  { code: "+33", flag: "🇫🇷", label: "FR" },
-  { code: "+91", flag: "🇮🇳", label: "IN" },
-  { code: "+39", flag: "🇮🇹", label: "IT" },
-  { code: "+81", flag: "🇯🇵", label: "JP" },
-  { code: "+52", flag: "🇲🇽", label: "MX" },
-  { code: "+51", flag: "🇵🇪", label: "PE" },
-  { code: "+351", flag: "🇵🇹", label: "PT" },
-  { code: "+44", flag: "🇬🇧", label: "UK" },
-  { code: "+58", flag: "🇻🇪", label: "VE" },
-];
+import { COUNTRY_CODES, DEFAULT_COUNTRY } from "@/data/countryCodes";
+import { Fireworks } from "@/components/motion/Fireworks";
+import { track } from "@/lib/analytics";
 
 interface QualificationFormProps {
   open: boolean;
@@ -54,7 +35,7 @@ export function QualificationForm({ open, onClose }: QualificationFormProps) {
     fullName: "",
     email: "",
     phone: "",
-    countryCode: COUNTRY_CODES[0],
+    countryCode: DEFAULT_COUNTRY,
     services: [] as string[],
     owners: "",
   });
@@ -162,6 +143,7 @@ export function QualificationForm({ open, onClose }: QualificationFormProps) {
     } catch {}
 
     setSubmitting(false);
+    track("form_submit", { services: form.services.join(", ") });
     setDir(1);
     setStep(5);
   };
@@ -204,6 +186,7 @@ export function QualificationForm({ open, onClose }: QualificationFormProps) {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       className="fixed inset-0 z-50 bg-card flex flex-col"
+      data-lenis-prevent
     >
       {/* Top bar */}
       <div className="flex items-center justify-between px-4 sm:px-6 pt-4 pb-2">
@@ -244,6 +227,9 @@ export function QualificationForm({ open, onClose }: QualificationFormProps) {
           </div>
         </div>
       )}
+
+      {/* Celebration */}
+      {step === 5 && <Fireworks />}
 
       {/* Content area */}
       <div className="flex-1 flex items-center justify-center px-6 sm:px-8 overflow-hidden">
@@ -410,7 +396,10 @@ export function QualificationForm({ open, onClose }: QualificationFormProps) {
                       <ChevronDown size={14} className="text-muted-foreground" />
                     </button>
                     {countryOpen && (
-                      <div className="absolute top-full left-0 mt-1 bg-card border border-border rounded-xl shadow-lg z-50 max-h-48 overflow-y-auto w-48">
+                      <div className="fixed inset-0 z-40" onClick={() => setCountryOpen(false)} />
+                    )}
+                    {countryOpen && (
+                      <div className="absolute top-full left-0 mt-1 bg-card border border-border rounded-xl shadow-lg z-50 max-h-64 overflow-y-auto w-48" data-lenis-prevent>
                         {COUNTRY_CODES.map((cc, i) => (
                           <button
                             key={`${cc.label}-${i}`}
@@ -432,7 +421,7 @@ export function QualificationForm({ open, onClose }: QualificationFormProps) {
                   <Input
                     ref={inputRef}
                     type="tel"
-                    placeholder="(786) 000-0000"
+                    placeholder="(123) 456-7890"
                     value={form.phone}
                     onChange={(e) => update("phone", e.target.value)}
                     onKeyDown={handleKeyDown}
@@ -505,9 +494,15 @@ export function QualificationForm({ open, onClose }: QualificationFormProps) {
                 transition={{ duration: 0.3, ease: "easeOut" }}
                 className="text-center"
               >
-                <div className="w-16 h-16 rounded-full bg-accent/15 flex items-center justify-center mx-auto mb-6">
-                  <Check className="h-8 w-8 text-accent" />
-                </div>
+                <motion.div
+                  initial={{ scale: 0, rotate: -30 }}
+                  animate={{ scale: 1, rotate: 0 }}
+                  transition={{ type: "spring", stiffness: 260, damping: 14, delay: 0.15 }}
+                  className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 shadow-[var(--shadow-glow)]"
+                  style={{ background: "var(--gradient-cta)" }}
+                >
+                  <Check className="h-8 w-8 text-accent-foreground" strokeWidth={3} />
+                </motion.div>
                 <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-3">
                   {t.finalTitle[lang]}
                 </h2>
