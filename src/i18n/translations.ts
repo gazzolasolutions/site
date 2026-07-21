@@ -351,9 +351,9 @@ export const translations = {
   // Footer
   footer: {
     tagline: {
-      en: "Helping non-residents and immigrants start their US businesses with confidence.",
-      es: "Ayudando a no residentes e inmigrantes a iniciar sus negocios en EE.UU. con confianza.",
-      pt: "Ajudando não residentes e imigrantes a abrir seus negócios nos EUA com confiança.",
+      en: "Helping entrepreneurs everywhere start and grow their Florida businesses with confidence.",
+      es: "Ayudando a emprendedores de todo el mundo a iniciar y hacer crecer sus empresas en Florida con confianza.",
+      pt: "Ajudando empreendedores de todo o mundo a abrir e expandir suas empresas na Flórida com confiança.",
     },
     quickLinks: { en: "Quick Links", es: "Enlaces Rápidos", pt: "Links Rápidos" },
     contactTitle: { en: "Contact", es: "Contacto", pt: "Contato" },

@@ -52,9 +52,14 @@ export function Footer() {
           </div>
           <div>
             <h4 className="font-display font-bold text-sm mb-4 text-foreground">{t.contactTitle[lang]}</h4>
-            <a href="mailto:gazzolasolutions@gmail.com" className="text-sm text-muted-foreground hover:text-accent transition-colors">
-              gazzolasolutions@gmail.com
-            </a>
+            <div className="flex flex-col gap-1.5">
+              <a href="tel:+17869732556" className="text-sm text-muted-foreground hover:text-accent transition-colors w-fit">
+                (786) 973-2556
+              </a>
+              <a href="mailto:gazzolasolutions@gmail.com" className="text-sm text-muted-foreground hover:text-accent transition-colors w-fit">
+                gazzolasolutions@gmail.com
+              </a>
+            </div>
             <div className="flex gap-3 mt-5">
               {SOCIAL_LINKS.map(({ icon: Icon, href, label }) => (
                 <a

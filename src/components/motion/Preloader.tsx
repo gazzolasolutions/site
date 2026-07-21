@@ -56,7 +56,7 @@ export function Preloader() {
             <motion.img
               src={logo}
               alt="Gazzola Solutions"
-              className="h-16 w-16"
+              className="h-24 w-24 md:h-36 md:w-36"
               initial={{ scale: 0.5, opacity: 0, rotate: -20 }}
               animate={{ scale: 1, opacity: 1, rotate: 0 }}
               transition={{ type: "spring", stiffness: 200, damping: 14, delay: 0.1 }}
